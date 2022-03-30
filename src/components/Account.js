@@ -4,6 +4,7 @@ import { Modal, PageHeader, Button } from "antd"
 import Icon from '@ant-design/icons';
 import { ReactComponent as MetamaskIcon } from "./Icons/metamask.svg";
 import { ReactComponent as WalletConnectIcon } from "./Icons/walletconnect.svg";
+import "antd/dist/antd.css";
 
 const meatamaskIcon = <Icon component={MetamaskIcon} />
 const walletConnectIcon = <Icon component={WalletConnectIcon} />
@@ -35,33 +36,13 @@ function Account() {
     };
     //end - modal antd buttons
 
-    const connectButton = () => {
-        console.log("accc", account)
-        if (!account) {
-            return (
-                <>
-                    <a className="button" onClick={showModal}>Connect Wallet</a>
-
-
-                    <Modal title="Choose your wallet" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                        <input type="submit" id="image-button" value="Metamask" onClick={() => enableWeb3()}></input>
-                        <input type="submit" id="image-button-walletconnect" value="WalletConnect" onClick={logInWalletConnect}></input>
-                    </Modal>
-
-                </>
-            );
-        }
-        return ({ account })
-
-    }
 
 
     if (!account) {
         console.log("not connected")
         return (
             <>
-
-                <div className="site-page-header-ghost-wrapper">
+                <div className="site-page-header-ghost-wrapper" >
                     <PageHeader
                         ghost={false}
                         title="OnChainAsciiApes"

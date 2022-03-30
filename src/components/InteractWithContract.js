@@ -1,6 +1,6 @@
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
-import { Button, DatePicker } from 'antd';
+import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
 
