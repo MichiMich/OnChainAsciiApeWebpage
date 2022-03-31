@@ -80,12 +80,12 @@ function Account() {
                 ghost={false}
                 title="OnChainAsciiApes"
                 extra={[
-                    <Button key="1">
+                    <Button key="2">
                         {JSON.stringify(account).slice(1, 7)}
                         ...
                         {JSON.stringify(account).slice(account.length - 3, account.length + 1)}
                     </Button>,
-                    <Button key="1" type="primary" onClick={logout}>
+                    <Button key="3" type="primary" onClick={logout}>
                         Logout
                     </Button>,
                 ]}
