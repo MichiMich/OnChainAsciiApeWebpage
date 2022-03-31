@@ -62,7 +62,7 @@ function Account() {
                             Metamask
                             {meatamaskIcon}
                         </Button>
-                        <Button block onClick={logInWalletConnect()}>
+                        <Button block onClick={() => logInWalletConnect()}>
                             walletconnect
                             {walletConnectIcon}
                         </Button>

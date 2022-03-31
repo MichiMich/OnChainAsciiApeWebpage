@@ -1,13 +1,16 @@
 import { Image, Button } from 'antd';
 import BananaApe from "./img/BananaColorApe.png";
-import Background from "./img/BananaColorApe.png"
-import DevilApe from "./img/DevilApe.svg";
-import DevilApeNeedToConnect from "./img/DevilApeNeedToConnect.svg";
+// import Background from "./img/backgrounds/8bitDigitalSun.jpg"
+import Background from "./img/backgrounds/mario.jpg";
+import JoinRaffleApe from "./img/SpeekingApes/JoinRaffle.svg";
+import ConnectApe from "./img/SpeekingApes/newApe.svg";
 import windowdimo from "./windowdimension.js"
+import { useState } from "react";
 
 //for interacting with contract
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import abi from "../constants/Raffle.json";
+import { useEffect } from 'react';
 
 const centered = {
     position: "fixed",
@@ -32,7 +35,7 @@ const backgroundImage = {
 let showResult = false
 function InteractWithContract() {
 
-    const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
+    const { isAuthenticated, account } = useMoralis();
 
 
     const handleSuccess = async () => {
@@ -119,20 +122,20 @@ function MintPage() {
     //use of useEffect() in windowdimension.js ->useWindowDimensions which updates the window data
     const { height, width } = windowdimo()
 
-    console.log(account)
-    if (account || isAuthenticated) {
-        <>
-            <Image src={Background} style={{ width: width, opacity: "0.5" }}>
-                <Button>Join raffle</Button>
-            </Image>
-            <div style={{ backgroundImage, width: width, height: height }}>
-                <div style={centered}>
-                    <a >
-                        <img src={DevilApe} />
-                    </a>
-                </div>
-            </div>
-        </>
+    const [count, setCount] = useState(0);
+
+    let ActiveApe = ConnectApe;
+
+    useEffect(() => {
+        document.title = `You clicked ${count} times`;
+        ActiveApe = ConnectApe;
+    });
+
+    if (!account || isAuthenticated) {
+        ActiveApe = ConnectApe;
+    }
+    else {
+        ActiveApe = JoinRaffleApe;
     }
 
     return (
@@ -147,13 +150,13 @@ function MintPage() {
                     <Image src={BananaApe} />
                 </div>
             </div> */}
-            <Image src={Background} style={{ width: width, opacity: "0.5" }}>
+            <Image src={Background} style={{ width: width, opacity: "1" }}>
                 <Button>Join raffle</Button>
             </Image>
-            <div style={{ backgroundImage, width: width, height: height }}>
+            <div style={{ width: width, height: height }}>
                 <div style={centered}>
                     <a >
-                        <img src={DevilApeNeedToConnect} />
+                        <img src={ActiveApe} />
                     </a>
                 </div>
             </div>
