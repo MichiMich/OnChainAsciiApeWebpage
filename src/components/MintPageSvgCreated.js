@@ -8,6 +8,7 @@ import windowdimo from "./windowdimension.js"
 import { useState } from "react";
 import part1 from "./img/svg_test/part1.svg"
 import part2 from "./img/svg_test/part2.svg"
+import { ReactComponent as part1reactcomponent } from "./img/svg_test/part1.svg"
 
 //for interacting with contract
 import { useMoralis, useWeb3Contract } from "react-moralis";
@@ -113,33 +114,7 @@ function InteractWithContract() {
 
 }
 
-function CreateSVG() {
 
-    const [data, setData] = useState(null);
-    const [data2, setData2] = useState(null);
-    var createdSvg = null;
-
-    useEffect(() => {
-        createdSvg = null;
-    });
-
-    fetch(part1)
-        .then(r => r.text())
-        .then(data => {
-            console.log('????', data);
-            setData(data);
-        });
-
-    fetch(part2)
-        .then(r => r.text())
-        .then(data2 => {
-            console.log('!!!!', data2);
-            setData2(data2);
-        });
-    createdSvg = [data, data2];
-    console.log("222", createdSvg);
-    return (createdSvg);
-}
 
 
 function MintPage() {
@@ -150,13 +125,16 @@ function MintPage() {
 
     const [count, setCount] = useState(0);
 
+    const [data, setData] = useState(null);
+    const [data2, setData2] = useState(null);
 
     let ActiveApe = ConnectApe;
-    let dyncreatedApe = CreateSVG();
+    let createdApe = ConnectApe;
 
     useEffect(() => {
         document.title = `You clicked ${count} times`;
         ActiveApe = ConnectApe;
+        createdApe = ConnectApe;
     });
 
     if (!account || isAuthenticated) {
@@ -166,6 +144,38 @@ function MintPage() {
         ActiveApe = JoinRaffleApe;
     }
 
+    fetch(part1)
+        .then(r => r.text())
+        .then(text1 => {
+            console.log('text decoded:', text1);
+        });
+
+    fetch(part2)
+        .then(r => r.text())
+        .then(text2 => {
+            console.log('text decoded:', text2);
+        });
+
+    fetch(part1)
+        .then(r => r.text())
+        .then(data2 => {
+            console.log('????', data2);
+            setData2(data2);
+        });
+
+    fetch(part2)
+        .then(r => r.text())
+        .then(data => {
+            console.log('!!!!', data);
+            setData(data);
+        });
+
+    console.log("777", JSON.stringify(data2) + JSON.stringify(data));
+    createdApe = JSON.stringify(data2) + JSON.stringify(data);
+    console.log("$$$$", createdApe)
+
+    createdApe = createdApe.slice(1, createdApe.length - 1)
+    console.log("222", createdApe);
     return (
         <>
 
@@ -189,8 +199,7 @@ function MintPage() {
                 </div>
 
                 <div >
-                    {dyncreatedApe}
-
+                    {createdApe}
 
                 </div>
             </div>

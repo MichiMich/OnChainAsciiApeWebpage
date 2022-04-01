@@ -113,33 +113,23 @@ function InteractWithContract() {
 
 }
 
-function CreateSVG() {
+// function createSVG() {
+//     fetch(part1)
+//         .then(r => r.text())
+//         .then(data => {
+//             console.log('????', data);
+//             setData2(data);
+//         });
 
-    const [data, setData] = useState(null);
-    const [data2, setData2] = useState(null);
-    var createdSvg = null;
+//     fetch(part2)
+//         .then(r => r.text())
+//         .then(data2 => {
+//             console.log('!!!!', data2);
+//             setData(data2);
+//         });
 
-    useEffect(() => {
-        createdSvg = null;
-    });
-
-    fetch(part1)
-        .then(r => r.text())
-        .then(data => {
-            console.log('????', data);
-            setData(data);
-        });
-
-    fetch(part2)
-        .then(r => r.text())
-        .then(data2 => {
-            console.log('!!!!', data2);
-            setData2(data2);
-        });
-    createdSvg = [data, data2];
-    console.log("222", createdSvg);
-    return (createdSvg);
-}
+//     return ([data, data2]);
+// }
 
 
 function MintPage() {
@@ -150,13 +140,16 @@ function MintPage() {
 
     const [count, setCount] = useState(0);
 
+    const [data, setData] = useState(null);
+    const [data2, setData2] = useState(null);
 
     let ActiveApe = ConnectApe;
-    let dyncreatedApe = CreateSVG();
+    let createdApe = ConnectApe;
 
     useEffect(() => {
         document.title = `You clicked ${count} times`;
         ActiveApe = ConnectApe;
+        createdApe = ConnectApe;
     });
 
     if (!account || isAuthenticated) {
@@ -166,6 +159,34 @@ function MintPage() {
         ActiveApe = JoinRaffleApe;
     }
 
+    fetch(part1)
+        .then(r => r.text())
+        .then(text1 => {
+            console.log('text decoded:', text1);
+        });
+
+    fetch(part2)
+        .then(r => r.text())
+        .then(text2 => {
+            console.log('text decoded:', text2);
+        });
+
+    fetch(part1)
+        .then(r => r.text())
+        .then(data2 => {
+            console.log('????', data2);
+            setData2(data2);
+        });
+
+    fetch(part2)
+        .then(r => r.text())
+        .then(data => {
+            console.log('!!!!', data);
+            setData(data);
+        });
+
+    createdApe = [data2, data]
+    console.log("222", createdApe);
     return (
         <>
 
@@ -189,7 +210,7 @@ function MintPage() {
                 </div>
 
                 <div >
-                    {dyncreatedApe}
+                    {createdApe}
 
 
                 </div>
