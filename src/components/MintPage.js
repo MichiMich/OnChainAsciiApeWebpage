@@ -6,8 +6,10 @@ import JoinRaffleApe from "./img/SpeekingApes/TwoPartApeJoinRaffle.svg";
 import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 import { useState } from "react";
-import part1 from "./img/svg_test/part1.svg"
-import part2 from "./img/svg_test/part2.svg"
+import part1 from "./img/SpeekingApes/svgParts/1.svg"
+import part3 from "./img/SpeekingApes/svgParts/2.svg"
+import part2 from "./img/SpeekingApes/svgParts/bubbleinput.svg"
+
 import copiedApe from "./img/svg_test/createdsvg.svg"
 
 //for interacting with contract
@@ -119,6 +121,8 @@ function CreateSVG() {
 
     const [data, setData] = useState(null);
     const [data2, setData2] = useState(null);
+    const [data3, setData3] = useState(null);
+
     var createdSvg = null;
 
     useEffect(() => {
@@ -135,12 +139,20 @@ function CreateSVG() {
     fetch(part2)
         .then(r => r.text())
         .then(data2 => {
-            // console.log('data2', data2);
+            console.log('data2', data2);
             setData2(data2);
         });
 
-    if (data != null && data2 != null) {
-        createdSvg = data.concat(data2);
+
+    fetch(part3)
+        .then(r => r.text())
+        .then(data3 => {
+            console.log('data3', data3);
+            setData3(data3);
+        });
+
+    if (data != null && data2 != null && data3 != null) {
+        createdSvg = data.concat(data2).concat(data3);
         console.log("createdSvg", createdSvg);
         return (createdSvg)
     }
