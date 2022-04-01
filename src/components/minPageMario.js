@@ -1,9 +1,9 @@
 import { Image, Button } from 'antd';
 import BananaApe from "./img/BananaColorApe.png";
-import Background from "./img/backgrounds/sun.png"
-//import Background from "./img/backgrounds/mariocut2.jpg";
+// import Background from "./img/backgrounds/8bitDigitalSun.jpg"
+import Background from "./img/backgrounds/mariocut2.jpg";
 import JoinRaffleApe from "./img/SpeekingApes/JoinRaffle.svg";
-import ConnectApe from "./img/SpeekingApes/TwoPartApeBlackWhite.svg";
+import ConnectApe from "./img/SpeekingApes/newApe.svg";
 import windowdimo from "./windowdimension.js"
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 const centered = {
     position: "fixed",
     top: "55%",
-    left: "20%",
+    left: "50%",
     transform: "translate(-50%, -50%)",
 }
 const backgroundImage = {
