@@ -11602,6 +11602,11 @@
   dependencies:
     "loose-envify" "^1.1.0"
 
+"reactjs-text-to-image@^0.0.1":
+  "integrity" "sha1-9hobuITyu82GrMHltaMkfjN2yT8="
+  "resolved" "https://registry.npmjs.org/reactjs-text-to-image/-/reactjs-text-to-image-0.0.1.tgz"
+  "version" "0.0.1"
+
 "read-pkg-up@^7.0.1":
   "integrity" "sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg=="
   "resolved" "https://registry.npmjs.org/read-pkg-up/-/read-pkg-up-7.0.1.tgz"

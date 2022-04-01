@@ -8,6 +8,7 @@ import windowdimo from "./windowdimension.js"
 import { useState } from "react";
 import part1 from "./img/svg_test/part1.svg"
 import part2 from "./img/svg_test/part2.svg"
+import copiedApe from "./img/svg_test/createdsvg.svg"
 
 //for interacting with contract
 import { useMoralis, useWeb3Contract } from "react-moralis";
@@ -15,6 +16,7 @@ import abi from "../constants/Raffle.json";
 import { useEffect } from 'react';
 import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { async } from 'q';
+import { render } from '@testing-library/react';
 
 const centered = {
     position: "fixed",
@@ -126,19 +128,24 @@ function CreateSVG() {
     fetch(part1)
         .then(r => r.text())
         .then(data => {
-            console.log('????', data);
+            // console.log('data', data);
             setData(data);
         });
 
     fetch(part2)
         .then(r => r.text())
         .then(data2 => {
-            console.log('!!!!', data2);
+            // console.log('data2', data2);
             setData2(data2);
         });
-    createdSvg = [data, data2];
-    console.log("222", createdSvg);
-    return (createdSvg);
+
+    if (data != null && data2 != null) {
+        createdSvg = data.concat(data2);
+        console.log("createdSvg", createdSvg);
+        return (createdSvg)
+    }
+
+
 }
 
 
@@ -188,10 +195,8 @@ function MintPage() {
                     </a>
                 </div>
 
-                <div >
-                    {dyncreatedApe}
-
-
+                <div>
+                    <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} />
                 </div>
             </div>
 
