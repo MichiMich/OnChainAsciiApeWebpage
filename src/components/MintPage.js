@@ -8,7 +8,7 @@ import windowdimo from "./windowdimension.js"
 import { useState } from "react";
 
 //svg dyn creation
-import CreateSVG from "./createSvgApe.js"
+import CreateConnectApe from "./ApeGeneration/ConnectApe.js"
 
 import copiedApe from "./img/svg_test/createdsvg.svg"
 
@@ -129,7 +129,7 @@ function MintPage() {
 
     let ActiveApe = ConnectApe;
 
-    let dyncreatedApe = CreateSVG();
+    let dyncreatedApe = CreateConnectApe();
 
     useEffect(() => {
         document.title = `You clicked ${count} times`;

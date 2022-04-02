@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const svgNewLineStart = '<tspan x="4%" dy="1.2em"';
 const svgNewLineEnd = '</tspan>'
 
-function createLineSvg(TextInput, ColorInput) {
+export function CreateLineSvg(TextInput, ColorInput) {
     var createdLine = null;
     console.log("textInput", typeof (TextInput));
     console.log("colorInput", typeof (ColorInput));
@@ -27,7 +27,7 @@ function createLineSvg(TextInput, ColorInput) {
     return (createdLine);
 }
 
-function CreateSVG() {
+export function CreateSVG(createdSvgLine) {
 
     const [data, setData] = useState(null);
     const [data3, setData3] = useState(null);
@@ -56,7 +56,7 @@ function CreateSVG() {
     if (data != null && data3 != null) {
         // createdSvg = data.concat(data2).concat(data3);
         //createdSvg = data + bubbleTextLine1 + bubbleTextLine2
-        createdSvg = data + createLineSvg('hello friend', 'blue');
+        createdSvg = data + createdSvgLine;
         createdSvg += data3;
         console.log("createdSvg", createdSvg);
         return (createdSvg)
@@ -64,5 +64,3 @@ function CreateSVG() {
 
 
 }
-
-export default CreateSVG;
