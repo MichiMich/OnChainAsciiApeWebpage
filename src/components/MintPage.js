@@ -6,8 +6,9 @@ import JoinRaffleApe from "./img/SpeekingApes/TwoPartApeJoinRaffle.svg";
 import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 import { useState } from "react";
-import svgStart from "./img/SpeekingApes/templates/Start.svg"
-import svgEnd from "./img/SpeekingApes/templates/End.svg"
+
+//svg dyn creation
+import CreateSVG from "./createSvgApe.js"
 
 import copiedApe from "./img/svg_test/createdsvg.svg"
 
@@ -34,33 +35,6 @@ const backgroundImage = {
     bottom: "0px",
     left: "0px",
     opacity: "1"
-
-}
-
-
-const svgNewLineStart = '<tspan x="4%" dy="1.2em"';
-const svgNewLineEnd = '</tspan>'
-
-function createLineSvg(TextInput, ColorInput) {
-    var createdLine = null;
-    console.log("textInput", typeof (TextInput));
-    console.log("colorInput", typeof (ColorInput));
-    //var check does not work, always resultet in zero input
-    if (TextInput == "" || TextInput == null || ColorInput == "" || ColorInput == null) {
-        console.log("zero input")
-        return;
-    }
-    //ToDo: compare data input if both are string, did not work for now, always returned true here
-    // if ((typeof (TextInput) != string)) {
-    //     console.log("wrong input data");
-    //     return;
-    // }
-    var start = '<text y="12%" x="50%" fill="';
-    var middle = '" text-anchor="start" font-size="18" xml:space="preserve" font-family="monospace">';
-    var end = '</text>';
-    createdLine = start + ColorInput + middle + TextInput + end;
-    console.log("createdSvgLine", createdLine);
-    return (createdLine);
 
 }
 
@@ -144,44 +118,6 @@ function InteractWithContract() {
 
 }
 
-function CreateSVG() {
-
-    const [data, setData] = useState(null);
-    const [data3, setData3] = useState(null);
-
-    var createdSvg = null;
-
-    useEffect(() => {
-        createdSvg = null;
-    });
-
-    fetch(svgStart)
-        .then(r => r.text())
-        .then(data => {
-            // console.log('data', data);
-            setData(data);
-        });
-
-    fetch(svgEnd)
-        .then(r => r.text())
-        .then(data3 => {
-            console.log('data3', data3);
-            setData3(data3);
-        });
-
-
-    if (data != null && data3 != null) {
-        // createdSvg = data.concat(data2).concat(data3);
-        //createdSvg = data + bubbleTextLine1 + bubbleTextLine2
-        createdSvg = data + createLineSvg('hello friend', 'blue');
-        createdSvg += data3;
-        console.log("createdSvg", createdSvg);
-        return (createdSvg)
-    }
-
-
-}
-
 
 function MintPage() {
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
@@ -191,9 +127,8 @@ function MintPage() {
 
     const [count, setCount] = useState(0);
 
-
-
     let ActiveApe = ConnectApe;
+
     let dyncreatedApe = CreateSVG();
 
     useEffect(() => {
