@@ -6,9 +6,10 @@ import JoinRaffleApe from "./img/SpeekingApes/TwoPartApeJoinRaffle.svg";
 import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 import { useState } from "react";
+import InteractWithContract from './InteractWithContract.js';
 
 //svg dyn creation
-import CreateConnectApe from "./ApeGeneration/ConnectApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe } from "./ApeGeneration/ConnectApe.js"
 
 import copiedApe from "./img/svg_test/createdsvg.svg"
 
@@ -20,6 +21,8 @@ import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { async } from 'q';
 import { render } from '@testing-library/react';
 import { string } from 'yargs';
+
+document.title = "AsciiApes";
 
 const centered = {
     position: "fixed",
@@ -39,86 +42,6 @@ const backgroundImage = {
 }
 
 
-let showResult = false
-function InteractWithContract() {
-
-    const { isAuthenticated, account } = useMoralis();
-
-
-    const handleSuccess = async () => {
-        //need to do a tx wait
-        console.log("success of trx")
-        showResult = true;
-    }
-
-    const handleComplete = async () => {
-        console.group("complete")
-    }
-
-    const handleError = async () => {
-        console.log("errorvalue")
-        console.log(error?.message.search("message"))
-        console.log("txresponse")
-        console.group("handlafdafae error")
-    }
-
-
-
-    const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
-        abi: abi,
-        contractAddress: "0x75Ab8EeEd318e4294B1AC150C95C852813EBC083",
-        functionName: "addAddress",
-        params: {
-            _addressToBeAdded: account
-        },
-    }
-
-    );
-
-
-    const handleResults = () => {
-        //here we get the resulte data
-        if (error) {
-            return (<div>
-                {error?.message.substring(error?.message.search('message') + 10, error?.message.search('data') - 3)}
-            </div>)
-        }
-    }
-
-    const InteractContract = async () => {
-        await enterRaffle(
-            {
-                onSuccess: handleSuccess,
-                onComplete: handleComplete,
-                //onError: () => { handleError(JSON.stringify(error)) },
-                onError: handleError
-            }
-        )
-    }
-
-    if (showResult) {
-        return (
-            <div>You joined</div>
-        )
-    }
-    if (account || isAuthenticated) {
-        return (
-            <div>
-                <Button type="primary" onClick={async () =>
-                    InteractContract()
-                } disabled={isLoading || isFetching}>Join Raffle</Button>
-                {handleResults()}
-            </div >)
-    }
-    return (
-        <div></div>
-    )
-
-
-
-}
-
-
 function MintPage() {
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
@@ -129,19 +52,27 @@ function MintPage() {
 
     let ActiveApe = ConnectApe;
 
-    let dyncreatedApe = CreateConnectApe();
+    let dyncreatedApe = null;
 
     useEffect(() => {
-        document.title = `You clicked ${count} times`;
         ActiveApe = ConnectApe;
+        dyncreatedApe = null;
     });
 
     if (!account || isAuthenticated) {
+        dyncreatedApe = CreateConnectApe();
         ActiveApe = ConnectApe;
     }
     else {
         ActiveApe = JoinRaffleApe;
+        dyncreatedApe = CreateJoinRaffleApe(JSON.stringify(account));
     }
+
+
+
+
+
+
 
     return (
         <>
@@ -159,16 +90,20 @@ function MintPage() {
                 <img src={Background} style={{ width: width, height: height, opacity: "1" }}>
                 </img>
 
-                <div style={centered}>
+                {/* <div style={centered}>
                     <a >
                         <img src={ActiveApe} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
                     </a>
-                </div>
+                </div> */}
 
-                <div>
-                    <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} />
+                <div style={centered}>
+                    <a onClick={InteractWithContract()}>
+                        <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
+                    </a>
+                    <InteractWithContract />
                 </div>
             </div>
+
 
 
         </>
