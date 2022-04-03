@@ -2,18 +2,20 @@ import Account from "./components/Account";
 import MintPage from "./components/MintPage";
 import Moralis from 'moralis';
 
+import { MoralisProvider } from "react-moralis";
 function App() {
 
 
   //start moralis
-  const moralisServerUrl = "https://6i3kla2yuaqw.usemoralis.com:2053/server";
+  const moralisServerUrl = "https://l9j8ruqibthp.usemoralis.com:2053/server";
 
-  const moralisAppId = "2fxeRL7M5IdL5ipUi5xTr7KsnZV9J9HjgjToIt7p";
+  const moralisAppId = "clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI";
 
   Moralis.start({ serverUrl: moralisServerUrl, appId: moralisAppId });
 
   return (
     <>
+
       <Account />
       <MintPage />
     </>

@@ -3,6 +3,7 @@ import { abi } from "../constants/Raffle.json";
 import { Button, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
+import { async } from "q";
 
 let showResult = false
 function InteractWithContract() {
@@ -66,17 +67,16 @@ function InteractWithContract() {
             <div>You joined</div>
         )
     }
+
     if (account || isAuthenticated) {
         return (
-            <div>
-                <Button type="primary" onClick={async () =>
-                    InteractContract()
-                } disabled={isLoading || isFetching}>Join Raffle</Button>
-                {handleResults()}
-            </div >)
+            async () =>
+                InteractContract(),
+
+            handleResults())
     }
     return (
-        <div></div>
+        <div>abc</div>
     )
 
 

@@ -20,7 +20,7 @@ import * as ReactDOMClient from 'react-dom/client';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoralisProvider serverUrl="https://6i3kla2yuaqw.usemoralis.com:2053/server" appId="2fxeRL7M5IdL5ipUi5xTr7KsnZV9J9HjgjToIt7p">
+    <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
       <App />
     </MoralisProvider>
   </React.StrictMode>,
