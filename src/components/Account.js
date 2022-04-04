@@ -39,7 +39,6 @@ function Account() {
 
 
     if (!account) {
-        console.log("not connected")
         return (
             <>
                 <div className="site-page-header-ghost-wrapper" >

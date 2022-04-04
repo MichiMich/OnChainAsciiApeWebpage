@@ -2,7 +2,7 @@ import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
 import { Button, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { async } from "q";
 
 //imports ape specific start
@@ -12,7 +12,7 @@ import JoinRaffleApe from "./img/SpeekingApes/TwoPartApeJoinRaffle.svg";
 import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 //svg dyn creation
-import { CreateConnectApe, CreateJoinRaffleApe } from "./ApeGeneration/ConnectApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe } from "./ApeGeneration/ConnectApe.js"
 import { useEffect } from 'react';
 
 //imports ape specific end
@@ -29,30 +29,56 @@ const centered = {
 }
 //styles end
 
-
+let createdErrorMessage = null;
 export function InteractWithContract() {
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
+    let [txErrorOccured, setTxError] = useState();
 
     //ape specific start
     let ActiveApe = ConnectApe;
 
     let dyncreatedApe = null;
 
+
     useEffect(() => {
         ActiveApe = ConnectApe;
         dyncreatedApe = null;
+        console.log("useEffect ran");
+
     });
 
-
-    if (!account || isAuthenticated) {
+    if (txErrorOccured) {
+        dyncreatedApe = CreateErrorApe(createdErrorMessage);
+    }
+    else if (!account || isAuthenticated) {
         dyncreatedApe = CreateConnectApe();
-        ActiveApe = ConnectApe;
     }
     else {
-        ActiveApe = JoinRaffleApe;
         dyncreatedApe = CreateJoinRaffleApe(JSON.stringify(account));
     }
+
+    // function createDynNeededApe(account, txErrorOccured) {
+    //     if (!account) {
+    //         console.log("not account")
+    //         dyncreatedApe = CreateConnectApe();
+    //         ActiveApe = ConnectApe;
+    //     }
+    //     else if (txErrorOccured) {
+    //         console.log("tx error")
+    //         //dyncreatedApe = CreateErrorApe("error")
+    //         //console.log("dynCreatedApe", dyncreatedApe);
+    //     }
+    //     else {
+    //         console.log("make raffle ape")
+    //         ActiveApe = JoinRaffleApe;
+    //         dyncreatedApe = CreateJoinRaffleApe(JSON.stringify(account));
+    //     }
+    // }
+
+
+
+
     //ape specific end
     //window specific start
     //use of useEffect() in windowdimension.js ->useWindowDimensions which updates the window data
@@ -61,21 +87,36 @@ export function InteractWithContract() {
 
 
 
-    const handleSuccess = async () => {
+    const handleSuccess = async (tx) => {
+        console.log("success entered")
+        console.log("succes tx", tx)
+        console.log("success wait done")
         //need to do a tx wait
         console.log("success of trx")
         showResult = true;
     }
 
-    const handleComplete = async () => {
-        console.group("complete")
+    const handleComplete = async (tx) => {
+        console.log("complete entered")
+        await tx.wait(1)
+        console.log("complete wait done")
     }
 
-    const handleError = async () => {
-        console.log("errorvalue")
-        console.log(error?.message.search("message"))
-        console.log("txresponse")
-        console.group("handlafdafae error")
+    const handleError = async (tx) => {
+        console.log("error entered")
+        if (tx != undefined || tx != null) {
+            //reverted -> require state of solidty
+            console.log("tx", tx)
+            //get interesting value to show for user ->should be require state
+            var txString = JSON.stringify(tx);
+            var errorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
+            console.log("message", errorMessage);
+            //now create ape with information in it
+            //CreateErrorApe(errorMessage);
+            createdErrorMessage = errorMessage;
+            setTxError(true);
+            console.log("txErrorState", txErrorOccured)
+        }
     }
 
 
@@ -87,8 +128,8 @@ export function InteractWithContract() {
         params: {
             _addressToBeAdded: account
         },
-    }
 
+    }
     );
 
 
@@ -101,22 +142,38 @@ export function InteractWithContract() {
         }
     }
 
+    // const InteractContract = async () => {
+    //     await enterRaffle(
+    //         {
+    //             onSuccess: handleSuccess,
+    //             onComplete: handleComplete,
+    //             //             //onError: () => { handleError(JSON.stringify(error)) },
+    //             onError: handleError,
+    //         }
+    //     )
+    //     console.log("web3data", enterRaffle)
+    //     console.log("web3data", isLoading)
+    //     console.log("web3data", isFetching)
+    // }
+
     const InteractContract = async () => {
-        await enterRaffle(
+        const tx = await enterRaffle(
             {
-                onSuccess: handleSuccess,
-                onComplete: handleComplete,
-                //onError: () => { handleError(JSON.stringify(error)) },
-                onError: handleError
+                onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
+                //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
+                //             //onError: () => { handleError(JSON.stringify(error)) },
+                onError: (tx) => handleError(tx, error),
             }
         )
+
     }
 
-    if (showResult) {
-        return (
-            <div>You joined</div>
-        )
-    }
+
+    // if (showResult) {
+    //     return (
+    //         <div>You joined</div>
+    //     )
+    // }
 
 
     if (account || isAuthenticated) {
@@ -173,22 +230,22 @@ export function InteractWithContract() {
 
 
 
-export function MintPage() {
+// export function MintPage() {
 
-    const { account, isAuthenticate } = useMoralis();
+//     const { account, isAuthenticate } = useMoralis();
 
-    if (account || isAuthenticate) {
-        return (
-            <>
-                <div>Connected</div>
-                <InteractWithContract />
-            </>
-        )
-    }
-    else {
-        return (
-            <>
-                <p>not connected</p>
-            </>)
-    }
-}
+//     if (account || isAuthenticate) {
+//         return (
+//             <>
+//                 <div>Connected</div>
+//                 <InteractWithContract />
+//             </>
+//         )
+//     }
+//     else {
+//         return (
+//             <>
+//                 <p>not connected</p>
+//             </>)
+//     }
+// }
