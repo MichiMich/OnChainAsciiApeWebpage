@@ -70,10 +70,10 @@ function InteractWithContract() {
 
     if (account || isAuthenticated) {
         return (
-            async () =>
-                InteractContract(),
-
-            handleResults())
+            <a type="primary" onClick={async () =>
+                InteractContract()
+            } disabled={isLoading || isFetching}>Join Raffle
+                {handleResults()}</a>)
     }
     return (
         <div>abc</div>

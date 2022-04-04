@@ -44,7 +44,6 @@ function MintPage() {
     //use of useEffect() in windowdimension.js ->useWindowDimensions which updates the window data
     const { height, width } = windowdimo()
 
-    const [count, setCount] = useState(0);
 
     let ActiveApe = ConnectApe;
 
@@ -53,7 +52,6 @@ function MintPage() {
     useEffect(() => {
         ActiveApe = ConnectApe;
         dyncreatedApe = null;
-
     });
 
     if (!account || isAuthenticated) {
@@ -70,7 +68,7 @@ function MintPage() {
     //interact start
     const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
         abi: abi,
-        contractAddress: "0x75Ab8EeEd318e4294B1AC150C95C852813EBC083",
+        contractAddress: "myContract",
         functionName: "addAddress",
         params: {
             _addressToBeAdded: account
@@ -82,12 +80,20 @@ function MintPage() {
     const InteractContract = async () => {
         console.log("abi", abi);
         console.log("web3en", isWeb3Enabled)
+        console.log("raffleresult", await enterRaffle(
+            {
+                onSuccess: console.log("success"),
+                onComplete: console.log("complete"),
+                //onError: () => { handleError(JSON.stringify(error)) },
+                onError: console.log("error")
+            }
+        ))
         await enterRaffle(
             {
-                onSuccess: alert("success"),
-                onComplete: alert("complete"),
+                onSuccess: console.log("success"),
+                onComplete: console.log("complete"),
                 //onError: () => { handleError(JSON.stringify(error)) },
-                onError: alert("error")
+                onError: console.log("error")
             }
         )
     }
@@ -139,9 +145,7 @@ function MintPage() {
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto"
                     onClick={async () =>
-                        await InteractContract({
-                            onSuccess: alert("successi"),
-                        })
+                        await InteractContract()
                     }
                     disabled={isLoading || isFetching}
                 >enter raffle</button>

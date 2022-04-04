@@ -1,7 +1,7 @@
 import Account from "./components/Account";
 import MintPage from "./components/MintPage";
 import Moralis from 'moralis';
-
+import InteractWithContract from "./components/InteractWithContract_old";
 import { MoralisProvider } from "react-moralis";
 function App() {
 
@@ -17,7 +17,8 @@ function App() {
     <>
 
       <Account />
-      <MintPage />
+      {/* <MintPage /> */}
+      <InteractWithContract />
     </>
   );
 }
