@@ -19,11 +19,9 @@ import * as ReactDOMClient from 'react-dom/client';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
-      <App />
-    </MoralisProvider>
-  </React.StrictMode>,
+  <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
+    <App />
+  </MoralisProvider>,
   document.getElementById('root')
 )
 
