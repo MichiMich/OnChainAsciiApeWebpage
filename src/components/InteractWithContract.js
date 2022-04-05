@@ -2,8 +2,6 @@ import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
 import { Button, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
-import React, { useState } from 'react';
-import { async } from "q";
 
 //imports ape specific start
 import Background from "./img/backgrounds/sun.png"
@@ -13,8 +11,7 @@ import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 //svg dyn creation
 import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/ConnectApe.js"
-import { useEffect } from 'react';
-
+import { Notification } from './condrend.js'
 //imports ape specific end
 
 
@@ -30,71 +27,20 @@ const centered = {
 
 let createdErrorMessage = null;
 let createdJoinMessage = null;
+
+
 export function InteractWithContract() {
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
-    let [txErrorOccured, setTxError] = useState();
-    let [txSuccessfull, setTxSuccessfull] = useState();
-    let [allowApeClick, setApeClickAllowance] = useState();
+    var apeAssistentValue;
+    var apeAssistenData;
 
-
-    let dyncreatedApe = null;
-
-
-    useEffect(() => {
-        dyncreatedApe = null;
-        console.log("useEffect ran");
-        console.log("account", account);
-        console.log("isAuth", isAuthenticated);
-
-    });
-
-
-    if (txSuccessfull) {
-        dyncreatedApe = createSuccessApe();
+    if (account) {
+        apeAssistentValue = 'joinRaffle';
     }
-    else if (txErrorOccured && (account || isAuthenticated)) {
-        dyncreatedApe = CreateErrorApe(createdErrorMessage);
-    }
-    else if (!account || isAuthenticated) {
-        dyncreatedApe = CreateConnectApe();
-        console.log("!account, is auth")
-    }
-    else {
-        dyncreatedApe = CreateJoinRaffleApe(JSON.stringify(account));
-    }
-
-    // function createDynNeededApe(account, txErrorOccured) {
-    //     if (!account) {
-    //         console.log("not account")
-    //         dyncreatedApe = CreateConnectApe();
-    //         ActiveApe = ConnectApe;
-    //     }
-    //     else if (txErrorOccured) {
-    //         console.log("tx error")
-    //         //dyncreatedApe = CreateErrorApe("error")
-    //         //console.log("dynCreatedApe", dyncreatedApe);
-    //     }
-    //     else {
-    //         console.log("make raffle ape")
-    //         ActiveApe = JoinRaffleApe;
-    //         dyncreatedApe = CreateJoinRaffleApe(JSON.stringify(account));
-    //     }
-    // }
-
-
-
-
-    //ape specific end
-    //window specific start
-    //use of useEffect() in windowdimension.js ->useWindowDimensions which updates the window data
-    const { height, width } = windowdimo()
-    //window specifi end
-
-
 
     const handleSuccess = async (tx) => {
-        setTxSuccessfull(true);
+        apeAssistentValue = 'success';
     }
 
     const handleComplete = async (tx) => {
@@ -112,14 +58,12 @@ export function InteractWithContract() {
             var txString = JSON.stringify(tx);
             createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
             console.log("message", createdErrorMessage);
-            setTxError(true);
-            console.log("txErrorState", txErrorOccured)
+            apeAssistenData = createdErrorMessage;
         }
         else {
             createdErrorMessage = "Error occured";
         }
     }
-
 
 
     const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
@@ -137,25 +81,13 @@ export function InteractWithContract() {
     const handleResults = () => {
         //here we get the resulte data
         if (error) {
-            return (<div>
-                {error?.message.substring(error?.message.search('message') + 10, error?.message.search('data') - 3)}
-            </div>)
+            return (
+                <div>
+                    {error?.message.substring(error?.message.search('message') + 10, error?.message.search('data') - 3)}
+                </div>)
         }
     }
 
-    // const InteractContract = async () => {
-    //     await enterRaffle(
-    //         {
-    //             onSuccess: handleSuccess,
-    //             onComplete: handleComplete,
-    //             //             //onError: () => { handleError(JSON.stringify(error)) },
-    //             onError: handleError,
-    //         }
-    //     )
-    //     console.log("web3data", enterRaffle)
-    //     console.log("web3data", isLoading)
-    //     console.log("web3data", isFetching)
-    // }
 
     const InteractContract = async () => {
         const tx = await enterRaffle(
@@ -169,39 +101,41 @@ export function InteractWithContract() {
 
     }
 
+    console.log("createApeData", apeAssistentValue, apeAssistenData)
+    return (
+        Notification(apeAssistentValue, apeAssistenData)
+    );
 
-
-
-
-    if (allowApeClick) {
+    /*
+        if (allowApeClick) {
+            return (
+                <>
+                    <div style={{ width: width, height: height }}>
+                        <img src={Background} style={{ width: width, height: height, opacity: "1" }} />
+                        <div style={centered}>
+                            <a type="primary" onClick={async () =>
+                                InteractContract()
+                            } disabled={isLoading || isFetching}>
+                                <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
+                            </a>
+                        </div>
+                    </div>
+                </>
+            )
+        }
         return (
             <>
                 <div style={{ width: width, height: height }}>
-                    <img src={Background} style={{ width: width, height: height, opacity: "1" }} />
+                    <img src={Background} style={{ width: width, height: height, opacity: "1" }}>
+                    </img>
                     <div style={centered}>
-                        <a type="primary" onClick={async () =>
-                            InteractContract()
-                        } disabled={isLoading || isFetching}>
-                            <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
-                        </a>
+                        <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
                     </div>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div style={{ width: width, height: height }}>
-                <img src={Background} style={{ width: width, height: height, opacity: "1" }}>
-                </img>
-                <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
-                </div>
-            </div>
-        </>
-    )
-
-
+    
+    */
 
     // if (account || isAuthenticated) {
     //     return (

@@ -2,6 +2,8 @@ import Account from "./components/Account";
 import Moralis from 'moralis';
 import { InteractWithContract } from "./components/InteractWithContract.js";
 import { MoralisProvider } from "react-moralis";
+import Notification from './components/condrend.js'
+
 function App() {
 
 
@@ -18,6 +20,7 @@ function App() {
       <Account />
       {/* <MintPage /> */}
       <InteractWithContract />
+      {/* <Notification /> */}
     </>
   );
 }

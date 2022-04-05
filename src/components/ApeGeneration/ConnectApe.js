@@ -31,6 +31,9 @@ export function CreateJoinRaffleApe(WalletAddress) {
 
 export function CreateErrorApe(errorMessage) {
     console.log("errormessage", errorMessage)
+    if (errorMessage == null || errorMessage == undefined) {
+        return (DynCreateSvg("no error data given"))
+    }
     //make two lines of error message start
     var middle = Math.floor(errorMessage.length / 2);
     var before = errorMessage.lastIndexOf(' ', middle);
