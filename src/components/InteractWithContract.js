@@ -28,15 +28,15 @@ const centered = {
 let createdErrorMessage = null;
 let createdJoinMessage = null;
 
-
 export function InteractWithContract() {
-    const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
+    const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
     var apeAssistentValue;
     var apeAssistenData;
 
     if (account) {
         apeAssistentValue = 'joinRaffle';
+        apeAssistenData = JSON.stringify(account);
     }
 
     const handleSuccess = async (tx) => {
