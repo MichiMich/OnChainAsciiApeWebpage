@@ -12,13 +12,12 @@ import JoinRaffleApe from "./img/SpeekingApes/TwoPartApeJoinRaffle.svg";
 import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 //svg dyn creation
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe } from "./ApeGeneration/ConnectApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/ConnectApe.js"
 import { useEffect } from 'react';
 
 //imports ape specific end
 
 
-let showResult = false
 
 //styles start
 const centered = {
@@ -30,29 +29,36 @@ const centered = {
 //styles end
 
 let createdErrorMessage = null;
+let createdJoinMessage = null;
 export function InteractWithContract() {
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
     let [txErrorOccured, setTxError] = useState();
+    let [txSuccessfull, setTxSuccessfull] = useState();
+    let [allowApeClick, setApeClickAllowance] = useState();
 
-    //ape specific start
-    let ActiveApe = ConnectApe;
 
     let dyncreatedApe = null;
 
 
     useEffect(() => {
-        ActiveApe = ConnectApe;
         dyncreatedApe = null;
         console.log("useEffect ran");
+        console.log("account", account);
+        console.log("isAuth", isAuthenticated);
 
     });
 
-    if (txErrorOccured) {
+
+    if (txSuccessfull) {
+        dyncreatedApe = createSuccessApe();
+    }
+    else if (txErrorOccured && (account || isAuthenticated)) {
         dyncreatedApe = CreateErrorApe(createdErrorMessage);
     }
     else if (!account || isAuthenticated) {
         dyncreatedApe = CreateConnectApe();
+        console.log("!account, is auth")
     }
     else {
         dyncreatedApe = CreateJoinRaffleApe(JSON.stringify(account));
@@ -88,12 +94,7 @@ export function InteractWithContract() {
 
 
     const handleSuccess = async (tx) => {
-        console.log("success entered")
-        console.log("succes tx", tx)
-        console.log("success wait done")
-        //need to do a tx wait
-        console.log("success of trx")
-        showResult = true;
+        setTxSuccessfull(true);
     }
 
     const handleComplete = async (tx) => {
@@ -109,13 +110,13 @@ export function InteractWithContract() {
             console.log("tx", tx)
             //get interesting value to show for user ->should be require state
             var txString = JSON.stringify(tx);
-            var errorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
-            console.log("message", errorMessage);
-            //now create ape with information in it
-            //CreateErrorApe(errorMessage);
-            createdErrorMessage = errorMessage;
+            createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
+            console.log("message", createdErrorMessage);
             setTxError(true);
             console.log("txErrorState", txErrorOccured)
+        }
+        else {
+            createdErrorMessage = "Error occured";
         }
     }
 
@@ -169,14 +170,10 @@ export function InteractWithContract() {
     }
 
 
-    // if (showResult) {
-    //     return (
-    //         <div>You joined</div>
-    //     )
-    // }
 
 
-    if (account || isAuthenticated) {
+
+    if (allowApeClick) {
         return (
             <>
                 <div style={{ width: width, height: height }}>
@@ -197,11 +194,6 @@ export function InteractWithContract() {
             <div style={{ width: width, height: height }}>
                 <img src={Background} style={{ width: width, height: height, opacity: "1" }}>
                 </img>
-                <a type="primary" onClick={async () =>
-                    InteractContract()
-                } disabled={isLoading || isFetching}>Join Raffle
-                    {handleResults()}</a>
-
                 <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${dyncreatedApe}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
                 </div>

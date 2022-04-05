@@ -47,11 +47,19 @@ export function CreateErrorApe(errorMessage) {
     //make two lines of error message end
 
 
-    var line = CreateLineSvg("52", "12", s1, "white");
-    var line2 = CreateLineSvg("57", "16", s2, "%23ff33cc");
+    var line = CreateLineSvg("52", "12", s1, "red");
+    var line2 = CreateLineSvg("57", "16", s2, "red");
     var svg = DynCreateSvg(line + line2);
     // console.log("svg", svg);
     return (svg);
 
+}
+
+export function createSuccessApe() {
+    var line = CreateLineSvg("52", "12", "Yipii you Joined!", "white");
+    var line2 = CreateLineSvg("64", "12", "Thanks a lot, I hope you win", "%23ff33cc"); //# needs to be set as %23 to work with url in calling function, so #ff33cc = %23ff33cc
+    var svg = DynCreateSvg(line + line2);
+    // console.log("svg", svg);
+    return (svg);
 }
 
