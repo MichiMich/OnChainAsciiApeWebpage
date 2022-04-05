@@ -5,7 +5,6 @@ import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe
 import Background from "./img/backgrounds/sun.png"
 import windowdimo from "./windowdimension.js"
 
-
 //styles start
 const centered = {
     position: "fixed",
@@ -17,7 +16,8 @@ const centered = {
 
 var dyncreatedApe = null;
 var width = 100;
-var buttonPressed = false;
+
+
 
 
 
@@ -28,7 +28,6 @@ export function Notification(choosenApe, apeData) {
     const { height, width } = windowdimo();
     const { account, isLoading, isFetching } = useMoralis();
     var webActiveWebContent = 'connect';
-    var buttonClicked = false;
 
     //default value
     if (choosenApe == null || choosenApe == undefined) {
@@ -42,12 +41,6 @@ export function Notification(choosenApe, apeData) {
     //     error: CreateErrorApe(apeData),
     // }
 
-    const handleButtonClick = () => {
-        console.log("buttonclicked")
-        buttonClicked = true;
-    }
-
-
 
     const SERVICE_APE_STATES = {
         connect:
@@ -57,7 +50,7 @@ export function Notification(choosenApe, apeData) {
                 </div>,
             </>,
         joinRaffle: <>
-            <a onClick={handleButtonClick()}>
+            <a >
                 <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
                 </div>
@@ -75,9 +68,8 @@ export function Notification(choosenApe, apeData) {
         </>,
     }
 
-    buttonClicked = false;
 
-    return ([
+    return (
         <>
             <img src={Background} style={{ width: width, height: height, opacity: "1" }}>
             </img>
@@ -85,8 +77,7 @@ export function Notification(choosenApe, apeData) {
                 <img src={`data:image/svg+xml;utf8,${SERVICE_APE_STATES[choosenApe]}`} style={{ width: width / 2.5, height: width / 2.5, opacity: "1" }} />
             </div> */}
             {SERVICE_APE_STATES[choosenApe]}
-        </>,
-        buttonPressed]
+        </>
     );
 }
 

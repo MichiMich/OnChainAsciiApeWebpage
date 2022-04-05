@@ -12,6 +12,7 @@ import windowdimo from "./windowdimension.js"
 //svg dyn creation
 import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/ConnectApe.js"
 import { Notification } from './condrend.js'
+import { useState } from "react";
 //imports ape specific end
 
 
@@ -31,16 +32,18 @@ let createdJoinMessage = null;
 export function InteractWithContract() {
 
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
-    var apeAssistentValue;
-    var apeAssistenData;
+
+    var [getApeAssistenData, setApeAssistentData] = useState();
+    var [getApeAssistent, setApeAssistent] = useState();
 
     if (account) {
-        apeAssistentValue = 'joinRaffle';
-        apeAssistenData = JSON.stringify(account);
+        setApeAssistent = 'joinRaffle';
+        setApeAssistentData(JSON.stringify(account));
     }
 
     const handleSuccess = async (tx) => {
-        apeAssistentValue = 'success';
+        console.log("success")
+        setApeAssistent = 'success';
     }
 
     const handleComplete = async (tx) => {
@@ -58,7 +61,8 @@ export function InteractWithContract() {
             var txString = JSON.stringify(tx);
             createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
             console.log("message", createdErrorMessage);
-            apeAssistenData = createdErrorMessage;
+            setApeAssistentData(createdErrorMessage);
+            setApeAssistent('error');
         }
         else {
             createdErrorMessage = "Error occured";
@@ -101,9 +105,15 @@ export function InteractWithContract() {
 
     }
 
-    console.log("createApeData", apeAssistentValue, apeAssistenData)
+    console.log("createApeData", getApeAssistent, getApeAssistenData)
+    // console.log("notificationdata", Notification(getApeAssistent, getApeAssistenData))
     return (
-        Notification(apeAssistentValue, apeAssistenData)
+        <>
+            {Notification(getApeAssistent, getApeAssistenData)[0]}
+            <button onClick={async () =>
+                InteractContract()
+            } disabled={isLoading || isFetching}>join raffle</button>
+        </>
     );
 
     /*
