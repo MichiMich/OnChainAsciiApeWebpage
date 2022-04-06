@@ -2,6 +2,7 @@ import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe
 import Background from "./img/backgrounds/sun.png"
 import { HandleMoralisWeb3, RunContractJoinRaffle, GetcontractFunction } from "./InteractWithContract.js";
 import { useMoralis } from "react-moralis";
+import { useState } from "react";
 //styles start
 const centered = {
     position: "fixed",
@@ -11,11 +12,16 @@ const centered = {
 }
 //styles end
 
-function Clickidi() {
+async function Clickidi() {
     console.log("clickidi entered")
     console.log("moralis hook made")
+    var runContractResult = await RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
 
-    RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
+    console.log("return wantedApe, givenApeData", runContractResult[0], runContractResult[1]);
+    wantedApe = runContractResult[0];
+    givenApeData = runContractResult[1];
+    getCurrentActiveApe(wantedApe, givenApeData);
+    HandleApeAssistent();
 }
 
 
@@ -44,7 +50,7 @@ function getCurrentActiveApe(choosenApe, apeData) {
     }
     else if (choosenApe == 'success') {
         return (<>
-            {console.log("serviceApesuccess wanted")}
+            {console.log("serviceApe success wanted")}
             <div style={centered}>
                 <img src={`data:image/svg+xml;utf8,${createSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
             </div>
@@ -52,7 +58,7 @@ function getCurrentActiveApe(choosenApe, apeData) {
     }
     else if (choosenApe == 'error') {
         return (<>
-            {console.log("serviceApeerror wanted")}
+            {console.log("serviceApe error wanted")}
             <div style={centered}>
                 <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
             </div>
@@ -112,20 +118,24 @@ export function WebpageContent() {
     )
 }
 
-
+var wantedApe, givenApeData;
 function HandleApeAssistent() {
     const { account } = useMoralis();
-    var wantedApe;
+
+    //const [getWantedApe, setWantedApe] = useState();
+
     if (!account) {
-        wantedApe = 'connect'
+        wantedApe = 'connect';
     }
     else {
         wantedApe = 'joinRaffle'
+        givenApeData = JSON.stringify(account)
     }
 
 
     console.log("apeAssistenthandle entered")
-    return (getCurrentActiveApe(wantedApe, JSON.stringify(account)))
+    console.log("wantedApe, apeData", wantedApe, givenApeData)
+    return (getCurrentActiveApe(wantedApe, givenApeData))
 }
 
 // function Notification(choosenApe, apeData) {

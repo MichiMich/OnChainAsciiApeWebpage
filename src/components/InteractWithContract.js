@@ -4,18 +4,20 @@ import 'antd/dist/antd.css';
 
 let createdErrorMessage = null;
 var globalEnterRaffle;
+
 export async function RunContractJoinRaffle(contractFunction, errorInformation) {
     console.log("runContractjoinraffle entered")
-
+    var result;
     const tx = await globalEnterRaffle(
         {
-            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
+            onSuccess: (tx) => result = tx.wait(1).then(handleSuccess(tx)),
             //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
-            onError: (tx) => handleError(tx, errorInformation),
+            onError: (tx) => result = handleError(tx, errorInformation),
         }
     )
     console.log("runContractFunction done")
-
+    console.log("result", result);
+    return (result);
 }
 
 const handleError = async (tx) => {
@@ -25,8 +27,10 @@ const handleError = async (tx) => {
         console.log("tx", tx)
         //get interesting value to show for user ->should be require state
         var txString = JSON.stringify(tx);
-        createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
+        //var createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3); //fits if require statement is true
+        var createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('stack') - 3);
         console.log("message", createdErrorMessage);
+        return ['error', createdErrorMessage];
         // setApeAssistentData(createdErrorMessage);
         // setApeAssistent('error');
     }
@@ -37,6 +41,7 @@ const handleError = async (tx) => {
 
 const handleSuccess = async (tx) => {
     console.log("success entered")
+    return ['success', tx];
     // setApeAssistent = 'success';
 }
 
