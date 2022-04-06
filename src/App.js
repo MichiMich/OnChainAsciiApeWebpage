@@ -3,6 +3,9 @@ import Moralis from 'moralis';
 import { InteractWithContract } from "./components/InteractWithContract.js";
 import { MoralisProvider } from "react-moralis";
 import Notification from './components/condrend.js'
+import { Appi } from "./components/AssistentApe_class.js";
+
+import { Test, Test2 } from "./components/AssistentApe_class.js";
 
 function App() {
 
@@ -18,9 +21,9 @@ function App() {
     <>
 
       <Account />
-      {/* <MintPage /> */}
       <InteractWithContract />
       {/* <Notification /> */}
+
     </>
   );
 }

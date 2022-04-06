@@ -1,21 +1,11 @@
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
-import { Button, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
 
-//imports ape specific start
-import Background from "./img/backgrounds/sun.png"
-//import Background from "./img/backgrounds/mariocut2.jpg";
-import JoinRaffleApe from "./img/SpeekingApes/TwoPartApeJoinRaffle.svg";
-import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
-import windowdimo from "./windowdimension.js"
 //svg dyn creation
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/ConnectApe.js"
 import { Notification } from './condrend.js'
-import { useState } from "react";
+import { useEffect } from "react";
 //imports ape specific end
-
-
 
 //styles start
 const centered = {
@@ -27,23 +17,65 @@ const centered = {
 //styles end
 
 let createdErrorMessage = null;
-let createdJoinMessage = null;
+
+// function handleSucces() = async (tx) =>{
+
+// }
+
+var globalAccount;
+
+function OptimizedCall() {
+    console.log("global account", globalAccount);
+}
+
+
+async function runtContractJoinRaffle(contractFunction) {
+
+    const tx = await contractFunction(
+        {
+            onSuccess: (tx) => tx.wait(1).then(console.log("success goblaenterraffle")),
+            //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
+            //             //onError: () => { handleError(JSON.stringify(error)) },
+            onError: (tx) => (console.log("error gobalenterraffle")),
+        }
+    )
+
+}
+
+function callData() {
+
+}
+
 
 export function InteractWithContract() {
 
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
-    var [getApeAssistenData, setApeAssistentData] = useState();
-    var [getApeAssistent, setApeAssistent] = useState();
+    globalAccount = account;
+
+    var createdApe = Notification('connect', "datasendbyme");
+
+
+    // useEffect(() => {
+
+    //     if (account) {
+    //         createdApe = Notification('connect', "datasendbyme")
+    //     }
+    //     else {
+    //         createdApe = Notification('connect', "datasendbyme");
+    //     }
+
+    // });
+
 
     if (account) {
-        setApeAssistent = 'joinRaffle';
-        setApeAssistentData(JSON.stringify(account));
+        // setApeAssistent = 'joinRaffle';
+        // setApeAssistentData(JSON.stringify(account));
     }
 
     const handleSuccess = async (tx) => {
         console.log("success")
-        setApeAssistent = 'success';
+        // setApeAssistent = 'success';
     }
 
     const handleComplete = async (tx) => {
@@ -61,8 +93,8 @@ export function InteractWithContract() {
             var txString = JSON.stringify(tx);
             createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
             console.log("message", createdErrorMessage);
-            setApeAssistentData(createdErrorMessage);
-            setApeAssistent('error');
+            // setApeAssistentData(createdErrorMessage);
+            // setApeAssistent('error');
         }
         else {
             createdErrorMessage = "Error occured";
@@ -81,7 +113,6 @@ export function InteractWithContract() {
     }
     );
 
-
     const handleResults = () => {
         //here we get the resulte data
         if (error) {
@@ -93,25 +124,25 @@ export function InteractWithContract() {
     }
 
 
-    const InteractContract = async () => {
-        const tx = await enterRaffle(
-            {
-                onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
-                //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
-                //             //onError: () => { handleError(JSON.stringify(error)) },
-                onError: (tx) => handleError(tx, error),
-            }
-        )
+    // const InteractContract = async () => {
+    //     const tx = await enterRaffle(
+    //         {
+    //             onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
+    //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
+    //             //             //onError: () => { handleError(JSON.stringify(error)) },
+    //             onError: (tx) => handleError(tx, error),
+    //         }
+    //     )
 
-    }
+    // }
 
-    console.log("createApeData", getApeAssistent, getApeAssistenData)
+    // console.log("createApeData", getApeAssistent, getApeAssistenData)
     // console.log("notificationdata", Notification(getApeAssistent, getApeAssistenData))
     return (
         <>
-            {Notification(getApeAssistent, getApeAssistenData)[0]}
+            {createdApe}
             <button onClick={async () =>
-                InteractContract()
+                runtContractJoinRaffle(enterRaffle)
             } disabled={isLoading || isFetching}>join raffle</button>
         </>
     );

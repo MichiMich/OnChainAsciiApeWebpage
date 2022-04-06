@@ -6,7 +6,7 @@ import ConnectApe from "./img/SpeekingApes/TwoPartApeConnect.svg";
 import windowdimo from "./windowdimension.js"
 import React, { useState } from "react";
 //svg dyn creation
-import { CreateConnectApe, CreateJoinRaffleApe } from "./ApeGeneration/ConnectApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe } from "./ApeGeneration/GenerateApe.js"
 
 //for interacting with contract
 import { useMoralis, useWeb3Contract } from "react-moralis";

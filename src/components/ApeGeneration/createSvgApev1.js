@@ -1,6 +1,6 @@
 import svgStart from "../img/SpeekingApes/templates/Start.svg"
 import svgEnd from "../img/SpeekingApes/templates/End.svg"
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 
 const svgNewLineStart = '<tspan x="4%" dy="1.2em"';
 const svgNewLineEnd = '</tspan>'
@@ -28,14 +28,52 @@ export function CreateLineSvg(xTranslationPercentage, yTranslationPercentage, Te
 }
 
 
+export function DynCreateSvg(createdSvgLine) {
+    const createdSvg = CreateSVG(createdSvgLine);
+
+    useEffect(() => {
+        // CreateSVG(createdSvgLine);
+        // console.log("side effect runs");
+    }, [createdSvgLine])
+
+
+    // const [createdSvg, startSvgCreation] = useState(CreateSVG(createdSvgLine));
+
+    // useEffect(() => {
+    //     function abc() {
+    //         startSvgCreation(CreateSVG(createdSvgLine))
+    //     }
+    //     abc();
+    //     return;
+    // }, []);
+    // console.log("returni", createdSvg);
+    // return (createdSvg);
+
+    // var createdSvg = useState(CreateSVG(createdSvgLine));
+    // useEffect(() => {
+    //     createdSvg = null;
+    // })
+    // console.log("returni", CreateSVG(createdSvgLine));
+    // return (CreateSVG(createdSvgLine));
+    // const [createdSvg, createdSvgLine] = useState(CreateSVG(createdSvgLine))
+
+
+
+    // console.log("returnValue", createdSvg)
+    return (createdSvg);
+
+}
+
 export function CreateSVG(createdSvgLine) {
 
-    // console.log("svg creation called")
-
-
     const [data, setData] = useState(null);
-    const [data2, setData2] = useState(null);
+    const [data3, setData3] = useState(null);
 
+    var createdSvg = null;
+
+    useEffect(() => {
+        createdSvg = null;
+    });
 
     fetch(svgStart)
         .then(r => r.text())
@@ -46,22 +84,19 @@ export function CreateSVG(createdSvgLine) {
 
     fetch(svgEnd)
         .then(r => r.text())
-        .then(data2 => {
+        .then(data3 => {
             // console.log('data3', data3);
-            setData2(data2)
+            setData3(data3);
         });
 
 
-
-    if (data != null && data2 != null) {
+    if (data != null && data3 != null) {
         // createdSvg = data.concat(data2).concat(data3);
         //createdSvg = data + bubbleTextLine1 + bubbleTextLine2
-        var createdSvg = data + createdSvgLine;
-        createdSvg += data2;
+        createdSvg = data + createdSvgLine;
+        createdSvg += data3;
         // console.log("createdSvg", createdSvg);
         return (createdSvg)
-    } else {
-        console.log("invalid svg data")
     }
 
 

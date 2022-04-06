@@ -1,7 +1,7 @@
 import { stat } from "fs";
 import { useState } from "react";
 import { useMoralis, useWeb3Contract } from "react-moralis";
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/ConnectApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/GenerateApe.js"
 import Background from "./img/backgrounds/sun.png"
 import windowdimo from "./windowdimension.js"
 
