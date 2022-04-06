@@ -2,105 +2,57 @@ import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
 import 'antd/dist/antd.css';
 
-//svg dyn creation
-import { Notification } from './condrend.js'
-import { useEffect } from "react";
-//imports ape specific end
-
-//styles start
-const centered = {
-    position: "fixed",
-    top: "55%",
-    left: "20%",
-    transform: "translate(-50%, -50%)",
-}
-//styles end
-
 let createdErrorMessage = null;
 
-// function handleSucces() = async (tx) =>{
-
-// }
-
-var globalAccount;
-
-function OptimizedCall() {
-    console.log("global account", globalAccount);
-}
-
-
-async function runtContractJoinRaffle(contractFunction) {
+async function runtContractJoinRaffle(contractFunction, errorInformation) {
 
     const tx = await contractFunction(
         {
-            onSuccess: (tx) => tx.wait(1).then(console.log("success goblaenterraffle")),
-            //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
-            //             //onError: () => { handleError(JSON.stringify(error)) },
-            onError: (tx) => (console.log("error gobalenterraffle")),
+            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
+            //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
+            onError: (tx) => handleError(tx, errorInformation),
         }
     )
 
 }
 
-function callData() {
+const handleError = async (tx) => {
+    console.log("error entered")
+    if (tx != undefined || tx != null) {
+        //reverted -> require state of solidty
+        console.log("tx", tx)
+        //get interesting value to show for user ->should be require state
+        var txString = JSON.stringify(tx);
+        createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
+        console.log("message", createdErrorMessage);
+        // setApeAssistentData(createdErrorMessage);
+        // setApeAssistent('error');
+    }
+    else {
+        createdErrorMessage = "Error occured";
+    }
+}
 
+const handleSuccess = async (tx) => {
+    console.log("success entered")
+    // setApeAssistent = 'success';
+}
+
+const handleComplete = async (tx) => {
+    console.log("complete entered")
+    await tx.wait(1)
+    console.log("complete wait done")
 }
 
 
-export function InteractWithContract() {
+export function HandleMoralisWeb3() {
 
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
-
-    globalAccount = account;
-
-    var createdApe = Notification('connect', "datasendbyme");
-
-
-    // useEffect(() => {
-
-    //     if (account) {
-    //         createdApe = Notification('connect', "datasendbyme")
-    //     }
-    //     else {
-    //         createdApe = Notification('connect', "datasendbyme");
-    //     }
-
-    // });
-
 
     if (account) {
         // setApeAssistent = 'joinRaffle';
         // setApeAssistentData(JSON.stringify(account));
     }
-
-    const handleSuccess = async (tx) => {
-        console.log("success")
-        // setApeAssistent = 'success';
-    }
-
-    const handleComplete = async (tx) => {
-        console.log("complete entered")
-        await tx.wait(1)
-        console.log("complete wait done")
-    }
-
-    const handleError = async (tx) => {
-        console.log("error entered")
-        if (tx != undefined || tx != null) {
-            //reverted -> require state of solidty
-            console.log("tx", tx)
-            //get interesting value to show for user ->should be require state
-            var txString = JSON.stringify(tx);
-            createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3);
-            console.log("message", createdErrorMessage);
-            // setApeAssistentData(createdErrorMessage);
-            // setApeAssistent('error');
-        }
-        else {
-            createdErrorMessage = "Error occured";
-        }
-    }
-
 
     const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
         abi: abi,
@@ -113,15 +65,6 @@ export function InteractWithContract() {
     }
     );
 
-    const handleResults = () => {
-        //here we get the resulte data
-        if (error) {
-            return (
-                <div>
-                    {error?.message.substring(error?.message.search('message') + 10, error?.message.search('data') - 3)}
-                </div>)
-        }
-    }
 
 
     // const InteractContract = async () => {
@@ -136,16 +79,10 @@ export function InteractWithContract() {
 
     // }
 
-    // console.log("createApeData", getApeAssistent, getApeAssistenData)
-    // console.log("notificationdata", Notification(getApeAssistent, getApeAssistenData))
-    return (
-        <>
-            {createdApe}
-            <button onClick={async () =>
-                runtContractJoinRaffle(enterRaffle)
-            } disabled={isLoading || isFetching}>join raffle</button>
-        </>
-    );
+    return;
+
+
+
 
     /*
         if (allowApeClick) {

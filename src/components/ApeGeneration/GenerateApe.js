@@ -3,10 +3,13 @@ import { CreateLineSvg, CreateSVG } from "./createSvgApe.js"
 
 
 export function CreateConnectApe() {
-
+    console.log("line1")
     var line = CreateLineSvg("52", "12", "Please ", "white");
+    console.log("line2")
     var line2 = CreateLineSvg("63", "12", "connect", "%23ff33cc");
+    console.log("line3")
     var line3 = CreateLineSvg("76", "12", "wallet", "white");
+    console.log("line4")
     var line4 = CreateLineSvg("57", "16", "first, my Apefriend!", "white");
     var svg = CreateSVG(line + line2 + line3 + line4);
     console.log("createdsvg", svg);
@@ -29,7 +32,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
 
 }
 
-export function CreateErrorApe(errorMessage) {
+export async function CreateErrorApe(errorMessage) {
     console.log("errormessage", errorMessage)
     if (errorMessage == null || errorMessage == undefined) {
         return (CreateSVG("no error data given"))
@@ -58,7 +61,7 @@ export function CreateErrorApe(errorMessage) {
 
 }
 
-export function createSuccessApe() {
+export async function createSuccessApe() {
     var line = CreateLineSvg("52", "12", "Yipii you Joined!", "white");
     var line2 = CreateLineSvg("64", "12", "Thanks a lot, I hope you win", "%23ff33cc"); //# needs to be set as %23 to work with url in calling function, so #ff33cc = %23ff33cc
     var svg = CreateSVG(line + line2);
