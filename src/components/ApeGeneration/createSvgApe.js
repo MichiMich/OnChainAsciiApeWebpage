@@ -94,9 +94,6 @@ export function CreateSVG(createdSvgLine) {
 
     // console.log("svg creation called")
 
-    console.log("svgstart", svgStart)
-    console.log("svgend", svgEnd)
-
     if (svgStart != null && svgEnd != null) {
         // createdSvg = data.concat(data2).concat(data3);
         //createdSvg = data + bubbleTextLine1 + bubbleTextLine2

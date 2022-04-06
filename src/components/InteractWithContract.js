@@ -3,16 +3,18 @@ import { abi } from "../constants/Raffle.json";
 import 'antd/dist/antd.css';
 
 let createdErrorMessage = null;
+var globalEnterRaffle;
+export async function RunContractJoinRaffle(contractFunction, errorInformation) {
+    console.log("runContractjoinraffle entered")
 
-async function runtContractJoinRaffle(contractFunction, errorInformation) {
-
-    const tx = await contractFunction(
+    const tx = await globalEnterRaffle(
         {
             onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
             //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
             onError: (tx) => handleError(tx, errorInformation),
         }
     )
+    console.log("runContractFunction done")
 
 }
 
@@ -45,14 +47,26 @@ const handleComplete = async (tx) => {
 }
 
 
+export function GetcontractFunction(addressToBeAdded) {
+    console.log("getContractfunction entered")
+    const { runContractFunction: enterRaffle, } = useWeb3Contract({
+        abi: abi,
+        contractAddress: "0x75Ab8EeEd318e4294B1AC150C95C852813EBC083",
+        functionName: "addAddress",
+        params: {
+            _addressToBeAdded: addressToBeAdded
+        },
+
+    }
+    );
+    console.log("useWEb3hook done")
+    return (enterRaffle);
+}
+
 export function HandleMoralisWeb3() {
 
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
-    if (account) {
-        // setApeAssistent = 'joinRaffle';
-        // setApeAssistentData(JSON.stringify(account));
-    }
 
     const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
         abi: abi,
@@ -65,7 +79,7 @@ export function HandleMoralisWeb3() {
     }
     );
 
-
+    globalEnterRaffle = enterRaffle;
 
     // const InteractContract = async () => {
     //     const tx = await enterRaffle(
@@ -79,7 +93,7 @@ export function HandleMoralisWeb3() {
 
     // }
 
-    return;
+    return (enterRaffle);
 
 
 

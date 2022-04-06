@@ -1,7 +1,7 @@
 import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/GenerateApe.js"
 import Background from "./img/backgrounds/sun.png"
-import { HandleMoralisWeb3, runtContractJoinRaffle } from "./InteractWithContract.js";
-
+import { HandleMoralisWeb3, RunContractJoinRaffle, GetcontractFunction } from "./InteractWithContract.js";
+import { useMoralis } from "react-moralis";
 //styles start
 const centered = {
     position: "fixed",
@@ -11,50 +11,54 @@ const centered = {
 }
 //styles end
 
+function Clickidi() {
+    console.log("clickidi entered")
+    console.log("moralis hook made")
+
+    RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
+}
+
+
 function getCurrentActiveApe(choosenApe, apeData) {
     console.log("choosenape", choosenApe)
     const windowWidth = window.innerWidth;
-    console.log("currentcreatedape", CreateConnectApe())
-    return (<div style={centered}>
-        <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-    </div>)
-    /*
-        if (choosenApe == 'connect') {
-            return (<>
-                {console.log("serviceApeConnect wanted")}
+
+
+    if (choosenApe == 'connect') {
+        return (<>
+            {console.log("serviceApeConnect wanted")}
+            <div style={centered}>
+                <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+            </div>
+        </>);
+    }
+    else if (choosenApe == 'joinRaffle') {
+        return (<>
+            {console.log("serviceApejoinRaffle wanted")}
+            <a onClick={() => Clickidi()}>
                 <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                    <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
-                {console.log("apiapi", CreateConnectApe())}
-            </>);
-        }
-        else if (choosenApe == 'joinRaffle') {
-            return (<>
-                {console.log("serviceApejoinRaffle wanted")}
-                <a >
-                    <div style={centered}>
-                        <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-                    </div>
-                </a>
-            </>);
-        }
-        else if (choosenApe == 'success') {
-            return (<>
-                {console.log("serviceApesuccess wanted")}
-                <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${createSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-                </div>
-            </>);
-        }
-        else if (choosenApe == 'error') {
-            return (<>
-                {console.log("serviceApeerror wanted")}
-                <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-                </div>
-            </>)
-        }
-    */
+            </a>
+        </>);
+    }
+    else if (choosenApe == 'success') {
+        return (<>
+            {console.log("serviceApesuccess wanted")}
+            <div style={centered}>
+                <img src={`data:image/svg+xml;utf8,${createSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+            </div>
+        </>);
+    }
+    else if (choosenApe == 'error') {
+        return (<>
+            {console.log("serviceApeerror wanted")}
+            <div style={centered}>
+                <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+            </div>
+        </>)
+    }
+
     //dont know why but entering this I always got the connect and joinRaffle ape when calling the connect one...
     // const SERVICE_APE_STATES = {
     //     connect:
@@ -97,6 +101,7 @@ function getCurrentActiveApe(choosenApe, apeData) {
 export function WebpageContent() {
     //const { height, width } = windowdimo();
 
+
     return (
         <>
             <HandleMoralisWeb3 />
@@ -109,10 +114,18 @@ export function WebpageContent() {
 
 
 function HandleApeAssistent() {
+    const { account } = useMoralis();
+    var wantedApe;
+    if (!account) {
+        wantedApe = 'connect'
+    }
+    else {
+        wantedApe = 'joinRaffle'
+    }
+
+
     console.log("apeAssistenthandle entered")
-    var generatedapedata = getCurrentActiveApe("connect", "mydata");
-    console.log("promisedati", generatedapedata);
-    return (generatedapedata)
+    return (getCurrentActiveApe(wantedApe, JSON.stringify(account)))
 }
 
 // function Notification(choosenApe, apeData) {
