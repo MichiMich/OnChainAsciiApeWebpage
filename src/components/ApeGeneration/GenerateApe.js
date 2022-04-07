@@ -32,7 +32,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
 
 }
 
-export async function CreateErrorApe(errorMessage) {
+export function CreateErrorApe(errorMessage) {
     console.log("errormessage", errorMessage)
     if (errorMessage == null || errorMessage == undefined) {
         return (CreateSVG("no error data given"))
@@ -54,14 +54,14 @@ export async function CreateErrorApe(errorMessage) {
 
 
     var line = CreateLineSvg("52", "12", s1, "red");
-    var line2 = CreateLineSvg("57", "16", s2, "red");
+    var line2 = CreateLineSvg("52", "16", s2, "red");
     var svg = CreateSVG(line + line2);
     // console.log("svg", svg);
     return (svg);
 
 }
 
-export async function createSuccessApe() {
+export function CreateSuccessApe() {
     var line = CreateLineSvg("52", "12", "Yipii you Joined!", "white");
     var line2 = CreateLineSvg("64", "12", "Thanks a lot, I hope you win", "%23ff33cc"); //# needs to be set as %23 to work with url in calling function, so #ff33cc = %23ff33cc
     var svg = CreateSVG(line + line2);

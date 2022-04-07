@@ -1,9 +1,9 @@
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe } from "./ApeGeneration/GenerateApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/GenerateApe.js"
 import Background from "./img/backgrounds/sun.png"
 import { HandleMoralisWeb3, RunContractJoinRaffle, GetcontractFunction } from "./InteractWithContract.js";
 import { useMoralis } from "react-moralis";
 import { useEffect, useState } from "react";
-import { render } from "@testing-library/react";
+import { JoinRaffle } from "./ContractInteraction.js";
 //styles start
 const centered = {
     position: "fixed",
@@ -12,21 +12,87 @@ const centered = {
     transform: "translate(-50%, -50%)",
 }
 //styles end
-var txDone, txResultApe, txResultMessage;
+var txDone, txResultApe;
 async function Clickidi() {
     console.log("clickidi entered")
     console.log("moralis hook made")
     var runContractResult = await RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
 
     console.log("return wantedApe, givenApeData", runContractResult[0], runContractResult[1]);
-    txResultApe = runContractResult[0];
-    txResultMessage = runContractResult[1];
-    console.log("right before handle access")
-    //getCurrentActiveApe(wantedApe, givenApeData);
-    console.log("error set")
+    wantedApe = runContractResult[0];
+    givenApeData = runContractResult[1];
     txDone = true;
+    dynCreatedApe = getCurrentActiveApe(wantedApe, givenApeData);
+    return () => HandleApeAssistent();
 }
 
+
+
+function HandleApeUpdate() {
+    const [getApe, setApe] = useState(
+        getCurrentActiveApeV2()
+    )
+
+    useEffect(() => {
+        getCurrentActiveApeV2(updatApe)
+    }, []);
+
+
+    return (
+        <>
+            {getApe}
+            <button onClick={forceUpdate}>
+                Click to re-render
+            </button>
+        </>
+    )
+
+
+}
+
+
+function getCurrentActiveApeV2() {
+    console.log("getCurrentActiveApeV2 ran")
+    console.log("wanted api, data", wantedApe, givenApeData);
+
+    const windowWidth = window.innerWidth;
+
+
+    if (choosenApe == 'connect') {
+        return (<>
+            {console.log("serviceApeConnect wanted")}
+            <div style={centered}>
+                <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+            </div>
+        </>);
+    }
+    else if (choosenApe == 'joinRaffle') {
+        return (<>
+            {console.log("serviceApejoinRaffle wanted")}
+            <a onClick={() => Clickidi()}>
+                <div style={centered}>
+                    <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                </div>
+            </a>
+        </>);
+    }
+    else if (choosenApe == 'success') {
+        return (<>
+            {console.log("serviceApe success wanted")}
+            <div style={centered}>
+                <img src={`data:image/svg+xml;utf8,${createSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+            </div>
+        </>);
+    }
+    else if (choosenApe == 'error') {
+        return (<>
+            {console.log("serviceApe error wanted")}
+            <div style={centered}>
+                <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+            </div>
+        </>)
+    }
+}
 
 function getCurrentActiveApe(choosenApe, apeData) {
     console.log("choosenape", choosenApe)
@@ -55,7 +121,7 @@ function getCurrentActiveApe(choosenApe, apeData) {
         return (<>
             {console.log("serviceApe success wanted")}
             <div style={centered}>
-                <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                <img src={`data:image/svg+xml;utf8,${createSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
             </div>
         </>);
     }
@@ -116,62 +182,59 @@ export function WebpageContent() {
             <HandleMoralisWeb3 />
             <img src={Background} style={{ width: window.innerWidth, height: window.innerHeight, opacity: "1" }}>
             </img>
-            <HandleApeAssistent />
+            <HandleApeUpdate />
         </>
     )
 }
 
-var wantedApe, givenApeData;
-var doOnce;
+var wantedApe, givenApeData, dynCreatedApe;
 function HandleApeAssistent() {
-
     const { account } = useMoralis();
-
-    //const [usedApe, setUsedApe] = useState(() => getCurrentActiveApe('connect', '')) //initial render assign connect ape
-
-    const [usedApe, setUsedApe] = useState('connect');
-
-    useEffect(() => {
-        console.log("useEffectRan");
-        console.log("usedapeEffect", usedApe);
-    }
-    )
 
     //const [getWantedApe, setWantedApe] = useState();
     console.log("handleApeAssisten ran")
+
+    // useEffect(() => {
+    // //     console.log("wantedape", wantedApe)
+    //     dynCreatedApe = getCurrentActiveApe(wantedApe, givenApeData)
+    //  });
+
     if (txDone) {
         console.log("txdone")
-        // wantedApe = txResultApe;
+        wantedApe = txResultApe;
+        dynCreatedApe = getCurrentActiveApe(wantedApe, givenApeData);
         // givenApeData = txResultMessage;
     }
     else if (!account) {
+        console.log("!account")
         wantedApe = 'connect';
-
+        dynCreatedApe = getCurrentActiveApe(wantedApe, givenApeData);
     }
     else {
-        wantedApe = 'joinRaffle';
-        givenApeData = JSON.stringify(account);
-        if (!doOnce || doOnce == null) {
-            console.log("doOnce");
-            setUsedApe('joinRaffle')
-            doOnce = true;
-        }
+        console.log("joinRaffle")
+        wantedApe = 'joinRaffle'
+        givenApeData = JSON.stringify(account)
+        dynCreatedApe = getCurrentActiveApe(wantedApe, givenApeData);
     }
-    console.log("usedapevalue", usedApe);
+
 
 
     console.log("apeAssistenthandle entered")
     console.log("wantedApe, apeData", wantedApe, givenApeData)
-    return (
-        <>
-            <p>here is the value {usedApe}</p>
-            <a onClick={() => Clickidi()}>JoinRaffle</a>
-        </>
-    )
-
-
-
-
+    return (dynCreatedApe)
+    // return (
+    //     <><div>
+    //         {/*Clicking on the button will force to re-render like force update does */}
+    //         <button onClick={forceUpdate}>
+    //             Click to re-render
+    //         </button>
+    //     </div>
+    //         <div>
+    //             {console.log("forcevalue", forceUpdate)}
+    //             {console.log("globalwantedape", globalWantedApe)}
+    //         </div>
+    //     </>
+    // )
 }
 
 // function Notification(choosenApe, apeData) {

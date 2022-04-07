@@ -1,6 +1,8 @@
 import Account from "./components/Account";
 import Moralis from 'moralis';
 import WebpageContent from './components/condrend.js'
+import { HandleAll } from "./components/ClassFunction";
+
 
 function App() {
 
@@ -17,8 +19,9 @@ function App() {
 
       <Account />
       {/* <InteractWithContract /> */}
-      <WebpageContent />
-
+      {/* <WebpageContent /> */}
+      {/* <WebpageContent /> */}
+      <HandleAll />
     </>
   );
 }

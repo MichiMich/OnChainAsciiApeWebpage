@@ -1,9 +1,8 @@
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe } from "./ApeGeneration/GenerateApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/GenerateApe.js"
 import Background from "./img/backgrounds/sun.png"
 import { HandleMoralisWeb3, RunContractJoinRaffle, GetcontractFunction } from "./InteractWithContract.js";
 import { useMoralis } from "react-moralis";
 import { useEffect, useState } from "react";
-import { render } from "@testing-library/react";
 //styles start
 const centered = {
     position: "fixed",
@@ -21,9 +20,8 @@ async function Clickidi() {
     console.log("return wantedApe, givenApeData", runContractResult[0], runContractResult[1]);
     txResultApe = runContractResult[0];
     txResultMessage = runContractResult[1];
-    console.log("right before handle access")
     //getCurrentActiveApe(wantedApe, givenApeData);
-    console.log("error set")
+    useForceUpdate(txResultApe); //rerender in HandleApeAssistent
     txDone = true;
 }
 
@@ -55,7 +53,7 @@ function getCurrentActiveApe(choosenApe, apeData) {
         return (<>
             {console.log("serviceApe success wanted")}
             <div style={centered}>
-                <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                <img src={`data:image/svg+xml;utf8,${createSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
             </div>
         </>);
     }
@@ -122,20 +120,8 @@ export function WebpageContent() {
 }
 
 var wantedApe, givenApeData;
-var doOnce;
 function HandleApeAssistent() {
-
     const { account } = useMoralis();
-
-    //const [usedApe, setUsedApe] = useState(() => getCurrentActiveApe('connect', '')) //initial render assign connect ape
-
-    const [usedApe, setUsedApe] = useState('connect');
-
-    useEffect(() => {
-        console.log("useEffectRan");
-        console.log("usedapeEffect", usedApe);
-    }
-    )
 
     //const [getWantedApe, setWantedApe] = useState();
     console.log("handleApeAssisten ran")
@@ -146,31 +132,16 @@ function HandleApeAssistent() {
     }
     else if (!account) {
         wantedApe = 'connect';
-
     }
     else {
-        wantedApe = 'joinRaffle';
-        givenApeData = JSON.stringify(account);
-        if (!doOnce || doOnce == null) {
-            console.log("doOnce");
-            setUsedApe('joinRaffle')
-            doOnce = true;
-        }
+        wantedApe = 'joinRaffle'
+        givenApeData = JSON.stringify(account)
     }
-    console.log("usedapevalue", usedApe);
 
 
     console.log("apeAssistenthandle entered")
     console.log("wantedApe, apeData", wantedApe, givenApeData)
-    return (
-        <>
-            <p>here is the value {usedApe}</p>
-            <a onClick={() => Clickidi()}>JoinRaffle</a>
-        </>
-    )
-
-
-
+    return (getCurrentActiveApe(wantedApe, givenApeData))
 
 }
 
