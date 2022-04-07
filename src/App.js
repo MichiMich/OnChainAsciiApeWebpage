@@ -2,7 +2,7 @@ import Account from "./components/Account";
 import Moralis from 'moralis';
 import WebpageContent from './components/condrend.js'
 import { HandleAll } from "./components/ClassFunction";
-
+import { Example } from './components/UsingTheEffect.js'
 
 function App() {
 
@@ -21,7 +21,8 @@ function App() {
       {/* <InteractWithContract /> */}
       {/* <WebpageContent /> */}
       {/* <WebpageContent /> */}
-      <HandleAll />
+      {/* <HandleAll/> */}
+      <Example />
     </>
   );
 }

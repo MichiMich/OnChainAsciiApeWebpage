@@ -10,6 +10,11 @@ const meatamaskIcon = <Icon component={MetamaskIcon} />
 const walletConnectIcon = <Icon component={WalletConnectIcon} />
 
 
+var activeAccount;
+
+export function getActiveAccount() {
+    return (activeAccount);
+}
 
 function Account() {
     const { Moralis, isAuthenticated, authenticate, enableWeb3, account, logout } = useMoralis();
@@ -39,6 +44,8 @@ function Account() {
 
 
     if (!account) {
+        activeAccount = null;
+        console.log("activeAccount", activeAccount);
         return (
             <>
                 <div className="site-page-header-ghost-wrapper" >
@@ -73,6 +80,8 @@ function Account() {
         );
 
     }
+    activeAccount = account;
+    console.log("activeAccount", activeAccount)
     return (
         <div className="site-page-header-ghost-wrapper">
             <PageHeader
