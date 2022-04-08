@@ -41,18 +41,20 @@ export function MintPage() {
         //if (!getTxDone && account) {
         if (account) {
             setActiveApe('joinRaffle'); //only for observing reasons, not needed
+            console.log("trigger ape useEffect account")
             setApeHtml(getCurrentActiveApe('joinRaffle', JSON.stringify(account)));
         }
         else {
             console.log("useEffect mint account, else")
+            console.log("trigger ape useEffect !account")
             setApeHtml(getCurrentActiveApe('connect', ''));
         }
     }, [account]); //only re-run if getApeHtml has changed
 
 
     function getCurrentActiveApe(choosenApe, apeData) {
-        //console.log("choosenape", choosenApe)
-        //console.log("apedatagiven", apeData)
+        console.log("choosenape", choosenApe)
+        console.log("apedatagiven", apeData)
         const windowWidth = window.innerWidth;
 
         if (choosenApe == 'connect') {
@@ -97,6 +99,7 @@ export function MintPage() {
         //txResultMessage = runContractResult[1];
         console.log("right before handle access")
         setActiveApe(runContractResult[0]);
+        console.log("trigger ape fromt x")
         setApeHtml(getCurrentActiveApe(runContractResult[0], runContractResult[1])); //create a new ape depending on result, success or error ape (runContractResult[0]) with given success or error information (runContractResult[1])
     }
 

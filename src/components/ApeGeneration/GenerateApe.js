@@ -11,8 +11,8 @@ export function CreateConnectApe() {
     var line3 = CreateLineSvg("76", "12", "wallet", "white");
     //console.log("line4")
     var line4 = CreateLineSvg("57", "16", "first, my Apefriend!", "white");
-    var svg = CreateSVG(line + line2 + line3 + line4);
-    //console.log("createdsvg", svg);
+    var svg = CreateSVG(line + line2 + line3 + line4, "black");
+    console.log("createdsvg", svg);
     return (svg);
 
 }
@@ -26,7 +26,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
     var line = CreateLineSvg("52", "12", "Welcome", "white");
     var line2 = CreateLineSvg("64", "12", walletAddressFormatted, "%23ff33cc"); //# needs to be set as %23 to work with url in calling function, so #ff33cc = %23ff33cc
     var line3 = CreateLineSvg("57", "16", "click me to join raffle", "white");
-    var svg = CreateSVG(line + line2 + line3);
+    var svg = CreateSVG(line + line2 + line3, 'black');
     // console.log("svg", svg);
     return (svg);
 
@@ -35,7 +35,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
 export function CreateErrorApe(errorMessage) {
     //console.log("errormessage", errorMessage)
     if (errorMessage == null || errorMessage == undefined) {
-        return (CreateSVG("no error data given"))
+        return (CreateSVG("no error data given", "red"))
     }
     //make two lines of error message start
     var middle = Math.floor(errorMessage.length / 2);
@@ -55,7 +55,7 @@ export function CreateErrorApe(errorMessage) {
 
     var line = CreateLineSvg("52", "12", s1, "red");
     var line2 = CreateLineSvg("52", "16", s2, "red");
-    var svg = CreateSVG(line + line2);
+    var svg = CreateSVG(line + line2, "red");
     // console.log("svg", svg);
     return (svg);
 
@@ -64,7 +64,7 @@ export function CreateErrorApe(errorMessage) {
 export function CreateSuccessApe() {
     var line = CreateLineSvg("52", "12", "Yipii you Joined!", "white");
     var line2 = CreateLineSvg("64", "12", "Thanks a lot, I hope you win", "%23ff33cc"); //# needs to be set as %23 to work with url in calling function, so #ff33cc = %23ff33cc
-    var svg = CreateSVG(line + line2);
+    var svg = CreateSVG(line + line2, "green");
     // console.log("svg", svg);
     return (svg);
 }

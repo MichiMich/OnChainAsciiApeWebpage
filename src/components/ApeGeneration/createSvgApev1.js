@@ -1,6 +1,68 @@
-import svgStart from "../img/SpeekingApes/templates/Start.svg"
-import svgEnd from "../img/SpeekingApes/templates/End.svg"
-import { useState, useEffect } from 'react';
+//import svgStart from "../img/SpeekingApes/templates/Start.svg"
+//import svgEnd from "../img/SpeekingApes/templates/End.svg"
+import { useState } from "react";
+
+
+const svgStart = (
+    `<svg width="650" height="700" xmlns="http://www.w3.org/2000/svg">
+<rect height="25" width="138" fill="white" y="31.7%" x="34.5%" opacity="1"/>
+<rect height="25" width="197" fill="white" y="34.9%" x="31.5%" opacity="1"/>
+<rect height="25" width="217" fill="white" y="38%" x="28.4%" opacity="1"/>
+<rect height="25" width="256.2" fill="white" y="41%" x="25.5%" opacity="1"/>
+<rect height="25" width="268.2" fill="white" y="44%" x="25.5%" opacity="1"/>
+<rect height="22.5" width="276" fill="white" y="47%" x="25.5%" opacity="1"/>
+<rect height="22.5" width="274" fill="white" y="50.2%" x="28.3%" opacity="1"/>
+<rect height="22.5" width="255" fill="white" y="53%" x="31.3%" opacity="1"/>
+<rect height="22.5" width="215" fill="white" y="56%" x="34.5%" opacity="1"/>
+<rect height="25" width="196" fill="white" y="59%" x="34.5%" opacity="1"/>
+
+<rect height="24" width="55" fill="white" y="53.2%" x="10.5%" opacity="1"/>
+<rect height="24" width="100" fill="white" y="56.2%" x="7%" opacity="1"/>
+<rect height="24" width="130" fill="white" y="59.5%" x="4.4%" opacity="1"/>
+<rect height="20" width="130" fill="white" y="63%" x="4.4%" opacity="1"/>
+<rect height="20" width="196" fill="white" y="63%" x="31.5%" opacity="1"/>
+
+<rect height="20" width="355" fill="white" y="65.8%" x="4%" opacity="1"/>
+<rect height="21" width="355" fill="white" y="68.8%" x="7%" opacity="1"/>
+<rect height="20" width="350" fill="white" y="72%" x="11%" opacity="1"/>
+<rect height="20" width="270" fill="white" y="75%" x="25.5%" opacity="1"/>
+<rect height="20" width="270" fill="white" y="78%" x="23%" opacity="1"/>
+<rect height="20" width="250" fill="white" y="81%" x="23%" opacity="1"/>
+<rect height="15" width="138" fill="white" y="31.5%" x="34.5%" opacity="1"/><text y="31%" fill="black" text-anchor="start" font-size="18" xml:space="preserve" font-family="monospace">
+<tspan x="4%" dy="1.2em">                    ██████████████
+</tspan><tspan x="4%" dy="1.2em">                  ██▓▓▓▓▲▓▓▓▓▓▓▓▲▓████
+</tspan><tspan x="4%" dy="1.2em">                ████▓▓▓▓▓▓░░░░▓▓▓▓░░██
+</tspan><tspan x="4%" dy="1.2em">              ██▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░██
+</tspan><tspan x="4%" dy="1.2em">              ██▓▓▓▓▓▓░░░░░░◔░░░░░◔░░░██
+</tspan><tspan x="4%" dy="1.2em">              ██▓▓██▓▓░░██░░░░░░░░░░░░░░██
+</tspan><tspan x="4%" dy="1.2em">                ██▓▓▓▓██░░░░░░░░░░░░░░░░░░██
+</tspan><tspan x="4%" dy="1.2em">    ██████        ██▓▓██░░░░░░░░████░░░░░░██
+</tspan><tspan x="4%" dy="1.2em">  ██▓▓▓▓▓▓██        ██░░████████░░░░██████
+</tspan><tspan x="4%" dy="1.2em">██▓▓▓▓▓▓▓▓▓▓██      ████░░░░░░░░░░░░░░██      
+</tspan><tspan x="4%" dy="1.2em">██▓▓▓▓██▓▓▓▓██    ██▓▓▓▓██████████████        
+</tspan><tspan x="4%" dy="1.2em">██▓▓▓▓▓▓██████████▓▓▓▓▓▓▓▓▓▓██▓▓▓▓██        
+</tspan><tspan x="4%" dy="1.2em">  ██▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓██▓▓▓▓██▓▓▓▓██    
+</tspan><tspan x="4%" dy="1.2em">    ████████████▓▓▓▓▓▓▓▓▓▓██▓▓▓▓██▓▓▓▓██    
+</tspan><tspan x="4%" dy="1.2em">              ██████████▓▓██░░░░░░██░░░░██
+</tspan><tspan x="4%" dy="1.2em">            ██░░░░░░░░░░██░░░░░░██░░░░██
+</tspan><tspan x="4%" dy="1.2em">            ██████████████████████████</tspan>
+</text>
+<rect height="220" width="650" fill="black" opacity="0"/><text y="2%" fill="white" text-anchor="start" font-size="18" xml:space="preserve" font-family="monospace">
+<tspan x="45%" dy="1.2em">   ██████████████████████████████
+</tspan><tspan x="45%" dy="1.2em"> ██                              ██
+</tspan><tspan x="45%" dy="1.2em">██                                ██
+</tspan><tspan x="45%" dy="1.2em">██                                ██
+</tspan><tspan x="45%" dy="1.2em">██                                ██
+</tspan><tspan x="45%" dy="1.2em"> ██                              ██
+</tspan><tspan x="45%" dy="1.2em">   ██████████████████████████████
+</tspan><tspan x="45%" dy="1.2em">             ██████     
+</tspan><tspan x="45%" dy="1.2em">            ███       
+</tspan><tspan x="45%" dy="1.2em">           ██        
+</tspan></text>`);
+
+const svgEnd = (`</svg>`);
+
+
 
 const svgNewLineStart = '<tspan x="4%" dy="1.2em"';
 const svgNewLineEnd = '</tspan>'
@@ -28,75 +90,19 @@ export function CreateLineSvg(xTranslationPercentage, yTranslationPercentage, Te
 }
 
 
-export function DynCreateSvg(createdSvgLine) {
-    const createdSvg = CreateSVG(createdSvgLine);
-
-    useEffect(() => {
-        // CreateSVG(createdSvgLine);
-        // console.log("side effect runs");
-    }, [createdSvgLine])
-
-
-    // const [createdSvg, startSvgCreation] = useState(CreateSVG(createdSvgLine));
-
-    // useEffect(() => {
-    //     function abc() {
-    //         startSvgCreation(CreateSVG(createdSvgLine))
-    //     }
-    //     abc();
-    //     return;
-    // }, []);
-    // console.log("returni", createdSvg);
-    // return (createdSvg);
-
-    // var createdSvg = useState(CreateSVG(createdSvgLine));
-    // useEffect(() => {
-    //     createdSvg = null;
-    // })
-    // console.log("returni", CreateSVG(createdSvgLine));
-    // return (CreateSVG(createdSvgLine));
-    // const [createdSvg, createdSvgLine] = useState(CreateSVG(createdSvgLine))
-
-
-
-    // console.log("returnValue", createdSvg)
-    return (createdSvg);
-
-}
-
 export function CreateSVG(createdSvgLine) {
 
-    const [data, setData] = useState(null);
-    const [data3, setData3] = useState(null);
+    // console.log("svg creation called")
 
-    var createdSvg = null;
-
-    useEffect(() => {
-        createdSvg = null;
-    });
-
-    fetch(svgStart)
-        .then(r => r.text())
-        .then(data => {
-            // console.log('data', data);
-            setData(data);
-        });
-
-    fetch(svgEnd)
-        .then(r => r.text())
-        .then(data3 => {
-            // console.log('data3', data3);
-            setData3(data3);
-        });
-
-
-    if (data != null && data3 != null) {
+    if (svgStart != null && svgEnd != null) {
         // createdSvg = data.concat(data2).concat(data3);
         //createdSvg = data + bubbleTextLine1 + bubbleTextLine2
-        createdSvg = data + createdSvgLine;
-        createdSvg += data3;
+        var createdSvg = svgStart + createdSvgLine;
+        createdSvg += svgEnd;
         // console.log("createdSvg", createdSvg);
         return (createdSvg)
+    } else {
+        console.log("invalid svg data")
     }
 
 

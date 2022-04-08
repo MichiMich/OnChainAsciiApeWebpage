@@ -1,10 +1,8 @@
 //import svgStart from "../img/SpeekingApes/templates/Start.svg"
 //import svgEnd from "../img/SpeekingApes/templates/End.svg"
-import { useState } from "react";
 
 
-const svgStart = (
-    `<svg width="650" height="700" xmlns="http://www.w3.org/2000/svg">
+const svgStart = `<svg width="650" height="700" xmlns="http://www.w3.org/2000/svg">
 <rect height="25" width="138" fill="white" y="31.7%" x="34.5%" opacity="1"/>
 <rect height="25" width="197" fill="white" y="34.9%" x="31.5%" opacity="1"/>
 <rect height="25" width="217" fill="white" y="38%" x="28.4%" opacity="1"/>
@@ -28,7 +26,9 @@ const svgStart = (
 <rect height="20" width="270" fill="white" y="75%" x="25.5%" opacity="1"/>
 <rect height="20" width="270" fill="white" y="78%" x="23%" opacity="1"/>
 <rect height="20" width="250" fill="white" y="81%" x="23%" opacity="1"/>
-<rect height="15" width="138" fill="white" y="31.5%" x="34.5%" opacity="1"/><text y="31%" fill="black" text-anchor="start" font-size="18" xml:space="preserve" font-family="monospace">
+<rect height="15" width="138" fill="white" y="31.5%" x="34.5%" opacity="1"/><text y="31%" fill="`;
+
+const svgMiddle = `" text-anchor="start" font-size="18" xml:space="preserve" font-family="monospace">
 <tspan x="4%" dy="1.2em">                    ██████████████
 </tspan><tspan x="4%" dy="1.2em">                  ██▓▓▓▓▲▓▓▓▓▓▓▓▲▓████
 </tspan><tspan x="4%" dy="1.2em">                ████▓▓▓▓▓▓░░░░▓▓▓▓░░██
@@ -58,7 +58,7 @@ const svgStart = (
 </tspan><tspan x="45%" dy="1.2em">             ██████     
 </tspan><tspan x="45%" dy="1.2em">            ███       
 </tspan><tspan x="45%" dy="1.2em">           ██        
-</tspan></text>`);
+</tspan></text>`;
 
 const svgEnd = (`</svg>`);
 
@@ -90,16 +90,21 @@ export function CreateLineSvg(xTranslationPercentage, yTranslationPercentage, Te
 }
 
 
-export function CreateSVG(createdSvgLine) {
+export function CreateSVG(createdSvgLine, apeColor) {
 
+    console.log("apeColor", apeColor)
     // console.log("svg creation called")
 
     if (svgStart != null && svgEnd != null) {
         // createdSvg = data.concat(data2).concat(data3);
         //createdSvg = data + bubbleTextLine1 + bubbleTextLine2
-        var createdSvg = svgStart + createdSvgLine;
+        if (apeColor === null || apeColor === undefined) {
+            //nothing defined, so use black one
+            apeColor = 'black';
+        }
+        var createdSvg = svgStart + apeColor + svgMiddle + createdSvgLine;
         createdSvg += svgEnd;
-        // console.log("createdSvg", createdSvg);
+        //console.log("createdSvg", createdSvg);
         return (createdSvg)
     } else {
         console.log("invalid svg data")

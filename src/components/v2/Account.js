@@ -26,13 +26,13 @@ function Account() {
         const user = await Moralis.authenticate({ provider: "walletconnect", chainId: 4 })
         console.log(user)
     }
-
-    useEffect(() => {
-        //only ran on account change
-        console.log("useEffect in Account ran");
-
-    }, [account])
-
+    /*
+        useEffect(() => {
+            //only ran on account change
+            console.log("useEffect in Account ran");
+    
+        }, [account])
+    */
     function showModal() {
         setIsModalVisible(true);
     };
