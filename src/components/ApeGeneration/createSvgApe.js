@@ -33,7 +33,11 @@ const svgMiddle = `" text-anchor="start" font-size="18" xml:space="preserve" fon
 </tspan><tspan x="4%" dy="1.2em">                  ██▓▓▓▓▲▓▓▓▓▓▓▓▲▓████
 </tspan><tspan x="4%" dy="1.2em">                ████▓▓▓▓▓▓░░░░▓▓▓▓░░██
 </tspan><tspan x="4%" dy="1.2em">              ██▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░██
-</tspan><tspan x="4%" dy="1.2em">              ██▓▓▓▓▓▓░░░░░░◔░░░░░◔░░░██
+</tspan><tspan x="4%" dy="1.2em">              ██▓▓▓▓▓▓░░░░░░`;
+
+const svgBetweenEyes = `░░░░░`;
+
+const svgEyesToEnd = `░░░██
 </tspan><tspan x="4%" dy="1.2em">              ██▓▓██▓▓░░██░░░░░░░░░░░░░░██
 </tspan><tspan x="4%" dy="1.2em">                ██▓▓▓▓██░░░░░░░░░░░░░░░░░░██
 </tspan><tspan x="4%" dy="1.2em">    ██████        ██▓▓██░░░░░░░░████░░░░░░██
@@ -90,7 +94,7 @@ export function CreateLineSvg(xTranslationPercentage, yTranslationPercentage, Te
 }
 
 
-export function CreateSVG(createdSvgLine, apeColor) {
+export function CreateSVG(createdSvgLine, apeColor, leftEye, rightEye) {
 
     console.log("apeColor", apeColor)
     // console.log("svg creation called")
@@ -102,7 +106,13 @@ export function CreateSVG(createdSvgLine, apeColor) {
             //nothing defined, so use black one
             apeColor = 'black';
         }
-        var createdSvg = svgStart + apeColor + svgMiddle + createdSvgLine;
+        if (leftEye === null || leftEye === undefined) {
+            leftEye = `◔`;
+        }
+        if (rightEye === null || rightEye === undefined) {
+            rightEye = `◔`;
+        }
+        var createdSvg = svgStart + apeColor + svgMiddle + leftEye + svgBetweenEyes + rightEye + svgEyesToEnd + createdSvgLine;
         createdSvg += svgEnd;
         //console.log("createdSvg", createdSvg);
         return (createdSvg)

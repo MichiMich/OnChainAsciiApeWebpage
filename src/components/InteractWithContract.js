@@ -28,7 +28,7 @@ const handleError = async (tx) => {
         var txString = JSON.stringify(tx);
         var createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3); //fits if require statement is true
         //var createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('stack') - 3); //on all other errors, ToDo should differentiate between both
-        alert(txString);
+        // alert(txString);
         console.log("message", createdErrorMessage);
         return ['error', createdErrorMessage];
         // setApeAssistentData(createdErrorMessage);
