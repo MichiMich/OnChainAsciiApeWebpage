@@ -2,8 +2,8 @@ import { useMoralis } from "react-moralis";
 import React, { useState } from 'react';
 import { Modal, PageHeader, Button } from "antd"
 import Icon from '@ant-design/icons';
-import { ReactComponent as MetamaskIcon } from "./Icons/metamask.svg";
-import { ReactComponent as WalletConnectIcon } from "./Icons/walletconnect.svg";
+import { ReactComponent as MetamaskIcon } from "../Icons/metamask.svg";
+import { ReactComponent as WalletConnectIcon } from "../Icons/walletconnect.svg";
 import "antd/dist/antd.css";
 
 const meatamaskIcon = <Icon component={MetamaskIcon} />
@@ -40,7 +40,7 @@ function Account() {
         setIsModalVisible(false);
     };
     //end - modal antd buttons
-
+    const [loadingState, setLoadingState] = useState(false);
 
 
     if (!account) {
@@ -53,9 +53,10 @@ function Account() {
                         ghost={false}
                         title="OnChainAsciiApes"
                         extra={[
-                            <Button key="1" type="primary" onClick={showModal}>
+                            <Button key="1" type="default" onClick={showModal} loading={loadingState}>
+                                {console.log("loadingstate", loadingState)}
                                 Connect
-                            </Button>,
+                            </Button>
                         ]}
                     ></PageHeader>
 

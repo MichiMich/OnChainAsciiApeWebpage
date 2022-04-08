@@ -16,12 +16,11 @@ const centered = {
 var txDone, apeData;
 export function Example() {
     const [ape, setape] = useState('connect');
-    const [getApeData, setApeData] = useState();
     const { account } = useMoralis();
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
         console.log("useEffect hook")
-        GetAssistentApe(ape, getApeData);
+        GetAssistentApe(ape, 'myData');
     });
 
 
@@ -32,7 +31,7 @@ export function Example() {
 
         console.log("return wantedApe, givenApeData");
         console.log("result0", runContractResult[0], "result1", runContractResult[1])
-        setApeData(runContractResult[1]);
+        apeData = runContractResult[1];
         setape(runContractResult[0])
         document.title = `You clicked`;
         txDone = true;
@@ -46,7 +45,7 @@ export function Example() {
 
         if (choosenApe == 'connect') {
             return (<>
-                {console.log("serviceApeConnect made")}
+                {console.log("serviceApeConnect wanted")}
                 <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
@@ -54,7 +53,7 @@ export function Example() {
         }
         else if (choosenApe == 'joinRaffle') {
             return (<>
-                {console.log("serviceApejoinRaffle made")}
+                {console.log("serviceApejoinRaffle wanted")}
                 <a onClick={() => joinRaffle()}>
                     <div style={centered}>
                         <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
@@ -64,7 +63,7 @@ export function Example() {
         }
         else if (choosenApe == 'success') {
             return (<>
-                {console.log("serviceApe success made")}
+                {console.log("serviceApe success wanted")}
                 <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
@@ -72,7 +71,7 @@ export function Example() {
         }
         else if (choosenApe == 'error') {
             return (<>
-                {console.log("serviceApe error made")}
+                {console.log("serviceApe error wanted")}
                 <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
@@ -108,7 +107,7 @@ export function Example() {
         //change between connect and account ape, only if no tx was done so far
         if (account && ape != 'joinRaffle') {
             console.log("account is here, no joinRaffle");
-            setApeData(JSON.stringify(account));
+            apeData = JSON.stringify(account)
             setape('joinRaffle');
         }
         else if (!account && ape != 'connect') {
@@ -125,7 +124,7 @@ export function Example() {
             <img src={Background} style={{ width: window.innerWidth, height: window.innerHeight, opacity: "1" }}>
             </img>
             <div>
-                {GetAssistentApe(ape, getApeData)}
+                {GetAssistentApe(ape, apeData)}
             </div>
         </>
     );

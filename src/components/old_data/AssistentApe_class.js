@@ -1,6 +1,6 @@
 import { Component, useState, useEffect } from "react";
-import Account from "./Account.js";
-import { JoinRaffle } from "./ContractInteraction.js";
+import Account from "../v2/Account.js";
+import { JoinRaffle } from "../ContractInteraction.js";
 
 
 function test2() {

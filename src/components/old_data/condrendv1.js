@@ -1,6 +1,6 @@
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "./ApeGeneration/GenerateApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, createSuccessApe } from "../ApeGeneration/GenerateApe.js"
 import Background from "./img/backgrounds/sun.png"
-import { HandleMoralisWeb3, RunContractJoinRaffle, GetcontractFunction } from "./InteractWithContract.js";
+import { HandleMoralisWeb3, RunContractJoinRaffle, GetcontractFunction } from "../InteractWithContract.js";
 import { useMoralis } from "react-moralis";
 import { useEffect, useState } from "react";
 //styles start

@@ -1,9 +1,9 @@
-import Account from "./components/Account";
+import Account from "./components/v2/Account";
 import Moralis from 'moralis';
 import WebpageContent from './components/condrend.js'
 import { HandleAll } from "./components/ClassFunction";
-import { Example } from './components/UsingTheEffect.js'
-
+import { TryOut } from './components/tests/ExampleMin.js';
+import { MintPage } from './components/v2/MintPage.js'
 function App() {
 
 
@@ -22,7 +22,9 @@ function App() {
       {/* <WebpageContent /> */}
       {/* <WebpageContent /> */}
       {/* <HandleAll/> */}
-      <Example />
+      {/* <Example /> */}
+      {/* <TryOut /> */}
+      <MintPage />
     </>
   );
 }

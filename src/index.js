@@ -2,32 +2,39 @@ import React from 'react';
 import App from './App';
 import { MoralisProvider } from "react-moralis";
 import reportWebVitals from './reportWebVitals';
-import "antd/dist/antd.css";
-import "./index.css";
+
+import ReactDOM from 'react-dom';
 import * as ReactDOMClient from 'react-dom/client';
 
-const container = document.getElementById('root');
+// const container = document.getElementById('root');
 
-const root = ReactDOMClient.createRoot(container);
+// const root = ReactDOMClient.createRoot(container);
 
-root.render(
-  <React.StrictMode>
-    <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
-      <App />
-    </MoralisProvider>
-  </React.StrictMode>)
+// root.render(
+//   <React.StrictMode>
+//     <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
+//       <App />
+//     </MoralisProvider>
+//   </React.StrictMode>)
+
+// root.render(
+//   <React.StrictMode>
+//     <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
+//       <App />
+//     </MoralisProvider>
+//   </React.StrictMode>)
 
 
-// ReactDOM.render(
-//   <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
-//     <App />
-//   </MoralisProvider>,
-//   document.getElementById('root')
-// )
+ReactDOM.render(
+  <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
+    <App />
+  </MoralisProvider>,
+  document.getElementById('root')
+)
 
 // ReactDOM.render(
 //   <React.StrictMode>
-//     <MoralisProvider serverUrl="https://6i3kla2yuaqw.usemoralis.com:2053/server" appId="2fxeRL7M5IdL5ipUi5xTr7KsnZV9J9HjgjToIt7p">
+//     <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
 //       <App />
 //     </MoralisProvider>
 //   </React.StrictMode>,
