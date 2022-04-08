@@ -14,112 +14,91 @@ const centered = {
 }
 //styles end
 
-function getCurrentActiveApe(choosenApe, apeData) {
-    console.log("choosenape", choosenApe)
-    console.log("apedatagiven", apeData)
-    const windowWidth = window.innerWidth;
 
-    if (choosenApe == 'connect') {
-        return (<>
-            {console.log("serviceApeConnect wanted")}
-            <div style={centered}>
-                <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-            </div>
-        </>);
-    }
-    else if (choosenApe == 'joinRaffle') {
-        return (<>
-            {console.log("serviceApejoinRaffle wanted")}
-            <a>
-                <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-                </div>
-            </a>
-        </>);
-    }
-    else if (choosenApe == 'success') {
-        return (<>
-            {console.log("serviceApe success wanted")}
-            <div style={centered}>
-                <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-            </div>
-        </>);
-    }
-    else if (choosenApe == 'error') {
-        return (<>
-            {console.log("serviceApe error wanted")}
-            <div style={centered}>
-                <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-            </div>
-        </>)
-    }
 
-}
 
-function timeout(delay) {
-    return new Promise(res => setTimeout(res, delay));
-}
+
+
 
 
 
 export function MintPage() {
 
     const [getActiveApe, setActiveApe] = useState('connect');
-    const [getApeHtml, setApeHtml] = useState();//useState(getCurrentActiveApe('connect', ''));
+    const [getApeHtml, setApeHtml] = useState(getCurrentActiveApe('connect', ''));//useState(getCurrentActiveApe('connect', ''));
+    const [getTxDone, setTxDone] = useState(false)
     const { account } = useMoralis();
 
 
     useEffect(() => {
-        console.log("useEffect getApeHtml ran");
-        console.log("getActiveApe", getActiveApe);
+        console.log("useEffect getApeHtml ran, getActiveApe", getActiveApe);
         console.log("account", account);
-
-
-    }, [getApeHtml || account]); //only re-run if getApeHtml has changed
+    }, [getApeHtml]); //only re-run if getApeHtml has changed
 
 
     useEffect(() => {
-        console.log("useEffect mint account ran");
-        console.log("getActiveApe", getActiveApe);
-        console.log("account", account);
+        console.log("useEffect mint account ran, account", account);
+        //if (!getTxDone && account) {
         if (account) {
+            setActiveApe('joinRaffle'); //only for observing reasons, not needed
             setApeHtml(getCurrentActiveApe('joinRaffle', JSON.stringify(account)));
+        }
+        else {
+            console.log("useEffect mint account, else")
+            setApeHtml(getCurrentActiveApe('connect', ''));
         }
     }, [account]); //only re-run if getApeHtml has changed
 
-    // if (account) {
-    //     console.log("account", account)
-    // }
-    // else {
-    //     console.log("!account", account)
-    // }
 
-    //HandleChange();
+    function getCurrentActiveApe(choosenApe, apeData) {
+        //console.log("choosenape", choosenApe)
+        //console.log("apedatagiven", apeData)
+        const windowWidth = window.innerWidth;
 
-    async function HandleChange() {
-        if (account && (getApeHtml != 'joinRaffle')) {
-            //user logged in with wallet
-            console.log("user logged in")
-            setActiveApe('joinRaffle');
-            setApeHtml(getCurrentActiveApe(getActiveApe, 'abcdefghijkl'));
-            console.log("use timeout");
-            await timeout(2000);
-
+        if (choosenApe == 'connect') {
+            return (<>
+                <div style={centered}>
+                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                </div>
+            </>);
         }
+        else if (choosenApe == 'joinRaffle') {
+            return (<>
+                <a onClick={() => joinRaffle()}>
+                    <div style={centered}>
+                        <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                    </div>
+                </a>
+            </>);
+        }
+        else if (choosenApe == 'success') {
+            return (<>
+                <div style={centered}>
+                    <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                </div>
+            </>);
+        }
+        else if (choosenApe == 'error') {
+            return (<>
+                <div style={centered}>
+                    <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                </div>
+            </>)
+        }
+
     }
 
-    function changeApeConst() {
-        if (getActiveApe == 'connect') {
-            setActiveApe('joinRaffle');
-        }
-        else {
-            setActiveApe('connect')
-        }
-
-        setApeHtml(getCurrentActiveApe(getActiveApe, 'abcdefghijk'));
+    async function joinRaffle() {
+        console.log("joinRaffle entered")
+        var runContractResult = await RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
+        setTxDone(true)
+        console.log("result of join raffle", runContractResult[0], "information from result", runContractResult[1])
+        //txResultApe = runContractResult[0];
+        //txResultMessage = runContractResult[1];
+        console.log("right before handle access")
+        setActiveApe(runContractResult[0]);
+        setApeHtml(getCurrentActiveApe(runContractResult[0], runContractResult[1])); //create a new ape depending on result, success or error ape (runContractResult[0]) with given success or error information (runContractResult[1])
     }
-
-
 
 
     return (
@@ -127,7 +106,6 @@ export function MintPage() {
             <HandleMoralisWeb3 />
             <img src={Background} style={{ width: window.innerWidth, height: window.innerHeight, opacity: "1" }}>
             </img>
-            <button onClick={changeApeConst}>change ape</button>
             <div>
                 {getApeHtml}
             </div>

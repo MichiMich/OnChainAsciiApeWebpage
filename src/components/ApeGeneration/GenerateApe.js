@@ -3,13 +3,13 @@ import { CreateLineSvg, CreateSVG } from "./createSvgApe.js"
 
 
 export function CreateConnectApe() {
-    console.log("line1")
+    //console.log("line1")
     var line = CreateLineSvg("52", "12", "Please ", "white");
-    console.log("line2")
+    //console.log("line2")
     var line2 = CreateLineSvg("63", "12", "connect", "%23ff33cc");
-    console.log("line3")
+    //console.log("line3")
     var line3 = CreateLineSvg("76", "12", "wallet", "white");
-    console.log("line4")
+    //console.log("line4")
     var line4 = CreateLineSvg("57", "16", "first, my Apefriend!", "white");
     var svg = CreateSVG(line + line2 + line3 + line4);
     //console.log("createdsvg", svg);
@@ -18,7 +18,7 @@ export function CreateConnectApe() {
 }
 
 export function CreateJoinRaffleApe(WalletAddress) {
-    console.log("walletinput", WalletAddress)
+    //console.log("walletinput", WalletAddress)
     if (WalletAddress != null) {
         var walletAddressFormatted = JSON.stringify(WalletAddress).slice(3, 7) + ".." + JSON.stringify(WalletAddress).slice(WalletAddress.length - 3, WalletAddress.length + 1);
         // console.log("walletAddressFormatted", walletAddressFormatted);
@@ -33,7 +33,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
 }
 
 export function CreateErrorApe(errorMessage) {
-    console.log("errormessage", errorMessage)
+    //console.log("errormessage", errorMessage)
     if (errorMessage == null || errorMessage == undefined) {
         return (CreateSVG("no error data given"))
     }
