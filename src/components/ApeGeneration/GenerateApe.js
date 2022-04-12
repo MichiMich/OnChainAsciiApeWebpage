@@ -12,7 +12,7 @@ export function CreateConnectApe() {
     //console.log("line4")
     var line4 = CreateLineSvg("57", "16", "first, my Apefriend!", "white");
     var svg = CreateSVG(line + line2 + line3 + line4, "black");
-    console.log("createdsvg", svg);
+    //console.log("createdsvg", svg);
     return (svg);
 
 }

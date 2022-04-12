@@ -3,7 +3,7 @@ import { HandleMoralisWeb3, RunContractJoinRaffle } from "../InteractWithContrac
 import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe } from "../ApeGeneration/GenerateApe.js"
 import Background from "../img/backgrounds/sun.png"
 import { useMoralis } from "react-moralis";
-
+import useWindowDimensions from "../windowdimension.js";
 
 //styles start
 const centered = {
@@ -28,6 +28,7 @@ export function MintPage() {
     const [getApeHtml, setApeHtml] = useState(getCurrentActiveApe('connect', ''));//useState(getCurrentActiveApe('connect', ''));
     const [getTxDone, setTxDone] = useState(false)
     const { account } = useMoralis();
+    //const { height, width } = useWindowDimensions(); //otional, adapting the window positon and the ape, renders a lot, updates the window width on every change
 
 
     useEffect(() => {
@@ -55,12 +56,13 @@ export function MintPage() {
     function getCurrentActiveApe(choosenApe, apeData) {
         console.log("choosenape", choosenApe)
         console.log("apedatagiven", apeData)
-        const windowWidth = window.innerWidth;
+        const windowWidth = 393;//window.innerWidth;
+        console.log("windowidth", window.innerWidth)
 
         if (choosenApe == 'connect') {
             return (<>
                 <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: 200, height: 200, opacity: "1" }} />
                 </div>
             </>);
         }
