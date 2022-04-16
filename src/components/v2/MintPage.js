@@ -15,20 +15,13 @@ const centered = {
 //styles end
 
 
-
-
-
-
-
-
-
 export function MintPage() {
 
     const [getActiveApe, setActiveApe] = useState('connect');
     const [getApeHtml, setApeHtml] = useState(getCurrentActiveApe('connect', ''));//useState(getCurrentActiveApe('connect', ''));
     const [getTxDone, setTxDone] = useState(false)
     const { account } = useMoralis();
-    //const { height, width } = useWindowDimensions(); //otional, adapting the window positon and the ape, renders a lot, updates the window width on every change
+    const { height, width } = useWindowDimensions(); //otional, adapting the window positon and the ape, renders a lot, updates the window width on every change
 
 
     useEffect(() => {
@@ -48,21 +41,32 @@ export function MintPage() {
         else {
             console.log("useEffect mint account, else")
             console.log("trigger ape useEffect !account")
-            setApeHtml(getCurrentActiveApe('connect', ''));
+            setApeHtml(getCurrentActiveApe('connect', '', width, height));
         }
     }, [account]); //only re-run if getApeHtml has changed
 
 
-    function getCurrentActiveApe(choosenApe, apeData) {
+    function getCurrentActiveApe(choosenApe, apeData, width, height) {
         console.log("choosenape", choosenApe)
         console.log("apedatagiven", apeData)
-        const windowWidth = 393;//window.innerWidth;
-        console.log("windowidth", window.innerWidth)
+        const windowWidth = 1351; //set to default size, which should fix pretty good otherwise dynamic: window.innerWidth
+
+        if (width != null && width != undefined && height != null && height != undefined) {
+            console.log("windowidth", window.innerWidth)
+            console.log("width: ", width, "\nheight: ", height);
+            if (width > height) {
+                console.log("width > height");
+            }
+            else {
+                console.log("height > width");
+            }
+        }
+
 
         if (choosenApe == 'connect') {
             return (<>
                 <div style={centered}>
-                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: 200, height: 200, opacity: "1" }} />
+                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: height / 2.5, height: height / 2.5, opacity: "1" }} />
                 </div>
             </>);
         }
