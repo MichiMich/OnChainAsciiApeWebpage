@@ -7,14 +7,13 @@ var globalEnterRaffle;
 var globalResult;
 export async function RunContractJoinRaffle(contractFunction, errorInformation) {
     console.log("runContractjoinraffle entered")
-    const tx = await globalEnterRaffle(
+    const tx1 = await globalEnterRaffle(
         {
-            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
+            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx1)),
             //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
             onError: (tx) => globalResult = handleError(tx, errorInformation),
         }
     )
-    await tx.wait(1);
     console.log("runContractFunction done")
     console.log("result", globalResult);
     return (globalResult);
@@ -31,9 +30,14 @@ const handleError = async (tx) => {
         if (txString.search('data') == -1) {
             createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('stack') - 3); //on all other errors, ToDo should differentiate between both
         }
-        else {
+        else if (txString.search('data') != -1) {
             createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3); //fits if require statement is true
         }
+        else {
+            createdErrorMessage = "unknown error";
+            alert(txString);
+        }
+
         console.log("message", createdErrorMessage);
         return ['error', createdErrorMessage];
         // setApeAssistentData(createdErrorMessage);
@@ -45,6 +49,7 @@ const handleError = async (tx) => {
 }
 
 const handleSuccess = async (tx) => {
+    await tx.wait(1);
     console.log("success entered")
     globalResult = ['success', tx];
     return ['success', tx];
