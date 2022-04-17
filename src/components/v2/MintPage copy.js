@@ -16,10 +16,6 @@ const centered = {
 }
 //styles end
 
-const svgCentered = {
-    position: "fixed", top: "10%", left: "10%"
-}
-
 
 export function MintPage() {
 
@@ -47,31 +43,31 @@ export function MintPage() {
         else {
             console.log("useEffect mint account, else")
             console.log("trigger ape useEffect !account")
-            setApeHtml(getCurrentActiveApe('connect', '', width, height));
+            setApeHtml(getCurrentActiveApe('connect', ''));
         }
     }, [account]); //only re-run if getApeHtml has changed
 
 
-    function getCurrentActiveApe(choosenApe, apeData, width, height) {
+    function getCurrentActiveApe(choosenApe, apeData) {
         console.log("choosenape", choosenApe)
         console.log("apedatagiven", apeData)
         const windowWidth = 1351; //set to default size, which should fix pretty good otherwise dynamic: window.innerWidth
-        if (width != null && width != undefined && height != null && height != undefined) {
-            console.log("windowidth", window.innerWidth)
-            console.log("width: ", width, "\nheight: ", height);
-            if (width > height) {
-                console.log("width > height");
-            }
-            else {
-                console.log("height > width");
-            }
-        }
+        // if (width != null && width != undefined && height != null && height != undefined) {
+        //     console.log("windowidth", window.innerWidth)
+        //     console.log("width: ", width, "\nheight: ", height);
+        //     if (width > height) {
+        //         console.log("width > height");
+        //     }
+        //     else {
+        //         console.log("height > width");
+        //     }
+        // }
 
 
         if (choosenApe == 'connect') {
             return (<>
-                <div style={svgCentered}>
-                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                <div style={{ position: "fixed", top: "10%", left: "10%" }}>
+                    <img src={`data:image/svg+xml;utf8,${CreateConnectApe()}`} style={{ width: 300, height: 300, opacity: "1" }} />
                 </div>
             </>);
         }
@@ -86,7 +82,7 @@ export function MintPage() {
         else if (choosenApe == 'joinRaffle') {
             return (<>
                 <a onClick={() => joinRaffle()}>
-                    <div style={svgCentered}>
+                    <div style={centered}>
                         <img src={`data:image/svg+xml;utf8,${CreateJoinRaffleApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                     </div>
                 </a>
@@ -94,14 +90,14 @@ export function MintPage() {
         }
         else if (choosenApe == 'success') {
             return (<>
-                <div style={svgCentered}>
+                <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
             </>);
         }
         else if (choosenApe == 'error') {
             return (<>
-                <div style={svgCentered}>
+                <div style={centered}>
                     <img src={`data:image/svg+xml;utf8,${CreateErrorApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
             </>)

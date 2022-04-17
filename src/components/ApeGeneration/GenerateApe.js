@@ -11,7 +11,7 @@ export function CreateConnectApe() {
     var line3 = CreateLineSvg("76", "12", "wallet", "white");
     //console.log("line4")
     var line4 = CreateLineSvg("57", "16", "first, my Apefriend!", "white");
-    var svg = CreateSVG(line + line2 + line3 + line4, "black");
+    var svg = CreateSVG(line + line2 + line3 + line4, "white");
     //console.log("createdsvg", svg);
     return (svg);
 
@@ -26,7 +26,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
     var line = CreateLineSvg("52", "12", "Welcome", "white");
     var line2 = CreateLineSvg("64", "12", walletAddressFormatted, "%23ff33cc"); //# needs to be set as %23 to work with url in calling function, so #ff33cc = %23ff33cc
     var line3 = CreateLineSvg("57", "16", "click me to join raffle", "white");
-    var svg = CreateSVG(line + line2 + line3, 'black');
+    var svg = CreateSVG(line + line2 + line3, 'white');
     // console.log("svg", svg);
     return (svg);
 

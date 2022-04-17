@@ -23,12 +23,16 @@ const handleError = async (tx) => {
     console.log("error entered")
     if (tx != undefined || tx != null) {
         //reverted -> require state of solidty
+        var createdErrorMessage;
         console.log("tx", tx)
         //get interesting value to show for user ->should be require state
         var txString = JSON.stringify(tx);
-        var createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3); //fits if require statement is true
-        //var createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('stack') - 3); //on all other errors, ToDo should differentiate between both
-        // alert(txString);
+        if (txString.search('data') == -1) {
+            createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('stack') - 3); //on all other errors, ToDo should differentiate between both
+        }
+        else {
+            createdErrorMessage = txString.substring(txString.search('message') + 10, txString.search('data') - 3); //fits if require statement is true
+        }
         console.log("message", createdErrorMessage);
         return ['error', createdErrorMessage];
         // setApeAssistentData(createdErrorMessage);
