@@ -14,6 +14,7 @@ export async function RunContractJoinRaffle(contractFunction, errorInformation) 
             onError: (tx) => globalResult = handleError(tx, errorInformation),
         }
     )
+    await tx.wait(1);
     console.log("runContractFunction done")
     console.log("result", globalResult);
     return (globalResult);
