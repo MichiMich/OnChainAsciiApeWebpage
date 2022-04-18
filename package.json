@@ -18,7 +18,8 @@
     "react-scripts": "^4.0.3",
     "reactjs-text-to-image": "^0.0.1",
     "state-pool": "^0.7.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3uikit": "^0.1.126"
   },
   "scripts": {
     "start": "react-scripts start",

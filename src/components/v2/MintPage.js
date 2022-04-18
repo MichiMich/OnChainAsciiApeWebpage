@@ -5,7 +5,6 @@ import Background from "../img/backgrounds/sun.png"
 import { useMoralis } from "react-moralis";
 import useWindowDimensions from "../windowdimension.js";
 import DevilApe from "./DevilApe.svg";
-import bananaApe from "./BananaColorApe.png"
 
 //styles start
 const centered = {
@@ -17,7 +16,7 @@ const centered = {
 //styles end
 
 const svgCentered = {
-    position: "fixed", top: "10%", left: "10%"
+    position: "fixed", top: "15%", left: "10%"
 }
 
 
@@ -75,14 +74,6 @@ export function MintPage() {
                 </div>
             </>);
         }
-        /*
-        if (choosenApe == 'connect') {
-            return (<>
-                <div style={{ position: "fixed", top: "10%", left: "10%" }}>
-                    <img src={DevilApe} style={{ width: 300, height: 300, opacity: "1" }} />
-                </div>
-            </>);
-        }*/
         else if (choosenApe == 'joinRaffle') {
             return (<>
                 <a onClick={() => joinRaffle()}>
