@@ -24,10 +24,15 @@ export async function RunContractJoinRaffle(contractFunction, errorInformation) 
 
 const handleError = async (tx) => {
     var createdErrorMessage;
-    console.log("erriu", tx.error.message); //this is it, we only want the mesage given by the interaction with contract
-    if (tx != undefined || tx != null) {
+    console.log("tx from interaction", tx);
+    if (tx.error != undefined) {
         createdErrorMessage = tx.error.message;
         console.log("filtered error message", createdErrorMessage);
+    }
+    else if (tx.message != undefined) {
+        //tx not fired, could be user cancel transaction
+        createdErrorMessage = tx.message;
+        console.log("tx message", tx.createdErrorMessage);
     }
     else {
         createdErrorMessage = "undefined error occured";
