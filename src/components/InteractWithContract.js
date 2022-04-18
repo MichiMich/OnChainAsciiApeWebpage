@@ -24,10 +24,12 @@ export async function RunContractJoinRaffle(contractFunction, errorInformation) 
 
 const handleError = async (tx) => {
     var createdErrorMessage;
+    var wantedAssistentApe = 'error';
     console.log("tx from interaction", tx);
     if (tx.error != undefined) {
         createdErrorMessage = tx.error.message;
         console.log("filtered error message", createdErrorMessage);
+        wantedAssistentApe = 'rejoin';
     }
     else if (tx.message != undefined) {
         //tx not fired, could be user cancel transaction
@@ -37,7 +39,7 @@ const handleError = async (tx) => {
     else {
         createdErrorMessage = "undefined error occured";
     }
-    return ['error', createdErrorMessage];
+    return [wantedAssistentApe, createdErrorMessage];
 
 }
 

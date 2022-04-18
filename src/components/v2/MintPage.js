@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { HandleMoralisWeb3, RunContractJoinRaffle } from "../InteractWithContract.js";
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe } from "../ApeGeneration/GenerateApe.js"
+import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe, CreateRejoinApe } from "../ApeGeneration/GenerateApe.js"
 import Background from "../img/backgrounds/sun.png"
 import { useMoralis } from "react-moralis";
 import useWindowDimensions from "../windowdimension.js";
@@ -98,6 +98,13 @@ export function MintPage() {
                     <img src={`data:image/svg+xml;utf8,${CreateSuccessApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
                 </div>
             </>);
+        }
+        else if (choosenApe == 'rejoin') {
+            return (<>
+                <div style={svgCentered}>
+                    <img src={`data:image/svg+xml;utf8,${CreateRejoinApe(apeData)}`} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                </div>
+            </>)
         }
         else if (choosenApe == 'error') {
             return (<>

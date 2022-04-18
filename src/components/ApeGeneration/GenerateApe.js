@@ -32,7 +32,8 @@ export function CreateJoinRaffleApe(WalletAddress) {
 
 }
 
-export function CreateErrorApe(errorMessage) {
+
+export function CreateRejoinApe(errorMessage) {
     //console.log("errormessage", errorMessage)
     if (errorMessage == null || errorMessage == undefined) {
         return (CreateSVG("no error data given", "red"))
@@ -56,6 +57,35 @@ export function CreateErrorApe(errorMessage) {
     var line = CreateLineSvg("52", "12", s1, "red");
     var line2 = CreateLineSvg("52", "16", s2, "red");
     var svg = CreateSVG(line + line2, "red", "⋋", "⋌");
+    // console.log("svg", svg);
+    return (svg);
+
+}
+
+export function CreateErrorApe(errorMessage) {
+    //console.log("errormessage", errorMessage)
+    if (errorMessage == null || errorMessage == undefined) {
+        return (CreateSVG("no error data given", "red"))
+    }
+    //make two lines of error message start
+    var middle = Math.floor(errorMessage.length / 2);
+    var before = errorMessage.lastIndexOf(' ', middle);
+    var after = errorMessage.indexOf(' ', middle + 1);
+
+    if (middle - before < after - middle) {
+        middle = before;
+    } else {
+        middle = after;
+    }
+
+    var s1 = errorMessage.substr(0, middle);
+    var s2 = errorMessage.substr(middle + 1);
+    //make two lines of error message end
+
+
+    var line = CreateLineSvg("52", "12", s1, "red");
+    var line2 = CreateLineSvg("52", "16", s2, "red");
+    var svg = CreateSVG(line + line2, "yellow", "ಥ", "ಥ");
     // console.log("svg", svg);
     return (svg);
 
