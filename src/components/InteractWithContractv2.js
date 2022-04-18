@@ -1,39 +1,30 @@
-import { useMoralis, useWeb3Contract } from "react-moralis";
+import { useMoralis, useWeb3Contract, useWeb3ExecuteFunction } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
 import 'antd/dist/antd.css';
 
 let createdErrorMessage = null;
 var globalEnterRaffle;
 var globalResult;
-export async function RunContractJoinRaffle(contractFunction, errorInformation) {
+var globalContractProcessor;
+var globalOptions;
+
+export async function RunContractJoinRaffle() {
     console.log("runContractjoinraffle entered")
-    const tx1 = await globalEnterRaffle(
-        {
-            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx1)),
-            //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
-            onError: (tx) => globalResult = handleError(tx, errorInformation),
+    await globalContractProcessor.fetch({
+        params: globalOptions,
+        onSuccess: () => {
+            handleSuccess();
+        },
+        onError: (error) => {
+            handleError(error)
         }
-    )
-    console.log("runContractFunction done")
-    console.log("result", globalResult);
-    return (globalResult);
+    });
 }
 
 
 
-
-const handleError = async (tx) => {
-    var createdErrorMessage;
-    console.log("erriu", tx.error.message); //this is it, we only want the mesage given by the interaction with contract
-    if (tx != undefined || tx != null) {
-        createdErrorMessage = tx.error.message;
-        console.log("filtered error message", createdErrorMessage);
-    }
-    else {
-        createdErrorMessage = "undefined error occured";
-    }
-    return ['error', createdErrorMessage];
-
+const handleError = (msg) => {
+    console.log("erri2", msg.error.message); //this is it, throwing out the correct message...
 }
 
 const handleSuccess = async (tx) => {
@@ -72,18 +63,17 @@ export function HandleMoralisWeb3() {
     const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
 
 
-    const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
-        abi: abi,
+    globalContractProcessor = useWeb3ExecuteFunction();
+
+    globalOptions = {
         contractAddress: "0x75Ab8EeEd318e4294B1AC150C95C852813EBC083",
         functionName: "addAddress",
+        abi: abi,
         params: {
             _addressToBeAdded: account
         },
-
     }
-    );
 
-    globalEnterRaffle = enterRaffle;
 
     // const InteractContract = async () => {
     //     const tx = await enterRaffle(
