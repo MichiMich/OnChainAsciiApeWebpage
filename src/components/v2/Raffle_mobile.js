@@ -81,14 +81,16 @@ export function RaffleMobile() {
         }
         else if (choosenApe == 'joinRaffle') {
             return (<>
-                <div>
-                    <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
-                    <p style={firstLineSpeechBubble}>Welcome <span style={{ color: "#ff33cc" }}>{walletAddressFormatted}</span></p>
-                    <p style={secondLineSpeechBubble}>click me to join raffle</p>
-                </div>
-                <div>
-                    <img src={ConnectApePng} style={{ width: window.innerWidth, height: window.innerWidth }} />
-                </div>
+                <a onClick={() => joinRaffle()}>
+                    <div>
+                        <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
+                        <p style={firstLineSpeechBubble}>Welcome <span style={{ color: "#ff33cc" }}>{walletAddressFormatted}</span></p>
+                        <p style={secondLineSpeechBubble}>click me to join raffle</p>
+                    </div>
+                    <div>
+                        <img src={ConnectApePng} style={{ width: window.innerWidth, height: window.innerWidth }} />
+                    </div>
+                </a>
             </>);
         }
         else if (choosenApe == 'success') {
