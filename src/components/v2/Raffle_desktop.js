@@ -9,17 +9,15 @@ const svgCentered = {
     position: "fixed", top: "15%", left: "10%"
 }
 
-export function MintPage() {
+export function RaffleDesktop() {
 
-    const [getActiveApe, setActiveApe] = useState('connect');
+    console.log("RaffleDesktop");
     const [getApeHtml, setApeHtml] = useState(getCurrentActiveApe('connect', ''));//useState(getCurrentActiveApe('connect', ''));
-    const [getTxDone, setTxDone] = useState(false)
     const { account } = useMoralis();
     const { height, width } = useWindowDimensions(); //otional, adapting the window positon and the ape, renders a lot, updates the window width on every change
 
 
     useEffect(() => {
-        console.log("useEffect getApeHtml ran, getActiveApe", getActiveApe);
         console.log("account", account);
     }, [getApeHtml]); //only re-run if getApeHtml has changed
 
@@ -28,7 +26,6 @@ export function MintPage() {
         console.log("useEffect mint account ran, account", account);
         //if (!getTxDone && account) {
         if (account) {
-            setActiveApe('joinRaffle'); //only for observing reasons, not needed
             console.log("trigger ape useEffect account")
             setApeHtml(getCurrentActiveApe('joinRaffle', JSON.stringify(account)));
         }
@@ -97,15 +94,7 @@ export function MintPage() {
     }
 
     async function joinRaffle() {
-        console.log("joinRaffle entered")
         var runContractResult = await RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
-        setTxDone(true)
-        console.log("result of join raffle", runContractResult[0], "information from result", runContractResult[1])
-        //txResultApe = runContractResult[0];
-        //txResultMessage = runContractResult[1];
-        console.log("right before handle access")
-        setActiveApe(runContractResult[0]);
-        console.log("trigger ape fromt x")
         setApeHtml(getCurrentActiveApe(runContractResult[0], runContractResult[1])); //create a new ape depending on result, success or error ape (runContractResult[0]) with given success or error information (runContractResult[1])
     }
 

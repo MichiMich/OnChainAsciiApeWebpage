@@ -1,9 +1,8 @@
 import Account from "./components/v2/Account";
 import Moralis from 'moralis';
-import WebpageContent from './components/condrend.js'
-import { HandleAll } from "./components/ClassFunction";
-import { TryOut } from './components/tests/ExampleMin.js';
-import { MintPage } from './components/v2/MintPage.js'
+import { RaffleDesktop } from './components/v2/Raffle_desktop.js';
+import { RaffleMobile } from './components/v2/Raffle_mobile.js';
+
 function App() {
 
 
@@ -13,20 +12,26 @@ function App() {
   const moralisAppId = "clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI";
 
   Moralis.start({ serverUrl: moralisServerUrl, appId: moralisAppId });
+  console.log("window width", window.innerWidth);
 
-  return (
-    <>
-
-      <Account />
-      {/* <InteractWithContract /> */}
-      {/* <WebpageContent /> */}
-      {/* <WebpageContent /> */}
-      {/* <HandleAll/> */}
-      {/* <Example /> */}
-      {/* <TryOut /> */}
-      <MintPage />
-    </>
-  );
+  if (window.innerWidth <= 768) {
+    console.log("display mode mobile");
+    return (
+      <>
+        <Account />
+        <RaffleMobile />
+      </>
+    )
+  }
+  else {
+    console.log("display mode desktop");
+    return (
+      <>
+        <Account />
+        <RaffleDesktop />
+      </>
+    )
+  }
 }
 
 export default App;
