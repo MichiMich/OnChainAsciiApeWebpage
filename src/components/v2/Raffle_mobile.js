@@ -36,7 +36,7 @@ export function RaffleMobile() {
         //if (!getTxDone && account) {
         if (account) {
             console.log("trigger ape useEffect account")
-            setApeHtml(getCurrentActiveApe('joinRaffle', JSON.stringify(account)));
+            setApeHtml(getCurrentActiveApe('joinRaffle', '', JSON.stringify(account)));
         }
         else {
             console.log("useEffect mint account, else")
@@ -46,7 +46,7 @@ export function RaffleMobile() {
     }, [account]); //only re-run if getApeHtml has changed
 
 
-    function getCurrentActiveApe(choosenApe, walletAddress, width, height) {
+    function getCurrentActiveApe(choosenApe, apeData, walletAddress, width, height) {
         console.log("choosenape", choosenApe)
         var walletAddressFormatted;
         const windowWidth = 1351; //set to default size, which should fix pretty good otherwise dynamic: window.innerWidth
@@ -95,7 +95,6 @@ export function RaffleMobile() {
         }
         else if (choosenApe == 'success') {
             return (<>
-
                 <div>
                     <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
                     <p style={firstLineSpeechBubble}>success</p>
@@ -106,11 +105,32 @@ export function RaffleMobile() {
             </>);
         }
         else if (choosenApe == 'rejoin') {
+            var s1, s2;
+            if (apeData == null || apeData == undefined) {
+                s1 = "no error data given";
+            }
+            else {
+                //make two lines of error message start
+                var middle = Math.floor(apeData.length / 2);
+                var before = apeData.lastIndexOf(' ', middle);
+                var after = apeData.indexOf(' ', middle + 1);
+
+                if (middle - before < after - middle) {
+                    middle = before;
+                } else {
+                    middle = after;
+                }
+
+                s1 = apeData.substr(0, middle);
+                s2 = apeData.substr(middle + 1);
+                //make two lines of error message end
+            }
             return (<>
 
                 <div>
                     <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
-                    <p style={firstLineSpeechBubble}>rejoin</p>
+                    <p style={firstLineSpeechBubble}>{s1}</p>
+                    <p style={secondLineSpeechBubble}>{s2}</p>
                 </div>
                 <div>
                     <img src={RejoinApePng} style={{ width: window.innerWidth, height: window.innerWidth }} />
