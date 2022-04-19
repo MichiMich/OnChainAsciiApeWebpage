@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { HandleMoralisWeb3, RunContractJoinRaffle } from "../InteractWithContract.js";
-import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe, CreateRejoinApe } from "../ApeGeneration/GenerateApe.js"
+import { Create2Lines } from "./create2Lines.js";
 
 import { useMoralis } from "react-moralis";
 import useWindowDimensions from "../windowdimension.js";
@@ -46,6 +46,7 @@ export function RaffleMobile() {
     }, [account]); //only re-run if getApeHtml has changed
 
 
+
     function getCurrentActiveApe(choosenApe, apeData, walletAddress, width, height) {
         console.log("choosenape", choosenApe)
         var walletAddressFormatted;
@@ -63,6 +64,12 @@ export function RaffleMobile() {
         //format wallet address
         if (walletAddress != null && walletAddress != undefined) {
             walletAddressFormatted = JSON.stringify(walletAddress).slice(3, 7) + ".." + JSON.stringify(walletAddress).slice(walletAddress.length - 3, walletAddress.length + 1);
+        }
+
+        //make two lines for error or rejoin
+        if (choosenApe == 'error' || choosenApe == 'rejoin') {
+            var [s1, s2] = Create2Lines(apeData);
+            console.log("created2linse: ", Create2Lines(apeData))
         }
 
 
@@ -97,7 +104,8 @@ export function RaffleMobile() {
             return (<>
                 <div>
                     <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
-                    <p style={firstLineSpeechBubble}>success</p>
+                    <p style={firstLineSpeechBubble}>Yipii you joined!</p>
+                    <p style={secondLineSpeechBubble}><span style={{ color: "#ff33cc" }}>Thanks a lot, I hope you win</span></p>
                 </div>
                 <div>
                     <img src={SuccessApePng} style={{ width: window.innerWidth, height: window.innerWidth }} />
@@ -105,32 +113,11 @@ export function RaffleMobile() {
             </>);
         }
         else if (choosenApe == 'rejoin') {
-            var s1, s2;
-            if (apeData == null || apeData == undefined) {
-                s1 = "no error data given";
-            }
-            else {
-                //make two lines of error message start
-                var middle = Math.floor(apeData.length / 2);
-                var before = apeData.lastIndexOf(' ', middle);
-                var after = apeData.indexOf(' ', middle + 1);
-
-                if (middle - before < after - middle) {
-                    middle = before;
-                } else {
-                    middle = after;
-                }
-
-                s1 = apeData.substr(0, middle);
-                s2 = apeData.substr(middle + 1);
-                //make two lines of error message end
-            }
             return (<>
-
                 <div>
                     <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
                     <p style={firstLineSpeechBubble}>{s1}</p>
-                    <p style={secondLineSpeechBubble}>{s2}</p>
+                    <p style={secondLineSpeechBubble}><span style={{ color: "#ff33cc" }}>{s2}</span></p>
                 </div>
                 <div>
                     <img src={RejoinApePng} style={{ width: window.innerWidth, height: window.innerWidth }} />
@@ -139,10 +126,10 @@ export function RaffleMobile() {
         }
         else if (choosenApe == 'error') {
             return (<>
-
                 <div>
                     <img src={SpeechBubblePng} style={{ width: window.innerWidth, height: 200 }} />
-                    <p style={firstLineSpeechBubble}>error</p>
+                    <p style={firstLineSpeechBubble}>{s1}</p>
+                    <p style={secondLineSpeechBubble}>{s2}</p>
                 </div>
                 <div>
                     <img src={ErrorApePng} style={{ width: window.innerWidth, height: window.innerWidth }} />
