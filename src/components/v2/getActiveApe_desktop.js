@@ -2,7 +2,7 @@
 import { CreateConnectApe, CreateJoinRaffleApe, CreateErrorApe, CreateSuccessApe, CreateRejoinApe } from "../ApeGeneration/GenerateApe.js"
 
 const svgCentered = {
-    position: "fixed", top: "15%", left: "10%"
+    position: "fixed", top: "15%", left: "20%"
 }
 
 export function GetCurrentActiveApe_desktop(choosenApe, apeData, width, height) {

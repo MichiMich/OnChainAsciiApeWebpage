@@ -14,8 +14,6 @@ export async function RunContractJoinRaffle(contractFunction, errorInformation) 
             onError: (tx) => globalResult = handleError(tx, errorInformation),
         }
     )
-    console.log("runContractFunction done")
-    console.log("result", globalResult);
     return (globalResult);
 }
 
@@ -76,7 +74,7 @@ export function GetcontractFunction(addressToBeAdded) {
 
 export function HandleMoralisWeb3() {
 
-    const { user, isWeb3Enabled, isWeb3EnableLoading, authenticate, isAuthenticated, isAuthenticating, account, logout } = useMoralis();
+    const { user, isWeb3Enabled, isWeb3EnableLoading, isAuthenticating, account, logout } = useMoralis();
 
 
     const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({

@@ -7,39 +7,23 @@ import { GetCurrentActiveApe_desktop } from "./getActiveApe_desktop.js";
 
 export function RaffleDesktop() {
 
-    console.log("RaffleDesktop");
     const [getApeHtml, setApeHtml] = useState(GetCurrentActiveApe_desktop('connect', ''));//useState(GetCurrentActiveApe_desktop('connect', ''));
     const { account } = useMoralis();
     const { height, width } = useWindowDimensions(); //otional, adapting the window positon and the ape, renders a lot, updates the window width on every change
 
-
     useEffect(() => {
-        console.log("account", account);
-    }, [getApeHtml]); //only re-run if getApeHtml has changed
-
-
-    useEffect(() => {
-        console.log("useEffect mint account ran, account", account);
-        //if (!getTxDone && account) {
         if (account) {
-            console.log("trigger ape useEffect account")
             setApeHtml(GetCurrentActiveApe_desktop('joinRaffle', JSON.stringify(account)));
         }
         else {
-            console.log("useEffect mint account, else")
-            console.log("trigger ape useEffect !account")
             setApeHtml(GetCurrentActiveApe_desktop('connect', '', width, height));
         }
     }, [account]); //only re-run if getApeHtml has changed
-
-
-
 
     async function joinRaffle() {
         var runContractResult = await RunContractJoinRaffle(); //toDo need to add contract from useMoralis Headers, maybe get it via property
         setApeHtml(GetCurrentActiveApe_desktop(runContractResult[0], runContractResult[1])); //create a new ape depending on result, success or error ape (runContractResult[0]) with given success or error information (runContractResult[1])
     }
-
 
 
     if (account) {
@@ -69,6 +53,6 @@ export function RaffleDesktop() {
             </>
         )
     }
-
+    //<div style={{ backgroundColor: "black", width: width, height: height }}> pure background color, no img
 
 }

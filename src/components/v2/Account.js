@@ -22,7 +22,7 @@ function Account() {
                 <>
                     <div className="topBanner">
                         <h2>OnChainAsciiApes</h2>
-                        <div className="lrContainersRight"><   ConnectButton signingMessage="please sign to verify wallet" /></div>
+                        <div className="lrContainersRight"><   ConnectButton moralisAuth="false" signingMessage="please sign to verify wallet" /></div>
                     </div>
                 </>
             )
