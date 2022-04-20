@@ -3,8 +3,7 @@ import Account from "./components/v2/Account";
 import Moralis from 'moralis';
 import { RaffleDesktop } from './components/v2/Raffle_desktop.js';
 import { RaffleMobile } from './components/v2/Raffle_mobile.js';
-import { Navigation } from "./components/Navigation.js";
-// import Navigation from "./components/Navigation.js"
+import Navigation from "./components/Navigation.js"
 
 function App() {
 
@@ -16,10 +15,6 @@ function App() {
 
   Moralis.start({ serverUrl: moralisServerUrl, appId: moralisAppId });
   console.log("window width", window.innerWidth);
-
-  return (
-    <Navigation />
-  )
 
   if (window.innerWidth <= 768) {
     console.log("display mode mobile");

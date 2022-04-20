@@ -1,6 +1,6 @@
 import { useMoralis } from "react-moralis";
 import { ConnectButton, Button } from "web3uikit";
-import "./styleBanner.css";
+import "../css/styleBanner.css";
 
 function Account() {
     const { account, logout } = useMoralis();
