@@ -10,6 +10,10 @@ import { Raffle } from './Raffle.js';
 import { Home } from "./Home.js";
 import "./css/styleNavbar.css";
 import { useState } from 'react';
+import Account from "./v2/Account.js"
+import { Row, Col } from 'antd';
+import { PageHeader, Descriptions } from 'antd';
+import "./css/styleBanner.css";
 
 export function Navigation() {
 
@@ -17,21 +21,28 @@ export function Navigation() {
 
     return (
         <Router>
-            <div className="navbar">
-                <h2>OnChainAsciiApes</h2>
-                <Button onClick={() => setshow(true)} text='Menu' />
 
+
+
+            <div className="site-page-header-ghost-wrapper">
+                <PageHeader
+                    ghost={false}
+                    title="OnChainAsciiApes"
+                    extra={[
+                        <Account />,
+                        <Button theme="outline" onClick={() => setshow(true)} text='...' />
+                    ]}
+                >
+                </PageHeader>
             </div>
+
             {show &&
-                <div style={{ height: "100%", width: "100%", background: "black", position: "fixed", top: "0px", left: "0px" }}>
+                <div style={{ height: "100%", width: "100%", background: "black", position: "fixed", top: "0px", left: "0px", opacity: "1" }}>
                     <h1 onClick={() => setshow(false)} style={{ position: "fixed", top: "0px", right: "20px", color: "white" }}>X</h1>
                     <ul>
                         <li ><Link to="/"><h2 style={{ color: "white" }} onClick={() => setshow(false)}>Home</h2></Link></li>
                         <li><Link to="/raffle"><h2 style={{ color: "white" }} onClick={() => setshow(false)}>Raffle</h2> </Link></li>
-
                     </ul>
-
-
                 </div>
             }
             <Routes>

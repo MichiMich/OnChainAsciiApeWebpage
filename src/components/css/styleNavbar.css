@@ -1,10 +1,21 @@
 .navbar {
-    display: flex;
+    -webkit-box-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    top: 0px;
+    display: grid;
     align-items: center;
     width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 1rem;
+    grid-area: header;
+
+}
+
+.padder {
+    padding: 1rem;
 }
 
 .lrContainers {
@@ -19,4 +30,14 @@
     padding-top: 10px;
     padding-right: 0px;
     float: right;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 500px 500px 500px 500px;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header header header"
+        "main main . sidebar"
+        "footer footer footer footer";
 }

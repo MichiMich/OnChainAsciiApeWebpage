@@ -10,7 +10,6 @@ function Account() {
             return (
                 <>
                     <div className="topBanner">
-                        <h2>OnChainAsciiApes</h2>
                         <div className="lrContainersRight"><Button theme="outline" text="Logout" onClick={logout} /></div>
                     </div>
                 </>
@@ -21,7 +20,6 @@ function Account() {
             return (
                 <>
                     <div className="topBanner">
-                        <h2>OnChainAsciiApes</h2>
                         <div className="lrContainersRight"><   ConnectButton moralisAuth="false" signingMessage="please sign to verify wallet" /></div>
                     </div>
                 </>
