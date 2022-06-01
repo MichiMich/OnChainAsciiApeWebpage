@@ -9,7 +9,7 @@ export async function RunContractJoinRaffle(contractFunction, errorInformation) 
     console.log("runContractjoinraffle entered")
     const tx1 = await globalEnterRaffle(
         {
-            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx1)),
+            onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
             //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
             onError: (tx) => globalResult = handleError(tx, errorInformation),
         }

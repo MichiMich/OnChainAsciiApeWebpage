@@ -14,6 +14,43 @@
 
 }
 
+.ulForLinks {
+    position: relative;
+    width: 100%;
+}
+
+.links {
+    text-align: center;
+    border-style: groove;
+    border-radius: 1em;
+    margin: auto;
+    width: 20%;
+    border: 5px solid #ffffff;
+    padding: 6px;
+    margin-top: 1em;
+}
+
+.closeButton {
+    text-align: center;
+    margin: auto;
+    width: 3%;
+    padding: 6px;
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+.closeMenu {
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border-style: groove;
+    border-radius: 1em;
+    border: 3px solid #ffffff;
+    text-align: center;
+
+}
+
 .padder {
     padding: 1rem;
 }

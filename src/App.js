@@ -10,9 +10,9 @@ function App() {
 
 
   //start moralis
-  const moralisServerUrl = "https://l9j8ruqibthp.usemoralis.com:2053/server";
+  const moralisServerUrl = "https://zndbxd11t68t.usemoralis.com:2053/server";
 
-  const moralisAppId = "clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI";
+  const moralisAppId = "DgACAFNJyee1lMogJi7roF9jAFUMgfCfqOYlm43j";
 
   Moralis.start({ serverUrl: moralisServerUrl, appId: moralisAppId });
   console.log("window width", window.innerWidth);

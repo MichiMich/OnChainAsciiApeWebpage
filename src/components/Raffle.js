@@ -9,7 +9,7 @@ export function Raffle() {
         console.log("display mode mobile");
         return (
             <>
-                <Account />
+
                 <RaffleMobile />
             </>
         )
@@ -18,7 +18,6 @@ export function Raffle() {
         console.log("display mode desktop");
         return (
             <>
-                <Account />
                 <RaffleDesktop />
             </>
         )

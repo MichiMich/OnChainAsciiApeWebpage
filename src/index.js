@@ -6,27 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom';
 import * as ReactDOMClient from 'react-dom/client';
 
-// const container = document.getElementById('root');
-
-// const root = ReactDOMClient.createRoot(container);
-
-// root.render(
-//   <React.StrictMode>
-//     <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
-//       <App />
-//     </MoralisProvider>
-//   </React.StrictMode>)
-
-// root.render(
-//   <React.StrictMode>
-//     <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
-//       <App />
-//     </MoralisProvider>
-//   </React.StrictMode>)
 
 
 ReactDOM.render(
-  <MoralisProvider serverUrl="https://l9j8ruqibthp.usemoralis.com:2053/server" appId="clgceh8S5tCXxJjT8V26VBZxQpE7vGbXe9iHRDuI">
+  <MoralisProvider serverUrl="https://zndbxd11t68t.usemoralis.com:2053/server" appId="DgACAFNJyee1lMogJi7roF9jAFUMgfCfqOYlm43j">
     <App />
   </MoralisProvider>,
   document.getElementById('root')
