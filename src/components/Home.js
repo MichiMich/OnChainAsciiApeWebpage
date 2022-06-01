@@ -7,7 +7,7 @@ import devilApe from "./img/DevilApeTransp.svg"
 import "./css/colorBackground.css"
 import "./css/grid.css"
 
-import { HandleMoralisWeb3, runContractMint } from "./InteractWithMintContract.js";
+import { HandleMoralisWeb3, RunContractMint, RunMint2, TriggerMint } from "./InteractWithMintContract.js";
 
 const windowWidth = 1351;
 
@@ -19,8 +19,13 @@ const svgCentered = {
 export function Home() {
 
     async function mintApe() {
-        var runContractResult = await runContractMint();
+        var runContractResult = await RunContractMint();
         console.log(runContractResult)
+    }
+
+    async function callMint2() {
+
+        RunMint2();
     }
 
     return (
@@ -49,7 +54,7 @@ export function Home() {
                         <div id="div1" style={{ marginLeft: "2%", float: "left" }}>
                             <Button
                                 id="mint_button"
-                                onClick={() => mintApe()}
+                                onClick={() => TriggerMint(3)}
                                 text="Mint"
                                 theme="outline"
                                 type="button"
