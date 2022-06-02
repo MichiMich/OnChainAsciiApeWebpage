@@ -1,5 +1,5 @@
 import "./css/styleBanner.css";
-import { Button, ConnectButton, Input } from "web3uikit";
+import { Button, Input } from "web3uikit";
 import Background from "./img/backgrounds/stones.jpg"
 import Background2 from "./img/backgrounds/asciiForest.png"
 import apesGif from "./img/BananaColorApe.png"
@@ -7,7 +7,7 @@ import devilApe from "./img/DevilApeTransp.svg"
 import "./css/colorBackground.css"
 import "./css/grid.css"
 
-import { HandleMoralisWeb3, RunContractMint, RunMint2, TriggerMint } from "./InteractWithMintContract.js";
+import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
 
 const windowWidth = 1351;
 
@@ -16,17 +16,11 @@ const svgCentered = {
 }
 
 
+
+
 export function Home() {
 
-    async function mintApe() {
-        var runContractResult = await RunContractMint();
-        console.log(runContractResult)
-    }
 
-    async function callMint2() {
-
-        RunMint2();
-    }
 
     return (
         <>
@@ -37,24 +31,29 @@ export function Home() {
             <div className="grad3">
 
                 <div style={svgCentered}>
-                    <img src={devilApe} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
+                    <img src={devilApe} alt="AssistandApe" style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
 
                     <div id="wrapperDiv">
-                        <div id="div2" style={{ marginLeft: "20%", float: "left", color: "white" }}>
+                        <div id="div2" style={{ marginLeft: "20%", float: "left", color: "black" }}>
                             <Input
+                                id="inputForNrOfWantedNfts"
                                 style={{ textcolor: "#ffffff" }}
+                                min="1"
+                                max="5"
                                 label="Nr of wanted apes?"
-                                name="nrOfApes"
+                                name="inputForNrOfWantedNfts"
                                 onBlur={function noRefCheck() { }}
                                 onChange={function noRefCheck() { }}
                                 type="number"
                                 labelBgColor="#ffffff"
                                 state="white"
-                            /></div>
+                            />
+                            {/* <InputNumber type="number" id="inputForNrOfWantedNfts" name="inputForNrOfWantedNfts" min="1" max="8" defaultValue="1" style={{ width: "100px" }} /> */}
+                        </div>
                         <div id="div1" style={{ marginLeft: "2%", float: "left" }}>
                             <Button
                                 id="mint_button"
-                                onClick={() => TriggerMint(3)}
+                                onClick={() => TriggerMint(document.getElementById("inputForNrOfWantedNfts").value)}
                                 text="Mint"
                                 theme="outline"
                                 type="button"
@@ -117,6 +116,7 @@ export function Home() {
             */}
         </>);
 }
+
 
 
 

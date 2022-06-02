@@ -1,77 +1,31 @@
 
-import { useMoralis, useWeb3Contract, useWeb3ExecuteFunction } from "react-moralis";
+import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/OnChainAsciiApes.json";
 var globalMint;
-const maxAllowedNrOfNftsPerMint = 8; //adapt with smart contract
-
-let globalTriggerMintVar = false;
-let globalContractProcessor;
 
 export async function TriggerMint(nrOfWantedNfts) {
+    console.log("wanted nr of nfts: ", nrOfWantedNfts)
+    if (nrOfWantedNfts > process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT) {
+        alert("only " + process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT + " nfts per mint are allowed");
+        return;
+    }
 
     let options = {
         abi: abi,
-        contractAddress: "0xDEAD5D3D47FbcFD09324f62e2D2C875EdF0c8BC7",
+        contractAddress: process.env.REACT_APP_NFT_CONTRACT_ADDRESS,
         functionName: "mint",
         params: {
-            _wantedQuantity: nrOfWantedNfts //todo: adapt quantity with value coming from website, check if less than 8 in first place
+            _wantedQuantity: nrOfWantedNfts
         },
-        msgValue: nrOfWantedNfts * 1000000000000000
+        msgValue: nrOfWantedNfts * process.env.REACT_APP_MINT_PRICE_PER_NFT_IN_GWEI
     }
 
-    await globalContractProcessor.fetch({
+
+    await globalMint({
         params: options,
         onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
-        onError: (tx) => (handleError(tx))
-    });
-
-    /*
-        const { runContractFunction: mint, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
-            abi: abi,
-            contractAddress: "0xDEAD5D3D47FbcFD09324f62e2D2C875EdF0c8BC7",
-            functionName: "mint",
-            params: {
-                _wantedQuantity: 1 //todo: adapt quantity with value coming from website, check if less than 8 in first place
-            },
-            msgValue: "1000000000000000",
-    
-        }
-        );
-    
-        mint();
-        */
-}
-
-export async function RunMint2() {
-    let options = {
-        abi: abi,
-        contractAddress: "0xDEAD5D3D47FbcFD09324f62e2D2C875EdF0c8BC7",
-        functionName: "mint",
-        params: {
-            _wantedQuantity: 1 //todo: adapt quantity with value coming from website, check if less than 8 in first place
-        },
-        msgValue: "10000000000000000",
-
-    };
-
-    globalMint(options)
-}
-
-
-export async function RunContractMint(nrOfWantedNfts, ethValue) {
-
-    if (nrOfWantedNfts > maxAllowedNrOfNftsPerMint) {
-        alert("sorry, only " + maxAllowedNrOfNftsPerMint + " nfts per mint are allowed");
-    }
-
-    console.log("this is how globalmint looks like", globalMint)
-
-
-    console.log("try minting, nr of wanted nfts: ", nrOfWantedNfts, "eth value: ", ethValue);
-    await globalMint({
-        onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
         onError: (tx) => (handleError(tx)),
-    })
+    });
 
 }
 
@@ -101,29 +55,19 @@ const handleSuccess = async (tx) => {
     await tx.wait(1);
     console.log("success entered")
     return ['success', tx];
-    // setApeAssistent = 'success';
 }
 
 export function HandleMoralisWeb3() {
 
     const { user, isWeb3Enabled, isWeb3EnableLoading, isAuthenticating, account, logout, Units } = useMoralis();
 
-    globalContractProcessor = useWeb3ExecuteFunction();
-
     const { runContractFunction: mint, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
         abi: abi,
         contractAddress: "0xDEAD5D3D47FbcFD09324f62e2D2C875EdF0c8BC7",
-        functionName: "mint",
-        params: {
-            _wantedQuantity: 1 //todo: adapt quantity with value coming from website, check if less than 8 in first place
-        },
-
+        functionName: "mint"
     }
     );
 
-    if (globalTriggerMintVar === true) {
-        mint();
-    }
     globalMint = mint;
 
     return;
