@@ -10,7 +10,9 @@ import "./css/grid.css"
 import "./css/animatedBackground.css"
 import apeEyes from "./img/eyes.png"
 import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
-
+//for list
+import { List, Avatar, Space } from 'antd';
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
 const windowWidth = 1351;
 
@@ -40,6 +42,54 @@ const svgAndInput = {
 export function Home() {
 
 
+    function returnApeDetailsList() {
+
+        const data = [{
+            title: `ApeEyes`,
+            content:
+                'Every combination of eyes is only existing once!Randomly assigned during mint.',
+        },
+        {
+            title: `ApeColor`,
+            description:
+                'd',
+            content:
+                '196 Apes have the color code: #ffffff',
+            color: '#ffffff'
+        }]
+
+
+        return (
+            <>
+                <div style={{ color: "white" }}>
+                    <List
+                        color="white"
+                        itemLayout="vertical"
+                        size="large"
+                        dataSource={data}
+                        renderItem={(item) => (
+                            <List.Item
+                                key={item.title}
+                                extra={
+                                    <img
+                                        width={272}
+                                        alt="logo"
+                                        src={apeEyes}
+                                    />
+                                }
+                            >
+                                <List.Item.Meta
+                                    title={<a href={item.href}>{item.title}</a>}
+                                    description={item.description}
+                                />
+                                {item.content}
+                            </List.Item>
+                        )}
+                    />
+                </div>
+            </>
+        )
+    }
 
     return (
         <>
@@ -94,7 +144,7 @@ export function Home() {
                         <p style={{ marginLeft: "2%", textAlign: "center" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, wl access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
                     </div>
 
-                    <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
+                    {/* <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
                         <h1 style={{ textAlign: "center", color: "#ffffff" }}>ApeDetails</h1>
                         <div style={{ float: "left", marginRight: "0%", width: "20%", borderStyle: "solid", borderWidth: "1px", borderColor: "white" }}>
                             <img src={apeEyes} style={{ width: "200px" }} />
@@ -103,13 +153,10 @@ export function Home() {
                             <p>hallo</p>
                         </div>
 
-                    </div>
+                    </div> */}
 
                     <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                        <ul>
-                            <li>111</li>
-                            <li>222</li>
-                        </ul>
+                        {returnApeDetailsList()}
                     </div>
 
                     <div>
@@ -178,6 +225,8 @@ export function Home() {
             
             */}
         </>);
+
+
 }
 
 
