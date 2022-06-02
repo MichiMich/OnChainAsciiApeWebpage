@@ -2,12 +2,11 @@ import { useMoralis, useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/Raffle.json";
 import 'antd/dist/antd.css';
 
-let createdErrorMessage = null;
 var globalEnterRaffle;
 var globalResult;
 export async function RunContractJoinRaffle(contractFunction, errorInformation) {
     console.log("runContractjoinraffle entered")
-    const tx1 = await globalEnterRaffle(
+    await globalEnterRaffle(
         {
             onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
             //             //onComplete: (tx) => tx.wait(1).then(handleComplete(tx)),
@@ -24,12 +23,12 @@ const handleError = async (tx) => {
     var createdErrorMessage;
     var wantedAssistentApe = 'error';
     console.log("tx from interaction", tx);
-    if (tx.error != undefined) {
+    if (tx.error !== undefined) {
         createdErrorMessage = tx.error.message;
         console.log("filtered error message", createdErrorMessage);
         wantedAssistentApe = 'rejoin';
     }
-    else if (tx.message != undefined) {
+    else if (tx.message !== undefined) {
         //tx not fired, could be user cancel transaction
         createdErrorMessage = tx.message;
         console.log("tx message", tx.createdErrorMessage);
@@ -49,13 +48,6 @@ const handleSuccess = async (tx) => {
     // setApeAssistent = 'success';
 }
 
-const handleComplete = async (tx) => {
-    console.log("complete entered")
-    await tx.wait(1)
-    console.log("complete wait done")
-}
-
-
 export function GetcontractFunction(addressToBeAdded) {
     console.log("getContractfunction entered")
     const { runContractFunction: enterRaffle, } = useWeb3Contract({
@@ -74,10 +66,10 @@ export function GetcontractFunction(addressToBeAdded) {
 
 export function HandleMoralisWeb3() {
 
-    const { user, isWeb3Enabled, isWeb3EnableLoading, isAuthenticating, account, logout } = useMoralis();
+    const { account, logout } = useMoralis();
 
 
-    const { runContractFunction: enterRaffle, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
+    const { runContractFunction: enterRaffle } = useWeb3Contract({
         abi: abi,
         contractAddress: "0x75Ab8EeEd318e4294B1AC150C95C852813EBC083",
         functionName: "addAddress",

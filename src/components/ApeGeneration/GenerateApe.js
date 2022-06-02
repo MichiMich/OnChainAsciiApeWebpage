@@ -35,7 +35,7 @@ export function CreateJoinRaffleApe(WalletAddress) {
 
 export function CreateRejoinApe(errorMessage) {
     //console.log("errormessage", errorMessage)
-    if (errorMessage == null || errorMessage == undefined) {
+    if (errorMessage === null || errorMessage === undefined) {
         return (CreateSVG("no error data given", "red"))
     }
     //make two lines of error message start
@@ -64,7 +64,7 @@ export function CreateRejoinApe(errorMessage) {
 
 export function CreateErrorApe(errorMessage) {
     //console.log("errormessage", errorMessage)
-    if (errorMessage == null || errorMessage == undefined) {
+    if (errorMessage === null || errorMessage === undefined) {
         return (CreateSVG("no error data given", "red"))
     }
     //make two lines of error message start

@@ -44,16 +44,12 @@ const svgEyesToEnd = `░░░██
 const svgEnd = (`</svg>`);
 
 
-
-const svgNewLineStart = '<tspan x="4%" dy="1.2em"';
-const svgNewLineEnd = '</tspan>'
-
 export function CreateLineSvg(xTranslationPercentage, yTranslationPercentage, TextInput, ColorInput) {
     var createdLine = null;
     // console.log("textInput", typeof (TextInput));
     // console.log("colorInput", typeof (ColorInput));
     //var check does not work, always resultet in zero input
-    if (TextInput == "" || TextInput == null || ColorInput == "" || ColorInput == null) {
+    if (TextInput === "" || TextInput === null || ColorInput === "" || ColorInput === null) {
         console.log("zero input")
         return;
     }

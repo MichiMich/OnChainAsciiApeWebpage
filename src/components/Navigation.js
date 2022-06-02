@@ -22,17 +22,16 @@ export function Navigation() {
 
     return (
         <Router>
-            <div className="site-page-header-ghost-wrapper">
-                <PageHeader
-                    ghost={false}
-                    title="OnChainAsciiApes"
-                    extra={[
-                        <Account />,
-                        <Button theme="outline" onClick={() => setshow(true)} text='...' />
-                    ]}
-                >
-                </PageHeader>
-            </div>
+            <PageHeader
+                ghost={false}
+                title="OnChainAsciiApes"
+                extra={[
+                    <Account />,
+                    <Button theme="outline" onClick={() => setshow(true)} text='...' />
+                ]}
+            >
+            </PageHeader>
+
 
             {show &&
                 <div style={{ height: "100%", width: "100%", background: "black", position: "fixed", top: "0px", left: "0px", opacity: "1" }}>

@@ -18,28 +18,31 @@ function App() {
   console.log("window width", window.innerWidth);
 
   return (
-    <Navigation />
+    <>
+      <Navigation />
+    </>
   )
-
-  if (window.innerWidth <= 768) {
-    console.log("display mode mobile");
-    return (
-      <>
-        <Account />
-        <RaffleMobile />
-      </>
-    )
-  }
-  else {
-    console.log("display mode desktop");
-    return (
-      <>
-        <Navigation />
-        <Account />
-        <RaffleDesktop />
-      </>
-    )
-  }
+  /*
+    if (window.innerWidth <= 768) {
+      console.log("display mode mobile");
+      return (
+        <>
+          <Account />
+          <RaffleMobile />
+        </>
+      )
+    }
+    else {
+      console.log("display mode desktop");
+      return (
+        <>
+          <Navigation />
+          <Account />
+          <RaffleDesktop />
+        </>
+      )
+    }*/
 }
+
 
 export default App;

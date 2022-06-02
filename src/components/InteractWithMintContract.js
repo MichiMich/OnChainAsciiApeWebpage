@@ -1,11 +1,11 @@
 
-import { useMoralis, useWeb3Contract } from "react-moralis";
+import { useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/OnChainAsciiApes.json";
 var globalMint;
 
 export async function TriggerMint(nrOfWantedNfts) {
-    console.log("wanted nr of nfts: ", nrOfWantedNfts)
-    if (nrOfWantedNfts > process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT) {
+
+    if (parseInt(nrOfWantedNfts) > process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT) {
         alert("only " + process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT + " nfts per mint are allowed");
         return;
     }
@@ -33,12 +33,12 @@ const handleError = async (tx) => {
     var createdErrorMessage;
     var wantedAssistentApe = 'error';
     console.log("tx from interaction", tx);
-    if (tx.error != undefined) {
+    if (tx.error !== undefined) {
         createdErrorMessage = tx.error.message;
         console.log("filtered error message", createdErrorMessage);
         wantedAssistentApe = 'rejoin';
     }
-    else if (tx.message != undefined) {
+    else if (tx.message !== undefined) {
         //tx not fired, could be user cancel transaction
         createdErrorMessage = tx.message;
         console.log("tx message", tx.createdErrorMessage);
@@ -59,9 +59,7 @@ const handleSuccess = async (tx) => {
 
 export function HandleMoralisWeb3() {
 
-    const { user, isWeb3Enabled, isWeb3EnableLoading, isAuthenticating, account, logout, Units } = useMoralis();
-
-    const { runContractFunction: mint, data: enterTxResponse, error, isLoading, isFetching } = useWeb3Contract({
+    const { runContractFunction: mint } = useWeb3Contract({
         abi: abi,
         contractAddress: "0xDEAD5D3D47FbcFD09324f62e2D2C875EdF0c8BC7",
         functionName: "mint"

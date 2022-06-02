@@ -48,33 +48,33 @@ function Account() {
         console.log("activeAccount", activeAccount);
         return (
             <>
-                <div className="site-page-header-ghost-wrapper" >
-                    <PageHeader
-                        ghost={false}
-                        title="OnChainAsciiApes"
-                        extra={[
-                            <Button key="1" type="default" onClick={showModal} loading={loadingState}>
-                                {console.log("loadingstate", loadingState)}
-                                Connect
-                            </Button>
-                        ]}
-                    ></PageHeader>
+
+                <PageHeader
+                    style={{ width: window.width }}
+                    ghost={false}
+                    title="OnChainAsciiApes"
+                    extra={[
+                        <Button key="1" type="default" onClick={showModal} loading={loadingState}>
+                            {console.log("loadingstate", loadingState)}
+                            Connect
+                        </Button>
+                    ]}
+                ></PageHeader>
 
 
-                    <Modal title="Choose your wallet" visible={isModalVisible} onCancel={handleCancel}
-                        footer={[<Button key="back" onClick={handleCancel}>
-                            Cancel
-                        </Button>]} >
-                        <Button block onClick={() => enableWeb3()}>
-                            Metamask
-                            {meatamaskIcon}
-                        </Button>
-                        <Button block onClick={() => logInWalletConnect()}>
-                            walletconnect
-                            {walletConnectIcon}
-                        </Button>
-                    </Modal>
-                </div>
+                <Modal title="Choose your wallet" visible={isModalVisible} onCancel={handleCancel}
+                    footer={[<Button key="back" onClick={handleCancel}>
+                        Cancel
+                    </Button>]} >
+                    <Button block onClick={() => enableWeb3()}>
+                        Metamask
+                        {meatamaskIcon}
+                    </Button>
+                    <Button block onClick={() => logInWalletConnect()}>
+                        walletconnect
+                        {walletConnectIcon}
+                    </Button>
+                </Modal>
 
 
             </>
@@ -84,22 +84,21 @@ function Account() {
     activeAccount = account;
     console.log("activeAccount", activeAccount)
     return (
-        <div className="site-page-header-ghost-wrapper">
-            <PageHeader
-                ghost={false}
-                title="OnChainAsciiApes"
-                extra={[
-                    <Button key="2">
-                        {JSON.stringify(account).slice(1, 7)}
-                        ...
-                        {JSON.stringify(account).slice(account.length - 3, account.length + 1)}
-                    </Button>,
-                    <Button key="3" type="primary" onClick={logout}>
-                        Logout
-                    </Button>,
-                ]}
-            ></PageHeader>
-        </div>
+
+        <PageHeader
+            ghost={false}
+            title="OnChainAsciiApes"
+            extra={[
+                <Button key="2">
+                    {JSON.stringify(account).slice(1, 7)}
+                    ...
+                    {JSON.stringify(account).slice(account.length - 3, account.length + 1)}
+                </Button>,
+                <Button key="3" type="primary" onClick={logout}>
+                    Logout
+                </Button>,
+            ]}
+        ></PageHeader>
     );
 
 
