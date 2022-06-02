@@ -1,69 +1,49 @@
 import "./css/snoflake.css"
-import ape181 from "./img/ApesForAnimation/181.svg"
-import ape198 from "./img/ApesForAnimation/198.svg"
-import ape200 from "./img/ApesForAnimation/200.svg"
-import ape201 from "./img/ApesForAnimation/201.svg"
-import ape202 from "./img/ApesForAnimation/202.svg"
-import ape203 from "./img/ApesForAnimation/203.svg"
-import ape204 from "./img/ApesForAnimation/204.svg"
+import ape1 from "./img/transparent/1.png"
+import ape2 from "./img/transparent/2.png"
+import ape3 from "./img/transparent/3.png"
+import ape4 from "./img/transparent/4.png"
+import ape5 from "./img/transparent/5.png"
+import ape6 from "./img/transparent/6.png"
+import ape7 from "./img/transparent/7.png"
+import ape8 from "./img/transparent/8.png"
 
 export function AnimatedBackground() {
+    console.log(window.innerWidth)
+    var height = window.innerWidth / 8 + "px";
+    console.log(height)
     return (
         <>
-            <div class="snowflakes" aria-hidden="true">
+            <div class="snowflakes" aria-hidden="true" style={{ height: height, opacity: "0.4" }}>
                 <div class="snowflake">
-                    ❄
+                    <img src={ape1} style={{ height: height, opacity: "0.4" }} />
+                </div>
+
+                <div class="snowflake">
+                    <img src={ape2} style={{ height: height, opacity: "0.4" }} />
+                </div>
+
+                <div class="snowflake">
+                    <img src={ape3} style={{ height: height, opacity: "0.4" }} />
+                </div>
+
+                <div class="snowflake">
+                    <img src={ape4} style={{ height: height, opacity: "0.4" }} />
+                </div>
+
+                <div class="snowflake">
+                    <img src={ape5} style={{ height: height, opacity: "0.4" }} />
+                </div>
+
+                <div class="snowflake">
+                    <img src={ape6} style={{ height: height, opacity: "0.4" }} />
+                </div>
+
+                <div class="snowflake">
+                    <img src={ape7} style={{ height: height, opacity: "0.4" }} />
                 </div>
                 <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape181} style={{ height: "125px" }} />
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape198} style={{ height: "125px" }} />
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape202} style={{ height: "125px" }} />
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape200} style={{ height: "125px" }} />
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape201} style={{ height: "125px" }} />
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape204} style={{ height: "125px" }} />
-                </div>
-                <div class="snowflake">
-                    ❄
-                </div>
-                <div class="snowflake">
-                    <img src={ape203} style={{ height: "125px" }} />
+                    <img src={ape8} style={{ height: height, opacity: "0.4" }} />
                 </div>
             </div>
         </>

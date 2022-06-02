@@ -20,6 +20,11 @@ function App() {
   return (
     <>
       <Navigation />
+      {/* <div class="wrapper" style={{ height: "1000px" }}>
+        <div class="dashed-box" style={{ position: "relative" }}>Dashed box</div>
+        <div class="gold-box" style={{ position: "absolute", background: "gold" }}>Gold box</div>
+        <div class="green-box" style={{ position: "absolute", background: "lightgreen" }}>Green box</div>
+      </div> */}
     </>
   )
   /*
