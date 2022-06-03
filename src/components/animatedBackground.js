@@ -14,7 +14,7 @@ export function AnimatedBackground() {
     console.log(height)
     return (
         <>
-            <div class="snowflakes" aria-hidden="true" style={{ height: height, opacity: "0.4" }}>
+            <div class="snowflakes" aria-hidden="true">
                 <div class="snowflake">
                     <img src={ape1} style={{ height: height, opacity: "0.4" }} />
                 </div>
