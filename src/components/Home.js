@@ -9,8 +9,11 @@ import { AnimatedBackground } from "./animatedBackground.js";
 import "./css/colorBackground.css"
 import "./css/grid.css"
 import "./css/animatedBackground.css"
-import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
+import { HandleMoralisWeb3, TriggerMint, TryGettingTop3Donators } from "./InteractWithMintContract.js";
 import { projectInformations } from "./projectInformation.js";
+
+
+import { GetTop3Donators } from "./top3Donators.js"
 
 export function Home() {
 
@@ -18,7 +21,6 @@ export function Home() {
         <>
             {/* moralis functions */}
             <HandleMoralisWeb3 />
-
 
             <div className="container" style={{ display: "block", width: "100vw" }}>
 
@@ -28,6 +30,7 @@ export function Home() {
                         <div style={{ position: "relative", left: "20%" }}>
                             <img src={devilApe} alt="AssistandApe" style={{ height: "50vw" }} />
                         </div>
+
                         <div style={{ position: "relative", left: "20%" }}>
                             <div style={{ marginBottom: "2%" }}>
                                 <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
@@ -52,11 +55,21 @@ export function Home() {
                                     <Button
                                         id="mint_button"
                                         onClick={() => TriggerMint(document.getElementById("inputForNrOfWantedNfts").value)}
-                                        text="Mint (0.001 eth/ape)"
+                                        text="Mint (0.005 eth)"
                                         theme="outline"
                                         type="button"
                                     />
                                 </div>
+                                <div>
+                                    <Button
+                                        id="try fetch"
+                                        onClick={() => TryGettingTop3Donators()}
+                                        text="fetch data"
+                                        theme="outline"
+                                        type="button"
+                                    />
+                                </div>
+
                             </div>
                         </div>
                     </div>
