@@ -10,7 +10,7 @@ import "./css/colorBackground.css"
 import "./css/grid.css"
 import "./css/animatedBackground.css"
 import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
-import { MoralisWeb3Query } from "./top3Donators.js";
+import { ShowTop3Donators } from "./top3Donators.js";
 import { projectInformations } from "./projectInformation.js";
 import { HandleDonation } from "./donate.js";
 
@@ -72,10 +72,10 @@ export function Home() {
 
                             </div>
 
-                            <MoralisWeb3Query />
+
                         </div>
                     </div>
-
+                    <ShowTop3Donators />
                     <HandleDonation />
                     {projectInformations()}
 

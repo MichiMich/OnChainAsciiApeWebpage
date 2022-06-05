@@ -5,7 +5,7 @@ import { Table, Avatar, Tag, Button } from "web3uikit"
 
 var globalFetch;
 
-export function MoralisWeb3Query() {
+export function ShowTop3Donators() {
 
   const [gettop3Donators, setTop3Donators] = useState(undefined);
 
@@ -76,59 +76,63 @@ export function MoralisWeb3Query() {
 
   if (gettop3Donators === undefined) {
     return (
-      <div style={{ width: "50vw", marginTop: "5%" }}>
-        <Table
-          columnsConfig="80px 0.5fr 0.5fr"
-          customNoDataText="Donations"
-          data={[]}
-          header={[
-            '',
-            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Wallet</span>,
-            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Donated [eth]</span>,
-          ]}
-          isLoading
-          maxPages={0}
-          onPageNumberChanged={function noRefCheck() { }}
-          pageSize={1}
-        />
+      <div style={{ position: "relative", left: "20%", marginTop: "10%" }}>
+        <div style={{ width: "50vw", marginTop: "5%" }}>
+          <Table
+            columnsConfig="80px 0.5fr 0.5fr"
+            customNoDataText="Donations"
+            data={[]}
+            header={[
+              '',
+              <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Wallet</span>,
+              <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Donated [eth]</span>,
+            ]}
+            isLoading
+            maxPages={0}
+            onPageNumberChanged={function noRefCheck() { }}
+            pageSize={1}
+          />
+        </div>
       </div>
     )
   }
   else {
     return (
-      <div style={{ width: "50vw", marginTop: "5%" }}>
-        <Table
-          columnsConfig="80px 0.5fr 0.5fr"
-          customNoDataText={gettop3Donators[0].address}
-          data={
-            [
+      <div style={{ position: "relative", left: "20%", marginTop: "10%" }}>
+        <div style={{ width: "50vw", marginTop: "5%" }}>
+          <Table
+            columnsConfig="80px 0.5fr 0.5fr"
+            customNoDataText={gettop3Donators[0].address}
+            data={
               [
-                <Avatar isRounded size={36} theme="image" />,
-                gettop3Donators[0].address,
-                <Tag color="blue" text={gettop3Donators[0].amount} />
-              ],
-              [
-                <Avatar isRounded size={36} theme="image" />,
-                gettop3Donators[1].address,
-                <Tag color="blue" text={gettop3Donators[1].amount} />
-              ], [
-                <Avatar isRounded size={36} theme="image" />,
-                gettop3Donators[2].address,
-                <Tag color="blue" text={gettop3Donators[2].amount} />
-              ]
+                [
+                  <Avatar isRounded size={36} theme="image" />,
+                  gettop3Donators[0].address,
+                  <Tag color="blue" text={gettop3Donators[0].amount} />
+                ],
+                [
+                  <Avatar isRounded size={36} theme="image" />,
+                  gettop3Donators[1].address,
+                  <Tag color="blue" text={gettop3Donators[1].amount} />
+                ], [
+                  <Avatar isRounded size={36} theme="image" />,
+                  gettop3Donators[2].address,
+                  <Tag color="blue" text={gettop3Donators[2].amount} />
+                ]
+              ]}
+            header={[
+              '',
+              <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Wallet</span>,
+              <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Donated [eth]</span>,
             ]}
-          header={[
-            '',
-            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Wallet</span>,
-            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Donated [eth]</span>,
-          ]}
-          maxPages={1}
-          noPagination
-          onPageNumberChanged={function noRefCheck() { }}
-          pageSize={3}
-        />
-        <div style={{ textAlign: "center", marginTop: "1%" }}>
-          <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation">**all donations go to savethechildren**</a>
+            maxPages={1}
+            noPagination
+            onPageNumberChanged={function noRefCheck() { }}
+            pageSize={3}
+          />
+          <div style={{ textAlign: "center", marginTop: "1%" }}>
+            <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation">**all donations go to savethechildren**</a>
+          </div>
         </div>
       </div>
     )
