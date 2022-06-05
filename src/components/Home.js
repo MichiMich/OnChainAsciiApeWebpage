@@ -12,13 +12,16 @@ import "./css/animatedBackground.css"
 import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
 import { MoralisWeb3Query } from "./top3Donators.js";
 import { projectInformations } from "./projectInformation.js";
+import { HandleDonation } from "./donate.js";
 
+//todo: define correct nft cost at .env file -> 0.005 eth
 export function Home() {
 
     return (
         <>
             {/* moralis functions */}
             <HandleMoralisWeb3 />
+
             <div className="container" style={{ display: "block", width: "100vw" }}>
 
                 <div className="grad3">
@@ -73,6 +76,7 @@ export function Home() {
                         </div>
                     </div>
 
+                    <HandleDonation />
                     {projectInformations()}
 
 

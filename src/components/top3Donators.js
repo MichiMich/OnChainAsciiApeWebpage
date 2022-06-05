@@ -1,6 +1,6 @@
 import { useMoralisQuery, useMoralisSubscription } from "react-moralis";
 import { useEffect, useState } from "react";
-import { Table, Avatar, Tag } from "web3uikit"
+import { Table, Avatar, Tag, Button } from "web3uikit"
 //todo: need to add donation function
 
 var globalFetch;
@@ -16,7 +16,7 @@ export function MoralisWeb3Query() {
 
   const { data, fetch, onError, afterSave } = useMoralisQuery(
     "DonatorsUpdate",
-    (query) => query.limit(2).descending("transaction_index"), //descending on transactions makes it ordered and we get last transaction on object[0] which is highest donator
+    (query) => query.limit(2).descending("block_timestamp"), //descending on transactions makes it ordered and we get last transaction on object[0] which is highest donator
     {
       live: true,
     },
@@ -76,16 +76,15 @@ export function MoralisWeb3Query() {
 
   if (gettop3Donators === undefined) {
     return (
-      <div style={{ width: "50vw" }}>
+      <div style={{ width: "50vw", marginTop: "5%" }}>
         <Table
-          columnsConfig="80px 3fr 2fr 2fr 80px"
-          customNoDataText="This is Custom Text"
+          columnsConfig="80px 0.5fr 0.5fr"
+          customNoDataText="Donations"
           data={[]}
           header={[
             '',
-            <span>Wallet</span>,
-            <span>Spend amount [eth]</span>,
-            ''
+            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Wallet</span>,
+            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Donated [eth]</span>,
           ]}
           isLoading
           maxPages={0}
@@ -97,9 +96,9 @@ export function MoralisWeb3Query() {
   }
   else {
     return (
-      <div style={{ width: "50vw" }}>
+      <div style={{ width: "50vw", marginTop: "5%" }}>
         <Table
-          columnsConfig="80px 1fr 1fr"
+          columnsConfig="80px 0.5fr 0.5fr"
           customNoDataText={gettop3Donators[0].address}
           data={
             [
@@ -120,57 +119,22 @@ export function MoralisWeb3Query() {
             ]}
           header={[
             '',
-            <span>Wallet</span>,
-            <span>Spend amount [eth]</span>,
-            ''
+            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Wallet</span>,
+            <span style={{ marginTop: "20px", color: "242222", fontWeight: "1000" }}>Donated [eth]</span>,
           ]}
           maxPages={1}
+          noPagination
           onPageNumberChanged={function noRefCheck() { }}
           pageSize={3}
         />
+        <div style={{ textAlign: "center", marginTop: "1%" }}>
+          <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation">**all donations go to savethechildren**</a>
+        </div>
       </div>
     )
   }
 
-  /*
-  if (gettop3Donators === undefined) {
-    return (
-      <>
-        <div>
-          loading...
-        </div>
-        <div>
-          <Button
-            id="mint_button"
-            onClick={() => getCurrentTop3Donators()}
-            text="getdonators"
-            theme="outline"
-            type="button"
-          />
-        </div>
-      </>
-    )
-  }
-  else {
-    return (
-      <>
-        <div>
-          
-          {gettop3Donators[0].address}
-        </div>
-        <div>
-          <Button
-            id="mint_button"
-            onClick={() => getCurrentTop3Donators()}
-            text="getdonators"
-            theme="outline"
-            type="button"
-          />
-        </div>
-      </>
-    )
-  }
-  */
+
 }
 
 

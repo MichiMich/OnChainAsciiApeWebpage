@@ -1,5 +1,5 @@
 
-import { useWeb3Contract, useMoralisQuery } from "react-moralis";
+import { useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/OnChainAsciiApes.json";
 var globalMint;
 
@@ -23,7 +23,7 @@ export async function TriggerMint(nrOfWantedNfts) {
 
     await globalMint({
         params: options,
-        onSuccess: (tx) => tx.wait(1).then(handleSuccess(tx)),
+        onSuccess: (tx) => (handleSuccess(tx)),
         onError: (tx) => (handleError(tx)),
     });
 
@@ -57,6 +57,8 @@ const handleError = async (tx) => {
 const handleSuccess = async (tx) => {
     await tx.wait(1);
     console.log("success entered")
+    console.log("tx", tx);
+    alert("Congrats my onchain friend, you have successfully minted!\nThanks, you are awesome\n!Did you know: all money from the mint goes to **SaveTheChildren**");
     return ['success', tx];
 }
 
@@ -64,7 +66,7 @@ export function HandleMoralisWeb3() {
 
     const { runContractFunction: mint } = useWeb3Contract({
         abi: abi,
-        contractAddress: "0xDEAD5D3D47FbcFD09324f62e2D2C875EdF0c8BC7",
+        contractAddress: process.env.REACT_APP_NFT_CONTRACT_ADDRESS,
         functionName: "mint"
     }
     );
