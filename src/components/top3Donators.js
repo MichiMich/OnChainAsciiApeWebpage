@@ -1,6 +1,6 @@
 import { useMoralisQuery, useMoralisSubscription } from "react-moralis";
 import { useEffect, useState } from "react";
-import { Button } from "web3uikit"
+import { Table, Avatar, Tag } from "web3uikit"
 //todo: need to add donation function
 
 var globalFetch;
@@ -8,6 +8,11 @@ var globalFetch;
 export function MoralisWeb3Query() {
 
   const [gettop3Donators, setTop3Donators] = useState(undefined);
+
+
+  useEffect(() => {
+    getCurrentTop3Donators();
+  }, []); //run once at page call, will be updated automatically onUpdate
 
   const { data, fetch, onError, afterSave } = useMoralisQuery(
     "DonatorsUpdate",
@@ -21,7 +26,7 @@ export function MoralisWeb3Query() {
     //onCreate: data => alert(`${data} was just created`),
     onUpdate: data => {
       console.log("updated", data);
-      //GetTop3Donators(); //update data on website
+      getCurrentTop3Donators(); //update data on website
     }
   });
 
@@ -41,6 +46,11 @@ export function MoralisWeb3Query() {
     let Donators = [];
     for (let i = 0; i < newTop3Donators.length; i++) {
       Donators.push({ address: newTop3Donators[i][0], amount: newTop3Donators[i][1] * 1e-18 });
+    }
+    //reduce address and amount to 3 digits
+    for (let i = 0; i < Donators.length; i++) {
+      Donators[i].address = Donators[i].address.substring(0, 6) + "..." + Donators[i].address.substring(Donators[i].address.length - 4);
+      Donators[i].amount = Donators[i].amount.toFixed(3);
     }
 
     return (Donators);
@@ -64,7 +74,65 @@ export function MoralisWeb3Query() {
     setTop3Donators(top3DonatorsFormatted);
   }
 
+  if (gettop3Donators === undefined) {
+    return (
+      <div style={{ width: "50vw" }}>
+        <Table
+          columnsConfig="80px 3fr 2fr 2fr 80px"
+          customNoDataText="This is Custom Text"
+          data={[]}
+          header={[
+            '',
+            <span>Wallet</span>,
+            <span>Spend amount [eth]</span>,
+            ''
+          ]}
+          isLoading
+          maxPages={0}
+          onPageNumberChanged={function noRefCheck() { }}
+          pageSize={1}
+        />
+      </div>
+    )
+  }
+  else {
+    return (
+      <div style={{ width: "50vw" }}>
+        <Table
+          columnsConfig="80px 1fr 1fr"
+          customNoDataText={gettop3Donators[0].address}
+          data={
+            [
+              [
+                <Avatar isRounded size={36} theme="image" />,
+                gettop3Donators[0].address,
+                <Tag color="blue" text={gettop3Donators[0].amount} />
+              ],
+              [
+                <Avatar isRounded size={36} theme="image" />,
+                gettop3Donators[1].address,
+                <Tag color="blue" text={gettop3Donators[1].amount} />
+              ], [
+                <Avatar isRounded size={36} theme="image" />,
+                gettop3Donators[2].address,
+                <Tag color="blue" text={gettop3Donators[2].amount} />
+              ]
+            ]}
+          header={[
+            '',
+            <span>Wallet</span>,
+            <span>Spend amount [eth]</span>,
+            ''
+          ]}
+          maxPages={1}
+          onPageNumberChanged={function noRefCheck() { }}
+          pageSize={3}
+        />
+      </div>
+    )
+  }
 
+  /*
   if (gettop3Donators === undefined) {
     return (
       <>
@@ -87,6 +155,7 @@ export function MoralisWeb3Query() {
     return (
       <>
         <div>
+          
           {gettop3Donators[0].address}
         </div>
         <div>
@@ -101,6 +170,7 @@ export function MoralisWeb3Query() {
       </>
     )
   }
+  */
 }
 
 

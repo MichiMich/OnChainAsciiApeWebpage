@@ -19,7 +19,6 @@ export function Home() {
         <>
             {/* moralis functions */}
             <HandleMoralisWeb3 />
-            <MoralisWeb3Query />
             <div className="container" style={{ display: "block", width: "100vw" }}>
 
                 <div className="grad3">
@@ -69,18 +68,13 @@ export function Home() {
                                 </div> */}
 
                             </div>
+
+                            <MoralisWeb3Query />
                         </div>
                     </div>
 
                     {projectInformations()}
-                    <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "25%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                        <h1 style={{ textAlign: "center", color: "#ffffff" }}>What are OnChainAsciiApes</h1>
-                        <p style={{ marginLeft: "2%", textAlign: "center" }}>OnChainAsciiApes are a nft creation of 205 Apes completly built with Ascii-Characters only. They are fully onchain generated and randomly assigned during mint. There is no need of a decentral/central storage, because its all onchain and you can query your created nft anytime without any cost or any other service</p>
-                    </div>
-                    <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                        <h1 style={{ textAlign: "center", color: "#ffffff" }}>Why OnChainAsciiApes</h1>
-                        <p style={{ marginLeft: "2%", textAlign: "center" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, wl access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
-                    </div>
+
 
                     {/* <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
                         <h1 style={{ textAlign: "center", color: "#ffffff" }}>ApeDetails</h1>
@@ -105,60 +99,6 @@ export function Home() {
             </div>
 
 
-
-
-            {/* <div style={svgCentered}>
-                <img src={devilApe} style={{ width: windowWidth / 2.5, height: windowWidth / 2.5, opacity: "1" }} />
-
-            </div> 
-            
-             <div className="row">
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-                <div className="column">
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                    <img src={devilApe} style={{ height: "250px" }} />
-                </div>
-            </div>
-            
-            
-            */}
         </>);
 
 
