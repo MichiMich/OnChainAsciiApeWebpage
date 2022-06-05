@@ -10,7 +10,7 @@ import "./css/colorBackground.css"
 import "./css/grid.css"
 import "./css/animatedBackground.css"
 import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
-import { MoralisWeb3Query, GetTop3Donators } from "./top3Donators.js";
+import { MoralisWeb3Query } from "./top3Donators.js";
 import { projectInformations } from "./projectInformation.js";
 
 export function Home() {
@@ -20,7 +20,6 @@ export function Home() {
             {/* moralis functions */}
             <HandleMoralisWeb3 />
             <MoralisWeb3Query />
-
             <div className="container" style={{ display: "block", width: "100vw" }}>
 
                 <div className="grad3">
@@ -59,7 +58,7 @@ export function Home() {
                                         type="button"
                                     />
                                 </div>
-                                <div>
+                                {/* <div>
                                     <Button
                                         id="try fetch"
                                         onClick={() => GetTop3Donators()}
@@ -67,7 +66,7 @@ export function Home() {
                                         theme="outline"
                                         type="button"
                                     />
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>
