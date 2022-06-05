@@ -1,46 +1,92 @@
 import { useMoralisQuery } from "react-moralis";
+import { Moralis } from "moralis";
+//todo: need to add donation function
 
-export function GetTop3Donators() {
+var globalFetch;
 
-    const query = useMoralisQuery(
-        "DonatorsUpdate");
+export async function GetTop3Donators() {
+
+  const basicQuery = await globalFetch({
+    onError: () => (alert("error fetching data")),
+    onSuccess: () => (console.log("success"))
+
+  })
+  console.log("basicQuery", basicQuery);
+  const top3DonatorsFormatted = getTop3DonatorsFormatted(basicQuery);
+
+  console.log("donators formatted", top3DonatorsFormatted);
+  console.log("first address", top3DonatorsFormatted[0].address);
+  return (top3DonatorsFormatted);
+
+}
+
+function getTop3DonatorsFormatted(queryResult) {
+  console.log("top3donators: ", queryResult[0]);
+  console.log("top3donators: ", queryResult[0].id);
+  const newTop3Donators = queryResult[0].get("newTop3Donators");
+  //find the one with the last obj
+  console.log("length", queryResult.length)
+  //const newestTransaction = queryResult[last].get("newestTransaction");
+  console.log("newTop3Donators: ", newTop3Donators);
+  console.log("first: ", newTop3Donators[0]);
+  let Donators = [];
+  for (let i = 0; i < newTop3Donators.length; i++) {
+    Donators.push({ address: newTop3Donators[i][0], amount: newTop3Donators[i][1] * 1e-18 });
+  }
 
 
+  return (Donators);
 
+}
 
+export function MoralisWeb3Query() {
 
-    const basicQuery = async () => {
-        const results = await query();
+  const { data, fetch, onError, afterSave } = useMoralisQuery(
+    "DonatorsUpdate",
+    (query) => query.limit(2).descending("transaction_index"), //descending on transactions makes it ordered and we get last transaction on object[0] which is highest donator
+    {
+      live: true,
+    },
+  );
+  console.log("fetched", fetch);
+  globalFetch = fetch;
+  console.log("data", data);
 
-        //alert("Successfully retrieved " + results.length + " monsters.");
-        // Do something with the returned Moralis.Object values
+}
 
+// Moralis.Cloud.afterSave("EthTransactions", async function (request) {
+//   const confirmed = request.object.get("confirmed");
+//   if (confirmed) {
+//     console.log("confirmed")
+//     // do something
+//   } else {
+//     console.log("not confirmed")
+//     // handle unconfirmed case
+//   }
+// });
+
+/* example from https://moralis.io/how-to-interact-with-smart-contracts-through-your-website/
+async function donate() {
+    let options = {
+      contractAddress: "0x356d2E7a0d592bAd95E86d19479c37cfdBb68Ab9",
+      functionName: "newDonation",
+      abi: [
+        {
+          inputs: [
+            { internalType: "string", name: "note", type: "string" },
+          ],
+          name: "newDonation",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+      ],
+      Params: {
+        Note: "Thanks for your work",
+      },
+      msgValue: Moralis.Units.ETH(0.1),
     };
-
-    return (
-
-        <button onClick={() => basicQuery()}>try getting data</button>
-    )
-}
-
-
-/*
-import { useMoralis, query } from "react-moralis";
-
-async function getTop3Donators() {
-    const query = query("DonatorsUpdate")
-    const donators = await query.find();
-    console.log(donators)
-
-}
-
-export function ShowTop3Donators() {
-    return (
-        <>
-            <div>
-                <h1>top3Donators</h1>
-            </div>
-        </>
-    )
-}
-*/
+    await Moralis.User.logOut();
+    console.log("logged out");
+  }
+  */
