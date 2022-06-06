@@ -76,7 +76,7 @@ export function ShowTop3Donators() {
 
   if (gettop3Donators === undefined) {
     return (
-      <div style={{ position: "relative", left: "20%", marginTop: "10%" }}>
+      <div style={{ position: "relative", left: "20%", marginTop: "5%" }}>
         <div style={{ width: "50vw", marginTop: "5%" }}>
           <Table
             columnsConfig="80px 0.5fr 0.5fr"
@@ -98,7 +98,7 @@ export function ShowTop3Donators() {
   }
   else {
     return (
-      <div style={{ position: "relative", left: "20%", marginTop: "10%" }}>
+      <div style={{ position: "relative", left: "20%", marginTop: "5%" }}>
         <div style={{ width: "50vw", marginTop: "5%" }}>
           <Table
             columnsConfig="80px 0.5fr 0.5fr"
@@ -131,7 +131,7 @@ export function ShowTop3Donators() {
             pageSize={3}
           />
           <div style={{ textAlign: "center", marginTop: "1%" }}>
-            <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation">**all donations go to savethechildren**</a>
+            <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation" target="_blank">**all donations go to savethechildren**</a>
           </div>
         </div>
       </div>

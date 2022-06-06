@@ -42,7 +42,16 @@ export function projectInformations() {
 
     return (
         <>
-            <div style={{ marginLeft: "10%", marginRight: "10%", marginTop: "15%" }}>
+
+            <div style={{ margin: "auto", width: "80%", marginTop: "15%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
+                <h1 style={{ textAlign: "center", color: "#ffffff" }}>What are OnChainAsciiApes</h1>
+                <p style={{ marginLeft: "2%", textAlign: "center" }}>OnChainAsciiApes are a nft creation of 205 Apes completly built with Ascii-Characters only. They are fully onchain generated and randomly assigned during mint. There is no need of a decentral/central storage, because its all onchain and you can query your created nft anytime without any cost or any other service</p>
+            </div>
+            <div style={{ margin: "auto", width: "80%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
+                <h1 style={{ textAlign: "center", color: "#ffffff" }}>Why OnChainAsciiApes</h1>
+                <p style={{ marginLeft: "2%", textAlign: "center" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, wl access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
+            </div>
+            <div style={{ margin: "auto", width: "80%", marginTop: "10%" }}>
 
                 <List
                     itemLayout="vertical"
@@ -141,14 +150,6 @@ export function projectInformations() {
                         </List.Item>
                     )}
                 />
-            </div>
-            <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "25%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                <h1 style={{ textAlign: "center", color: "#ffffff" }}>What are OnChainAsciiApes</h1>
-                <p style={{ marginLeft: "2%", textAlign: "center" }}>OnChainAsciiApes are a nft creation of 205 Apes completly built with Ascii-Characters only. They are fully onchain generated and randomly assigned during mint. There is no need of a decentral/central storage, because its all onchain and you can query your created nft anytime without any cost or any other service</p>
-            </div>
-            <div style={{ marginLeft: "2%", marginRight: "2%", marginTop: "5%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                <h1 style={{ textAlign: "center", color: "#ffffff" }}>Why OnChainAsciiApes</h1>
-                <p style={{ marginLeft: "2%", textAlign: "center" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, wl access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
             </div>
         </>
     )

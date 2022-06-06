@@ -75,7 +75,7 @@ export function HandleDonation() {
 
     return (
         <>
-            <div style={{ position: "relative", left: "20%", marginTop: "2%" }}>
+            <div style={{ margin: "auto", width: "50%", marginTop: "2%" }}>
                 <div style={{ marginBottom: "2%" }}>
                     <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
                         <Input

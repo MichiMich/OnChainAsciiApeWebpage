@@ -7,8 +7,9 @@ function Account() {
     function handleAccountChange() {
         if (account) {
             return (
-                <div className="lrContainersRight"><Button theme="outline" text="Logout" onClick={() => logout()} /></div>
-
+                <div >
+                    <div className="lrContainersRight"><Button theme="outline" text="Logout" onClick={() => logout()} /></div>
+                </div>
 
             )
         }
@@ -24,7 +25,6 @@ function Account() {
 
     return (
         <>
-            <div></div>
             <div>
                 {handleAccountChange()}
             </div>

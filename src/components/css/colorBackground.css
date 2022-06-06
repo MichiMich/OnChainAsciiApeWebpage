@@ -11,13 +11,18 @@
 }
 
 .grad3 {
-    position: relative;
+    height: 400vh;
+    width: 120vw;
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
     background-color: #FF3CAC;
     /* background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
     height: 200vh; this looked pretty good*/
     background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 25%, #2B86C5 100%);
-    height: 400vh;
-    width: 100vw;
+
 
 }
 

@@ -14,35 +14,35 @@ export function AnimatedBackground() {
     console.log(height)
     return (
         <>
-            <div class="snowflakes" aria-hidden="true">
-                <div class="snowflake">
+            <div className="snowflakes" aria-hidden="true">
+                <div className="snowflake">
                     <img src={ape1} style={{ height: height, opacity: "0.4" }} />
                 </div>
 
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape2} style={{ height: height, opacity: "0.4" }} />
                 </div>
 
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape3} style={{ height: height, opacity: "0.4" }} />
                 </div>
 
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape4} style={{ height: height, opacity: "0.4" }} />
                 </div>
 
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape5} style={{ height: height, opacity: "0.4" }} />
                 </div>
 
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape6} style={{ height: height, opacity: "0.4" }} />
                 </div>
 
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape7} style={{ height: height, opacity: "0.4" }} />
                 </div>
-                <div class="snowflake">
+                <div className="snowflake">
                     <img src={ape8} style={{ height: height, opacity: "0.4" }} />
                 </div>
             </div>
