@@ -33,6 +33,9 @@ export function Home() {
 
                     <div style={{ margin: "auto", width: "50%" }}>
                         <div style={{ marginBottom: "2%" }}>
+                            <div style={{ backgroundColor: "black" }}>
+                                <hi>hello</hi>
+                            </div>
                             <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
                                 <Input
                                     id="inputForNrOfWantedNfts"
@@ -47,8 +50,6 @@ export function Home() {
                                     labelBgColor="#ffffff"
                                     state="white"
                                 />
-
-
                                 {/* <input className={input123} type="number" id="inputForNrOfWantedNfts" min="1" max="8" defaultValue="1" /> */}
                             </div>
                             <div>

@@ -7,16 +7,15 @@ function Account() {
     function handleAccountChange() {
         if (account) {
             return (
-                <div >
-                    <div className="lrContainersRight"><Button theme="outline" text="Logout" onClick={() => logout()} /></div>
+                <div>
+                    <div ><Button theme="outline" text="Logout" onClick={() => logout()} /></div>
                 </div>
-
             )
         }
         else {
             return (
                 <div >
-                    <div className="lrContainersRight"><ConnectButton moralisAuth="true" signingMessage="please sign to verify wallet" /></div>
+                    <div><ConnectButton moralisAuth="true" signingMessage="please sign to verify wallet" /></div>
                 </div>
             )
         }
@@ -25,10 +24,7 @@ function Account() {
 
     return (
         <>
-            <div>
-                {handleAccountChange()}
-            </div>
-
+            {handleAccountChange()}
         </>
     )
 
