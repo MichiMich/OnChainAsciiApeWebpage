@@ -75,7 +75,9 @@ export function HandleDonation() {
 
     return (
         <>
-            <div style={{ margin: "auto", width: "50%", marginTop: "2%" }}>
+            <center style={{
+                borderStyle: "solid", marginTop: "4%", marginLeft: "2%", marginRight: "2%"
+            }}>
                 <div style={{ marginBottom: "2%" }}>
                     <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
                         <Input
@@ -115,7 +117,7 @@ export function HandleDonation() {
                                 </div> */}
 
                 </div>
-            </div>
+            </center>
 
         </>
 

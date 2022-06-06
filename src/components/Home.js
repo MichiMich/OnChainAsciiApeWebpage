@@ -4,6 +4,8 @@ import Background from "./img/backgrounds/stones.jpg"
 import Background2 from "./img/backgrounds/asciiForest.png"
 import apesGif from "./img/BananaColorApe.png"
 import devilApe from "./img/transparent/DevilApe.png"
+import devilApe2 from "./img/transparent/devilApe2Transp.png"
+
 
 import { AnimatedBackground } from "./animatedBackground.js";
 import "./css/colorBackground.css"
@@ -27,6 +29,8 @@ export function Home() {
             <AnimatedBackground />
             {mintInput()}
             <ShowTop3Donators />
+            <HandleDonation />
+            {projectInformations()}
             {/* 
             {mintInput()}
             <ShowTop3Donators />
@@ -63,13 +67,13 @@ function mintInput() {
                     </div>
                 </div> */}
             <center style={{
-                borderStyle: "solid"
+                borderStyle: "solid", marginTop: "2%", marginLeft: "2%", marginRight: "2%"
             }}>
                 <div style={{ borderStyle: "solid", width: "100%" }}>
-                    <img src={devilApe} alt="AssistandApe" style={{ height: "50vw", maxWidth: "500px", maxHeight: "500px" }} />
+                    <img src={devilApe2} alt="AssistandApe" style={{ height: "50vw", maxWidth: "500px", maxHeight: "500px" }} />
                 </div>
                 <div>
-                    <div style={{ float: "left", marginRight: "4%", width: "30%" }}>
+                    <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
                         <Input
                             id="inputForNrOfWantedNfts"
                             style={{ textcolor: "#ffffff" }}
@@ -83,9 +87,9 @@ function mintInput() {
                             labelBgColor="#ffffff"
                             state="white"
                         />
-                        {/* <input className={input123} type="number" id="inputForNrOfWantedNfts" min="1" max="8" defaultValue="1" /> */}
                     </div>
-                    <div >
+                    {/* <input className={input123} type="number" id="inputForNrOfWantedNfts" min="1" max="8" defaultValue="1" /> */}
+                    <div>
                         <Button
                             id="mint_button"
                             onClick={() => TriggerMint(document.getElementById("inputForNrOfWantedNfts").value)}
@@ -95,16 +99,6 @@ function mintInput() {
                         />
                     </div>
                 </div>
-                {/* <div>
-                                    <Button
-                                        id="try fetch"
-                                        onClick={() => GetTop3Donators()}
-                                        text="fetch data"
-                                        theme="outline"
-                                        type="button"
-                                    />
-                                </div> */}
-
             </center>
         </>
     )

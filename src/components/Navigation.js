@@ -17,16 +17,13 @@ export function Navigation() {
 
 
     return (<>
-        {/* <div style={{ backgroundColor: "black", width: "100vw" }}>
-            <PageHeader
-                ghost={false}
-                title="OnChainAsciiApes"
-                extra={[
-                    <Account />
-                ]}
-            />
-
-        </div> */}
+        <PageHeader
+            ghost={false}
+            title="OnChainAsciiApes"
+            extra={[
+                <Account />
+            ]}
+        />
         < Home />
     </>
 
