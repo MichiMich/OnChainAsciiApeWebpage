@@ -1,5 +1,4 @@
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
 import { Button, Input } from "web3uikit";
 const { Meta } = Card;
 

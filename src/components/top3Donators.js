@@ -1,6 +1,6 @@
 import { useMoralisQuery, useMoralisSubscription } from "react-moralis";
 import { useEffect, useState } from "react";
-import { Table, Avatar, Tag, Button } from "web3uikit"
+import { Table, Avatar, Tag } from "web3uikit"
 //todo: need to add donation function
 
 var globalFetch;
@@ -100,11 +100,11 @@ export function ShowTop3Donators() {
   else {
     return (<>
 
-      <center style={{ marginTop: "10%", marginLeft: "2%", marginRight: "2%", zIndex: 10, position: "relative" }}>
+      <center style={{ marginTop: "10%", marginLeft: "2%", marginRight: "2%", position: "relative" }}>
         <h1 style={{ color: "white" }}>Top3 Donators</h1>
 
-        <div style={{ textAlign: "center", marginTop: "1%" }}>
-          <p>**The top3 donators will be granted with a special Ape**</p>
+        <div style={{ textAlign: "center", marginTop: "1%", maxWidth: "700px" }}>
+          <p>In addition to the mint you can also donate an amount of your choice. All proceeds of both the mint and these donations go to Save The Children. The top 3 donators get a special Ape!</p>
         </div>
         <div style={{ maxWidth: "800px" }}>
           <Table
@@ -146,42 +146,3 @@ export function ShowTop3Donators() {
 
 }
 
-
-
-
-// Moralis.Cloud.afterSave("EthTransactions", async function (request) {
-//   const confirmed = request.object.get("confirmed");
-//   if (confirmed) {
-//     console.log("confirmed")
-//     // do something
-//   } else {
-//     console.log("not confirmed")
-//     // handle unconfirmed case
-//   }
-// });
-
-/* example from https://moralis.io/how-to-interact-with-smart-contracts-through-your-website/
-async function donate() {
-    let options = {
-      contractAddress: "0x356d2E7a0d592bAd95E86d19479c37cfdBb68Ab9",
-      functionName: "newDonation",
-      abi: [
-        {
-          inputs: [
-            { internalType: "string", name: "note", type: "string" },
-          ],
-          name: "newDonation",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function",
-        },
-      ],
-      Params: {
-        Note: "Thanks for your work",
-      },
-      msgValue: Moralis.Units.ETH(0.1),
-    };
-    await Moralis.User.logOut();
-    console.log("logged out");
-  }
-  */

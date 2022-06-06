@@ -3,8 +3,6 @@ import { List } from 'antd';
 import "./css/antd.css"
 
 import apeNameArray from "./img/ApeNameArray.PNG"
-import icy from "./img/ApesForAnimation/icy.png"
-import eyes from "./img/ApesForAnimation/facesym.png"
 import properties from "./img/ApesForAnimation/apeprops.png"
 import apeEyes from "./img/eyes.png"
 import specialApe from "./img/transparent/1.png"
@@ -14,14 +12,14 @@ export function projectInformations() {
     const data1 = [{
         title: "Ape eyes",
         content:
-            'Every combination of eyes exists only once! Randomly assigned during mint, cleared right after for not getting assigned twice.'
+            'Every combination of eyes exists only once! Randomly assigned during mint'
 
     }]
 
     const data2 = [
         {
             title: "Ape color",
-            content: `196 Apes have the color code: #ffffff, 9 special apes exist with different clor codes.`,
+            content: `196 Apes have the color code: #ffffff, 9 special apes exist with different color codes.`,
 
 
         }]
@@ -31,7 +29,7 @@ export function projectInformations() {
             title:
                 'Ape name',
             content:
-                'Ape eye defining name creation with unique id, 196 apes have a random assigned value choosen by a given name array. 9 apes have a specialized name'
+                'Ape eye defining name creation with unique id, 196 apes have a random assigned value chosen by a given name array. 9 apes have a specialized name'
         }]
 
     const data4 = [
@@ -47,18 +45,18 @@ export function projectInformations() {
 
     return (
         <>
-            <center style={{ margin: "auto", width: "80%", marginTop: "8%", color: "#ffffff", maxWidth: "800px", zIndex: 10, position: "relative" }}>
+            <center style={{ margin: "auto", width: "80%", marginTop: "8%", color: "#ffffff", maxWidth: "800px", position: "relative" }}>
                 <div>
                     <h1 style={{ textAlign: "center", color: "#ffffff" }}>What are OnChainAsciiApes</h1>
                 </div>
                 <div style={{ marginTop: "1%", color: "#ffffff", borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                    <p style={{ textAlign: "center", marginTop: "10px" }}>OnChainAsciiApes are a nft creation of 205 Apes completly built with Ascii-Characters only. They are fully onchain generated and randomly assigned during mint. There is no need of a decentral/central storage, because its all onchain and you can query your created nft anytime without any cost or any other service</p>
+                    <p style={{ textAlign: "center", marginTop: "10px" }}>OnChainAsciiApes are a nft creation of 205 Apes completely built with Ascii-Characters only. They are fully onchain generated and randomly assigned during mint.<b> **This means every ape is unique!**</b> There is no need for a decentral/central storage, because it´s all onchain and you can query your created nft anytime without any cost or any other service</p>
                 </div>
                 <div style={{ marginTop: "10%", color: "#ffffff" }}>
                     <h1 style={{ textAlign: "center", color: "#ffffff" }}>Why OnchainAsciiApes</h1>
                 </div>
                 <div style={{ borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
-                    <p style={{ marginLeft: "2%", textAlign: "center", marginTop: "10px" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, wl access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
+                    <p style={{ marginLeft: "2%", textAlign: "center", marginTop: "10px" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, white list access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
                 </div>
 
                 <div style={{ margin: "auto", marginTop: "10%" }}>

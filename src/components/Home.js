@@ -1,15 +1,7 @@
-import "./css/styleBanner.css";
-import { Button, Input, Table, Tag } from "web3uikit";
-import Background from "./img/backgrounds/stones.jpg"
-import Background2 from "./img/backgrounds/asciiForest.png"
-import apesGif from "./img/BananaColorApe.png"
-import devilApe from "./img/transparent/DevilApe.png"
+import { Button, Input } from "web3uikit";
 import devilApe2 from "./img/transparent/devilApe2Transp.png"
-
-
 import { AnimatedBackground } from "./animatedBackground.js";
 import "./css/colorBackground.css"
-import "./css/grid.css"
 import "./css/animatedBackground.css"
 import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
 import { ShowTop3Donators } from "./top3Donators.js";
@@ -26,8 +18,8 @@ export function Home() {
             <HandleMoralisWeb3 />
 
 
-
-            <AnimatedBackground />
+            {/* 
+            <AnimatedBackground /> */}
             {mintInput()}
             <ShowTop3Donators />
             <HandleDonation />
@@ -69,23 +61,25 @@ function mintInput() {
                     </div>
                 </div> */}
             <center style={{
-                marginTop: "2%", marginLeft: "2%", marginRight: "2%", zIndex: 10, position: "relative"
+                marginTop: "2%", marginLeft: "2%", marginRight: "2%", position: "relative"
             }}>
                 <div style={{ width: "100%" }}>
                     <img src={devilApe2} alt="AssistandApe" style={{ height: "50vw", maxWidth: "500px", maxHeight: "500px" }} />
                 </div>
+
+                <h1 style={{ color: "white" }}>Mint here</h1>
                 <div
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
                         gap: '10px',
-                        maxWidth: '700px',
+                        maxWidth: '700px'
                     }}
                 >
-                    <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
+
+                    <div style={{ float: "left", marginRight: "2%", width: "200px", backgroundColor: "white", borderRadius: "20px", borderStyle: "solid" }}>
                         <Input
                             id="inputForNrOfWantedNfts"
-                            style={{ textcolor: "#ffffff" }}
                             min="1"
                             max="5"
                             label="Nr apes"
@@ -94,7 +88,6 @@ function mintInput() {
                             onChange={function noRefCheck() { }}
                             type="number"
                             labelBgColor="#ffffff"
-                            state="white"
                         />
                     </div>
                     {/* <input className={input123} type="number" id="inputForNrOfWantedNfts" min="1" max="8" defaultValue="1" /> */}

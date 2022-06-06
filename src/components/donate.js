@@ -17,7 +17,7 @@ async function Donate(donationValueInEth) {
 
     let options = {
         abi: abi,
-        contractAddress: "0xCE9ea0C43c99162e337B2E2aec90C5Db73e053D8",
+        contractAddress: process.env.REACT_APP_TOP3DONATORS_CONTRACT_ADDRESS,
         functionName: "donate",
         msgValue: donationValueInGwei
     }
@@ -69,7 +69,7 @@ export function HandleDonation() {
 
     const { runContractFunction: donate } = useWeb3Contract({
         abi: abi,
-        contractAddress: "0xCE9ea0C43c99162e337B2E2aec90C5Db73e053D8",
+        contractAddress: process.env.REACT_APP_TOP3DONATORS_CONTRACT_ADDRESS,
         functionName: "donate"
     }
     );
@@ -79,8 +79,9 @@ export function HandleDonation() {
     return (
         <>
             <center style={{
-                marginTop: "2%", marginLeft: "2%", marginRight: "2%"
+                marginTop: "3%", marginLeft: "2%", marginRight: "2%"
             }}>
+                <h1 style={{ color: "white" }}>Donate here</h1>
                 <div
                     style={{
                         display: 'flex',
@@ -90,10 +91,9 @@ export function HandleDonation() {
                         marginBottom: "2%"
                     }}
                 >
-                    <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
+                    <div style={{ float: "left", marginRight: "2%", width: "200px", backgroundColor: "white", borderRadius: "20px", borderStyle: "solid" }}>
                         <Input
                             id="donationValue"
-                            style={{ textcolor: "#ffffff" }}
                             min="0.001"
                             max="10000"
                             label="Wanted donation[eth]"
@@ -102,9 +102,7 @@ export function HandleDonation() {
                             onChange={function noRefCheck() { }}
                             type="number"
                             labelBgColor="#ffffff"
-                            state="white"
                         />
-
 
                         {/* <input className={input123} type="number" id="inputForNrOfWantedNfts" min="1" max="8" defaultValue="1" /> */}
                     </div>
@@ -129,7 +127,7 @@ export function HandleDonation() {
 
                 </div>
                 <div style={{ textAlign: "center", marginTop: "3%", fontWeight: "bold" }}>
-                    <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation" target="_blank">**all donations go to savethechildren**</a>
+                    <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation" target="_blank">**100% of the donations go to <u>savethechildren</u>**</a>
                 </div>
             </center>
 
