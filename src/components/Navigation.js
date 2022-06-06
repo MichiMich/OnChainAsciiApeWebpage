@@ -5,7 +5,7 @@ import {
     Route,
     Link
 } from 'react-router-dom';
-import { Button, ConnectButton } from "web3uikit";
+import { Button, ConnectButton, NotificationProvider } from "web3uikit";
 import { Home } from "./Home.js";
 import "./css/styleNavbar.css";
 import Account from "./v2/Account.js"
@@ -21,10 +21,22 @@ export function Navigation() {
             ghost={false}
             title="OnChainAsciiApes"
             extra={[
-                <Account />
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '0px',
+                    maxWidth: '70px',
+                    marginBottom: "2%",
+                    marginRight: "45%"
+                }}>
+                    <Account />
+                </div>
             ]}
         />
-        < Home />
+        <NotificationProvider>
+            < Home />
+        </NotificationProvider>
+
     </>
 
 

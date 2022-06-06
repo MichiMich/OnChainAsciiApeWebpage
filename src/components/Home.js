@@ -15,6 +15,7 @@ import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
 import { ShowTop3Donators } from "./top3Donators.js";
 import { projectInformations } from "./projectInformation.js";
 import { HandleDonation } from "./donate.js";
+import { NotificationFromWeb3UiKit } from "./notification";
 
 //todo: define correct nft cost at .env file -> 0.005 eth
 export function Home() {
@@ -49,6 +50,7 @@ export function Home() {
 
                     </div> */}
             <div className="grad3"></div>
+            {NotificationFromWeb3UiKit()}
 
 
         </>);
@@ -67,12 +69,19 @@ function mintInput() {
                     </div>
                 </div> */}
             <center style={{
-                borderStyle: "solid", marginTop: "2%", marginLeft: "2%", marginRight: "2%"
+                marginTop: "2%", marginLeft: "2%", marginRight: "2%"
             }}>
-                <div style={{ borderStyle: "solid", width: "100%" }}>
+                <div style={{ width: "100%" }}>
                     <img src={devilApe2} alt="AssistandApe" style={{ height: "50vw", maxWidth: "500px", maxHeight: "500px" }} />
                 </div>
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        maxWidth: '700px',
+                    }}
+                >
                     <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
                         <Input
                             id="inputForNrOfWantedNfts"

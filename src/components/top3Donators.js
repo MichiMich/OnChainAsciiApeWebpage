@@ -101,6 +101,11 @@ export function ShowTop3Donators() {
     return (<>
 
       <center style={{ marginTop: "10%", marginLeft: "2%", marginRight: "2%" }}>
+        <h1 style={{ color: "white" }}>Top3 Donators</h1>
+
+        <div style={{ textAlign: "center", marginTop: "1%" }}>
+          <p>**The top3 donators will be granted with a special Ape**</p>
+        </div>
         <div style={{ maxWidth: "800px" }}>
           <Table
             columnsConfig="80px 0.5fr 0.5fr"
@@ -132,9 +137,6 @@ export function ShowTop3Donators() {
             onPageNumberChanged={function noRefCheck() { }}
             pageSize={3}
           />
-          <div style={{ textAlign: "center", marginTop: "1%" }}>
-            <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation" target="_blank">**all donations go to savethechildren**</a>
-          </div>
         </div>
       </center>
     </>

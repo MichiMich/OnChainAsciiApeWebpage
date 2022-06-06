@@ -1,14 +1,22 @@
 
 import { useWeb3Contract } from "react-moralis";
 import { abi } from "../constants/OnChainAsciiApes.json";
+import { throwNotification } from "./notification.js";
 var globalMint;
 
 export async function TriggerMint(nrOfWantedNfts) {
-
+    console.log("number from input: ", nrOfWantedNfts)
     if (parseInt(nrOfWantedNfts) > process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT) {
-        alert("only " + process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT + " nfts per mint are allowed");
+        //alert("only " + process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT + " nfts per mint are allowed");
+        const message = "only " + process.env.REACT_APP_MAX_ALLOWED_NR_NFTS_PER_MINT + " nfts per mint are allowed";
+        throwNotification('info', message, "Invalid number");
         return;
     }
+    else if (parseInt(nrOfWantedNfts) <= 0 || nrOfWantedNfts === undefined || nrOfWantedNfts === "" || nrOfWantedNfts === null) {
+        throwNotification('info', "Please choose a nr between 1-8", "Invalid number");
+        return;
+    }
+
 
     let options = {
         abi: abi,
@@ -49,7 +57,7 @@ const handleError = async (tx) => {
     else {
         createdErrorMessage = "undefined error occured";
     }
-    alert(createdErrorMessage);
+    throwNotification('error', createdErrorMessage, "Error");
     return [wantedAssistentApe, createdErrorMessage];
 
 }
@@ -58,7 +66,8 @@ const handleSuccess = async (tx) => {
     await tx.wait(1);
     console.log("success entered")
     console.log("tx", tx);
-    alert("Congrats my onchain friend, you have successfully minted!\nThanks, you are awesome\n!Did you know: all money from the mint goes to **SaveTheChildren**");
+    throwNotification('success', "Congrats my onchain friend, you have successfully minted!\nThanks, you are awesome!\nDid you know: all money from the mint goes to **SaveTheChildren**", "Success");
+    //alert("Congrats my onchain friend, you have successfully minted!\nThanks, you are awesome!\nDid you know: all money from the mint goes to **SaveTheChildren**");
     return ['success', tx];
 }
 

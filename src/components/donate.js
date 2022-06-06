@@ -76,9 +76,17 @@ export function HandleDonation() {
     return (
         <>
             <center style={{
-                borderStyle: "solid", marginTop: "4%", marginLeft: "2%", marginRight: "2%"
+                marginTop: "4%", marginLeft: "2%", marginRight: "2%"
             }}>
-                <div style={{ marginBottom: "2%" }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        maxWidth: '700px',
+                        marginBottom: "2%"
+                    }}
+                >
                     <div style={{ float: "left", marginRight: "2%", width: "200px" }}>
                         <Input
                             id="donationValue"
@@ -117,9 +125,15 @@ export function HandleDonation() {
                                 </div> */}
 
                 </div>
+                <div style={{ textAlign: "center", marginTop: "3%", fontWeight: "bold" }}>
+                    <a href="https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation" target="_blank">**all donations go to savethechildren**</a>
+                </div>
             </center>
 
         </>
 
     )
 }
+
+
+
