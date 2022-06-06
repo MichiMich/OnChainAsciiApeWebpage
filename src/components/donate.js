@@ -2,13 +2,15 @@
 import { useWeb3Contract } from "react-moralis";
 import { Button, Input } from "web3uikit";
 import { abi } from "../constants/Top3Donators.json";
+
+import { throwNotification } from "./notification.js";
 var globalDonate;
 
 async function Donate(donationValueInEth) {
     const donationValueInGwei = donationValueInEth * 1e18
     console.log("donation value eth: ", donationValueInEth);
-    if (parseFloat(donationValueInGwei) < 0.001) {
-        alert("min donation amount of 0.001 eth required");
+    if (parseFloat(donationValueInEth) < 0.001) {
+        throwNotification('error', "Min donation of 0.001eth required", "Error");
         return;
     }
 
@@ -49,7 +51,8 @@ const handleError = async (tx) => {
     else {
         createdErrorMessage = "undefined error occured";
     }
-    alert(createdErrorMessage);
+
+    throwNotification('error', createdErrorMessage, "Error");
     return [wantedAssistentApe, createdErrorMessage];
 
 }
@@ -58,7 +61,7 @@ const handleSuccess = async (tx) => {
     await tx.wait(1);
     console.log("success entered")
     console.log("tx", tx);
-    alert("Thank you my onchain friend!\n100% of your donation goes to **SaveTheChildren**!\nThe top3 donators get an special ape!\nbtw: you can donate multiple times,the donations will be summed up!");
+    throwNotification('success', "Thank you my onchain friend!\n100% of your donation goes to **SaveTheChildren**!\nThe top3 donators get an special ape!\nbtw: you can donate multiple times,the donations will be summed up!", "Success");
     return ['success', tx];
 }
 
