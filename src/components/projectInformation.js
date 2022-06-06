@@ -47,7 +47,7 @@ export function projectInformations() {
 
     return (
         <>
-            <center style={{ margin: "auto", width: "80%", marginTop: "10%", color: "#ffffff", maxWidth: "800px" }}>
+            <center style={{ margin: "auto", width: "80%", marginTop: "8%", color: "#ffffff", maxWidth: "800px", zIndex: 10, position: "relative" }}>
                 <div>
                     <h1 style={{ textAlign: "center", color: "#ffffff" }}>What are OnChainAsciiApes</h1>
                 </div>
@@ -60,8 +60,9 @@ export function projectInformations() {
                 <div style={{ borderStyle: "solid", borderRadius: "25px", borderWidth: "2px", borderColor: "white" }}>
                     <p style={{ marginLeft: "2%", textAlign: "center", marginTop: "10px" }}>The OnChainAsciiApes serve as the genesis mint of my brand MichiMich. They will provide future benefits like access to <b>quest informations, genesis-holders only areas with early information access, wl access for future mints</b> and the possibility to give most welcome input to current development projects. The genesis mint should be a nearly free mint and for all who believe in the project, the future or/and just the onchain art and the fun I had developing this.</p>
                 </div>
-                <div style={{ margin: "auto", marginTop: "10%" }}>
 
+                <div style={{ margin: "auto", marginTop: "10%" }}>
+                    <h1 style={{ color: "white" }}>What defines an Ape</h1>
                     <List
                         itemLayout="vertical"
                         size="large"

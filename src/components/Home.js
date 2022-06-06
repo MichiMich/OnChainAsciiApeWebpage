@@ -69,7 +69,7 @@ function mintInput() {
                     </div>
                 </div> */}
             <center style={{
-                marginTop: "2%", marginLeft: "2%", marginRight: "2%"
+                marginTop: "2%", marginLeft: "2%", marginRight: "2%", zIndex: 10, position: "relative"
             }}>
                 <div style={{ width: "100%" }}>
                     <img src={devilApe2} alt="AssistandApe" style={{ height: "50vw", maxWidth: "500px", maxHeight: "500px" }} />

@@ -100,7 +100,7 @@ export function ShowTop3Donators() {
   else {
     return (<>
 
-      <center style={{ marginTop: "10%", marginLeft: "2%", marginRight: "2%" }}>
+      <center style={{ marginTop: "10%", marginLeft: "2%", marginRight: "2%", zIndex: 10, position: "relative" }}>
         <h1 style={{ color: "white" }}>Top3 Donators</h1>
 
         <div style={{ textAlign: "center", marginTop: "1%" }}>

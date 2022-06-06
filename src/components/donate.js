@@ -79,7 +79,7 @@ export function HandleDonation() {
     return (
         <>
             <center style={{
-                marginTop: "4%", marginLeft: "2%", marginRight: "2%"
+                marginTop: "2%", marginLeft: "2%", marginRight: "2%"
             }}>
                 <div
                     style={{

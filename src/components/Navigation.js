@@ -1,11 +1,5 @@
 
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link
-} from 'react-router-dom';
-import { Button, ConnectButton, NotificationProvider } from "web3uikit";
+import { NotificationProvider } from "web3uikit";
 import { Home } from "./Home.js";
 import "./css/styleNavbar.css";
 import Account from "./v2/Account.js"
