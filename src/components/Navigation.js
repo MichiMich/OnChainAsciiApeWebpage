@@ -17,7 +17,7 @@ export function Navigation() {
 
 
     return (<>
-        <div style={{ backgroundColor: "black", width: "120vw" }}>
+        {/* <div style={{ backgroundColor: "black", width: "100vw" }}>
             <PageHeader
                 ghost={false}
                 title="OnChainAsciiApes"
@@ -26,7 +26,7 @@ export function Navigation() {
                 ]}
             />
 
-        </div>
+        </div> */}
         < Home />
     </>
 
