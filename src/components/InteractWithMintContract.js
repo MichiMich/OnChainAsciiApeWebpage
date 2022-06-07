@@ -13,7 +13,7 @@ export async function TriggerMint(nrOfWantedNfts) {
         return;
     }
     else if (parseInt(nrOfWantedNfts) <= 0 || nrOfWantedNfts === undefined || nrOfWantedNfts === "" || nrOfWantedNfts === null) {
-        throwNotification('info', "Please choose a nr between 1-8", "Invalid number");
+        throwNotification('info', "Please choose a nr between 1-2", "Invalid number");
         return;
     }
 
