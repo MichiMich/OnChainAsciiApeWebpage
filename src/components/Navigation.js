@@ -10,8 +10,6 @@ import { AnimatedBackground } from "./animatedBackground.js";
 
 export function Navigation() {
 
-
-
     return (<>
         <AnimatedBackground />
         <PageHeader
@@ -35,24 +33,6 @@ export function Navigation() {
         </NotificationProvider>
 
     </>
-
-
-
     );
 
-
-
 }
-
-/*
-<PageHeader
-            ghost={false}
-            title="OnChainAsciiApes"
-            extra={[
-                <Account />
-            ]}
-        >
-        </PageHeader>
-        < Home /></>
-
-*/
