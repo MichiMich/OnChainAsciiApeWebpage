@@ -23,6 +23,20 @@
     height: 200vh; this looked pretty good*/
     background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 25%, #2B86C5 100%);
 
+}
+
+.background {
+
+    z-index: 0;
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-color: #FF3CAC;
+    /* border-radius: 20px; */
+    /* background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+    height: 200vh; this looked pretty good*/
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 25%, #2B86C5 100%);
 
 }
 

@@ -23,7 +23,7 @@ export function Navigation() {
                     justifyContent: 'center',
                     gap: '0px',
                     maxWidth: '70px',
-                    marginBottom: "2%",
+                    marginBottom: "0%",
                     marginRight: "45%"
                 }}>
                     <Account />
