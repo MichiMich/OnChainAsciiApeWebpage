@@ -3,7 +3,7 @@ import { List } from 'antd';
 import "./css/antd.css"
 
 import apeNameArray from "./img/ApeNameArray.PNG"
-import properties from "./img/ApesForAnimation/apeprops.png"
+import properties from "./img/apeprops.png"
 import apeEyes from "./img/eyes.png"
 import specialApe from "./img/transparent/1.png"
 

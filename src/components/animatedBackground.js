@@ -1,4 +1,4 @@
-import "./css/snoflake.css"
+import "./css/flyingApes.css"
 import ape1 from "./img/transparent/1.png"
 import ape2 from "./img/transparent/2.png"
 import ape3 from "./img/transparent/3.png"

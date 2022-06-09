@@ -1,10 +1,8 @@
 
 import { NotificationProvider } from "web3uikit";
 import { Home } from "./Home.js";
-import "./css/styleNavbar.css";
-import Account from "./v2/Account.js"
+import Account from "./Account.js"
 import { PageHeader } from 'antd';
-import "./css/styleBanner.css";
 
 import { AnimatedBackground } from "./animatedBackground.js";
 
