@@ -1,5 +1,5 @@
 
-import Account from "./components/v2/Account";
+import Account from "./components/Account";
 import Moralis from 'moralis';
 import { RaffleDesktop } from './components/v2/Raffle_desktop.js';
 import { RaffleMobile } from './components/v2/Raffle_mobile.js';

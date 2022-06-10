@@ -10,7 +10,6 @@ import ape8 from "./img/transparent/8.png"
 
 export function AnimatedBackground() {
     var height = window.innerWidth / 8 + "px";
-    console.log(height)
     return (
         <>
             <div className="snowflakes" aria-hidden="true">

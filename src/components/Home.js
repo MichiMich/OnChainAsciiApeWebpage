@@ -12,7 +12,7 @@ export function Home() {
 
     return (
         <>
-            <div style={{ backgroundColor: "#FF3CAC", backgroundImage: "linear-gradient(225deg, #FF3CAC 0%, #784BA0 25%, #2B86C5 100%)" }}>
+            <div style={{ backgroundImage: "linear-gradient(225deg, #FF3CAC 0%, #784BA0 25%, #2B86C5 100%)" }}>
                 {/* moralis functions */}
                 <HandleMoralisWeb3 />
 
