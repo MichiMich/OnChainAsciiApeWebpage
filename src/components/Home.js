@@ -32,7 +32,8 @@ export function Home() {
                         display: 'flex',
                         justifyContent: 'center',
                         gap: '20px',
-                        paddingBottom: "0.5vh"
+                        paddingBottom: "0.5vh",
+                        position: "relative"
                     }}
                 >
                     <a href="https://discord.gg/VV7yeHfp4C" target="_blank">
