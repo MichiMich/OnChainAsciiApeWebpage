@@ -4,7 +4,6 @@ import { HandleMoralisWeb3, TriggerMint } from "./InteractWithMintContract.js";
 import { ShowTop3Donators } from "./top3Donators.js";
 import { projectInformations } from "./projectInformation.js";
 import { HandleDonation } from "./donate.js";
-import { NotificationFromWeb3UiKit } from "./notification";
 
 
 //todo: define correct nft cost at .env file -> 0.005 eth
@@ -15,13 +14,10 @@ export function Home() {
             <div style={{ backgroundImage: "linear-gradient(225deg, #FF3CAC 0%, #784BA0 25%, #2B86C5 100%)" }}>
                 {/* moralis functions */}
                 <HandleMoralisWeb3 />
-
                 {mintInput()}
                 <ShowTop3Donators />
                 <HandleDonation />
                 {projectInformations()}
-
-                {NotificationFromWeb3UiKit()}
 
                 {/* line for creating footer part */}
                 <div style={{ paddingTop: "8%" }}>

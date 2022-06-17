@@ -2,14 +2,12 @@ import React from 'react';
 import App from './App';
 import { MoralisProvider } from "react-moralis";
 import reportWebVitals from './reportWebVitals';
-
 import ReactDOM from 'react-dom';
-import * as ReactDOMClient from 'react-dom/client';
-
+require('dotenv').config()
 
 
 ReactDOM.render(
-  <MoralisProvider serverUrl="https://zndbxd11t68t.usemoralis.com:2053/server" appId="DgACAFNJyee1lMogJi7roF9jAFUMgfCfqOYlm43j">
+  <MoralisProvider serverUrl={process.env.REACT_APP_MORALIS_SERVER_URL} appId={process.env.REACT_APP_MORALIS_APP_ID}>
     <App />
   </MoralisProvider>,
   document.getElementById('root')
